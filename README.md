@@ -5,4 +5,5 @@ Plateforme web de gestion domotique
 ## Etat d'avancement
 
 - [x] Initialisation de l'architecture MVC
-- [ ] Page de LogIn/SignIn
+- [ ] `[En cours]` Page de LogIn/SignIn
+
