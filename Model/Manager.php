@@ -1,0 +1,28 @@
+<?php
+
+namespace SweetIt\SweetOm\Model;
+
+/**
+* Class Manager which provides a method to connect to a database
+*
+* Manager uses PDO to connect to a database
+*
+* @return PDO Object
+*/
+class Manager
+{
+	
+	function dbConnect()
+	{
+		$engine = "mysql";
+		$host = "localhost";
+		$dbname = "sweetom";
+		$charset = "utf8";
+		$login = "root";
+		$password = "";
+
+		$db = new \PDO($engine.":host=".$host.";dbname=".$dbname.";charset=".$charset, $login, $password);
+
+		return $db;
+	}
+}
