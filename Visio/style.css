@@ -1,0 +1,160 @@
+body
+{
+	background-color: rgb(223,223,223);
+}
+.Corps
+{
+	padding: 20px;
+	background: white;
+}
+
+#header
+{
+
+	background: rgb(255,167,79);
+	vertical-align: top;
+	margin-bottom: 45px;
+	border-radius: 7px;
+}
+
+#logo
+{
+	display: inline-block;
+	width: 127px;
+	height: 127px;
+	margin-right: 85%;
+}
+
+.deconnexion
+{
+	display: inline-block;
+	margin-left: 85%;
+	vertical-align: bottom;
+}
+
+
+#footer 
+{
+	vertical-align: bottom;
+	background: white;
+	margin-top: 50px;
+	border-radius: 7px;
+	padding: 4px;
+}
+
+
+#footer p
+{
+	display: inline-block;
+
+}
+
+#footer p [hover]
+{
+	color: blue;
+}
+
+
+#form_inscription
+{
+	width: 1000px;
+	margin: auto;
+	background: white;
+	border-radius: 20px;
+	opacity: 0.9;
+
+}
+
+#tete_form
+{
+	height: 15px;
+	background: rgb(0,0,91);
+	border-radius: 20px 20px 0px 0px;
+}
+
+.info
+{
+	margin: 2% 15% 2% 15%;
+	background: black;
+	color: white;
+}
+
+
+.centrer 
+{
+	margin: 2% 38% 2% 45%;
+}
+
+#Accueil
+{
+	margin: auto;
+	text-align: center;
+
+}
+
+
+#Accueil div
+{
+	display: inline-block;
+	width: 400px;
+	height: 400px;
+	background: rgb(195,195,195);
+	font-size: 2em;
+	-webkit-transition: width 1s;
+	transition: width 1s;
+}
+
+#Accueil div p
+{
+	margin: auto;
+	font-style: italic;
+}
+
+#tab_de_bord
+{
+	border-radius: 9px 0px 0px 9px;
+}
+#tab_de_bord p
+{
+	border-radius: 9px 0px 0px 0px;
+}
+#edit_profil
+{
+	border-radius: 0px 9px 9px 0px;
+}
+#edit_profil p
+{
+	border-radius: 0px 9px 0px 0px;
+}
+
+#tab_de_bord:hover
+{
+	width: 500px;
+	background: url("Images/tab_de_bord2.jpg") no-repeat;
+	text-decoration: underline;
+}
+
+#edit_profil:hover
+{
+	width: 500px;
+	background: url("Images/edit_profil4.png") no-repeat;
+	text-decoration: underline;
+}
+
+.piece_chambre,.piece_toilette,.piece_sejour
+{
+	display: inline-block;
+	margin-right: 10px;
+	width: 250px;
+	text-align: left;
+}
+
+#corps_chambre,#corps_toilette,#corps_sejour
+{
+	margin-bottom: 50px;
+	text-align: center;
+}
+#corps_chambre p,#corps_toilette p,#corps_sejour p
+{
+	text-align: center;
+}
