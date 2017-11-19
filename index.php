@@ -1,17 +1,34 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Page TEST</title>
-    </head>
-    <body>
-        <form method="post">
-            <input type="password" name="pass">
-            <input type="submit" value="get hash!">
-        </form>
-        <?php
-            if (isset($_POST['pass'])){
-                echo password_hash($_POST['pass'], PASSWORD_DEFAULT);
+<?php
+session_start();
+
+require_once ("Controler/frontend.php");
+
+try
+{
+    if (isset($_SESSION['connected']) && $_SESSION['connected'] === true)
+    {
+        if (isset($_GET['action']))
+        {
+            if ($_GET['action'] == "dashboard")
+            {
+
             }
-        ?>
-    </body>
-</html>
+        }
+        else
+        {
+
+        }
+    }
+    else if (isset($_GET['logout']))
+    {
+        logout();
+    }
+    else
+    {
+        login();
+    }
+}
+catch (Exception $e)
+{
+    echo "Message : ".$e->getMessage();
+}

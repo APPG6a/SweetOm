@@ -14,7 +14,7 @@
 
 
 	<body>
-		<?php include("enTete.php"); ?>
+		<?php require("header.php"); ?>
 
 		<p>
 			Vos données ont bien été enregistré! 
@@ -22,9 +22,9 @@
 	
 		<div id="Accueil">
 			<div id=tab_de_bord>   <p>Tableau de bord</p>    </div>
-			<a href="mon_habitation.php"> <div id=edit_profil> <p>Editer profil</p>  </div> </a> 
+			<a href="myHouse.php"> <div id=edit_profil> <p>Editer profil</p>  </div> </a>
 		
 		</div>
-		<?php include("pied_de_page.php"); ?>
+		<?php require("footer.php"); ?>
 	</body>
 </html>

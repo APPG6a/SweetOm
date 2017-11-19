@@ -1,5 +1,3 @@
-<? php session_start()?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +5,7 @@
 	<style type="text/css">
 		.corps
 		{
-		background: url("Images/sweetom_house_image4 - Copie.png") rgba(0,0,0,0.5) no-repeat;
+		background: url("/Public/Assets/Images/sweetomHouseImage4.png") rgba(0,0,0,0.5) no-repeat;
 		background-size: 100%;
 		padding: 20px;
 		}
@@ -17,11 +15,11 @@
 	<title>Inscription</title>
 </head>
 <body>
-	<?php include("enTete.php"); ?>
+	<?php include("header.php"); ?>
 
 	<div class="corps">
 
-		<form  id="form_inscription" method="POST" action="mon_habitation.php">
+		<form  id="form_inscription" method="POST" action="myHouse.php">
 
        		
 			<div id=tete_form></div>
@@ -29,7 +27,7 @@
 			<input class="info" type="number" name="Superficie" placeholder="Superficie en m²">
 			<input class="info" type="number" name="Nb_habt" placeholder="Nombre d'habitants" required/></br>
 			<input class="info" type="number" name="Nb_chambre" placeholder="Nombre de chambres" required/>
-			<input class="info" type="numbre" name="Nb_toilette" placeholder="Nombre de salle(s) de bain"></br>
+			<input class="info" type="number" name="Nb_toilette" placeholder="Nombre de salle(s) de bain"></br>
 			<input class="info" type="number" name="Nb_sejour" placeholder="Nombre de séjour(s)">
 			<input class= "centrer" type="submit" value="j'enregistre mes données">
 
@@ -40,7 +38,7 @@
 
 	
 
-	<?php include("pied_de_page.php"); ?>
+	<?php include("footer.php"); ?>
 
 
 </body>

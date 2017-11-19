@@ -130,14 +130,14 @@ body
 #tab_de_bord:hover
 {
 	width: 500px;
-	background: url("Images/tab_de_bord2.jpg") no-repeat;
+	background: url("/Public/Assets/Images/tab_de_bord2.jpg") no-repeat;
 	text-decoration: underline;
 }
 
 #edit_profil:hover
 {
 	width: 500px;
-	background: url("Images/edit_profil4.png") no-repeat;
+	background: url("/Public/Assets/Images/edit_profil4.png") no-repeat;
 	text-decoration: underline;
 }
 

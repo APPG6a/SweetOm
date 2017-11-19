@@ -8,6 +8,7 @@
 
 namespace SweetIt\SweetOm\Model;
 
+require_once("Model/Manager.php");
 
 class UserManager extends Manager
 {
@@ -32,7 +33,8 @@ class UserManager extends Manager
 
         $req = $db->prepare('INSERT INTO utilisateurs (Nom, Prenom, Login, Password, Telephone, Mail, ID_SuperUser, UserType)
                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-        $affectedLines = $req->execute(array($surname, $name, $login, password_hash($password, PASSWORD_DEFAULT), $phone, $mail, $idSuperUser, $userType));
+        $affectedLines = $req->execute(array($surname, $name, $login, password_hash($password, PASSWORD_DEFAULT),
+            $phone, $mail, $idSuperUser, $userType));
 
         return $affectedLines;
     }

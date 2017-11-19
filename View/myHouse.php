@@ -1,4 +1,4 @@
-<? php session_start()?>
+<?php session_start()?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<?php include("enTete.php"); ?>
+	<?php include("header.php"); ?>
 	<div class="Corps">
 		<?php 
 			$jour=date('d');
@@ -147,17 +147,17 @@
 						}
 						else
 						{
-							echo "ERROR! </br></br> Veuillez remplir les champs en cliquant <a href=\"Info_habitation.php\"> ici </a>";
+							echo "> ici </a>";
 						}
 					
 					}
 				else
 				{
-					echo "ERROR! </br></br>Veuillez remplir les champs en cliquant <a href=\"Info_habitation.php\"> ici </a>";
+					echo "> ici </a>";
 				}
 		echo "</form>";
 		?>
 	</div>
-	<?php include("pied_de_page.php"); ?>
+	<?php include("footer.php"); ?>
 </body>
-</html>>
+</html>
