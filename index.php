@@ -19,13 +19,13 @@ try
 
         }
     }
-    else if (isset($_GET['logout']))
+    else if (isset($_GET['action']) && $_GET['action'] == 'logout')
     {
         logout();
     }
     else
     {
-        login();
+        header("Location: View/accueil_utilisateur.php");
     }
 }
 catch (Exception $e)

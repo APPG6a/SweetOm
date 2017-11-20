@@ -120,6 +120,15 @@ body
 }
 #edit_profil
 {
+	display: inline-block;
+	font-style: italic;
+	text-decoration: none;
+	-webkit-transition: width 1s;
+	transition: width 1s;
+	color: black;
+	font-size: 2em;
+	width: 400px;
+	height: 400px;
 	border-radius: 0px 9px 9px 0px;
 }
 #edit_profil p

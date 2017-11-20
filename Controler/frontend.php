@@ -21,5 +21,5 @@ function logout()
 {
     session_destroy();
     $_SESSION = array();
-    require('/index.php');
+    require('index.php');
 }
