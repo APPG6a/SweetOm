@@ -4,10 +4,9 @@
 <head>
 	<title></title>
 	<meta  charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="../Public/Style/style.css">
 </head>
 <body>
-	<?php include("header.php"); ?>
 	<div class="Corps">
 		<?php 
 			$jour=date('d');
@@ -158,6 +157,5 @@
 		echo "</form>";
 		?>
 	</div>
-	<?php include("footer.php"); ?>
 </body>
 </html>

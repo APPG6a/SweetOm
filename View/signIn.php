@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset='utf-8 /'>
-	<style type="text/css">
-		.corps
-		{
-		background: url("/Public/Assets/Images/sweetomHouseImage4.png") no-repeat;
-		background-size: 100%;
-		padding: 20px;
-		}
-	</style>
-
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<title>Inscription</title>
-</head>
-<body>
-	<?php include("header.php"); ?>
-
-	<div class="corps">
+<?php
+$title = "SignIn";
+ob_start();
+?>
+	<div class="CorpsSignIn">
 
 		<form id="form_inscription" method="POST" action="houseInfo.php">
 
@@ -33,17 +18,12 @@
 			<input class="info" type="number" name="cp" placeholder="Code postal" required/>
 			<input class="info" type="text" name="ville" placeholder="Ville" required/><br />
 			<input class="info" type="text" name="pays" placeholder="Pays" required/><br />
-			<div class="centrer"><input  type="checkbox" name="a_coche"/> <label for="a_coche"> j'accepte les CGU </label> </div><br />
+			<div class="centrer"><label><input  type="checkbox" name="a_coche"/>  j'accepte les CGU </label> </div><br />
 			<input class= "centrer" type="submit" value="j'enregistre mes données">
 		</form>
 		
 	</div>
-	
-
-	
-
-	<?php include("footer.php"); ?>
-
-
-</body>
-</html> 
+<?php
+$content = ob_get_clean();
+require_once("template.php");
+?>

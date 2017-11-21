@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once ("Controler/frontend.php");
+require_once("Controller/frontend.php");
 
 try
 {
@@ -23,9 +23,13 @@ try
     {
         logout();
     }
+    else if (isset($_GET['action']) && $_GET['action'] == 'login')
+    {
+        login();
+    }
     else
     {
-        header("Location: View/accueil_utilisateur.php");
+        login();
     }
 }
 catch (Exception $e)
