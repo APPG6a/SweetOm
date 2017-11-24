@@ -202,6 +202,7 @@ label input:focus + .label-text
     -ms-transform: translateY(-74px);
     -o-transform: translateY(-74px);
     transform: translateY(-74px);
+
 }
 
 label input.isNotEmpty + .label-text {
@@ -211,6 +212,7 @@ label input.isNotEmpty + .label-text {
     -ms-transform: translateY(-74px);
     -o-transform: translateY(-74px);
     transform: translateY(-74px);
+    
 }
 
 #logo
@@ -219,6 +221,33 @@ label input.isNotEmpty + .label-text {
 	width: 127px;
 	height: 127px;
 	margin-right: 85%;
+}
+#message
+{
+	margin: 30px 50px;
+	word-wrap: break-word;
+	overflow: auto;
+}
+#menu-message
+{
+	vertical-align: top;
+	width:20%;
+}
+
+#menu-message a
+{
+	display: block;
+}
+
+#menu-message, #type-message
+{
+	display: inline-block;
+}
+
+#objet-message
+{
+	width: 500px;
+	margin-left: 50px
 }
 
 #tete_form
