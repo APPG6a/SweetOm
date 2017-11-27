@@ -27,32 +27,31 @@ function modifyUser($Array, $ID)
     $newUser->setHome($ID, $address);
 }
 
-function connectUser($pass, $login)
+function connectUser($login, $pass)
 {
     $user = new \SweetIt\SweetOm\Model\ConnectionManager();
 
-    $userInfo = $user->connect($login, password_hash($pass, PASSWORD_DEFAULT));
+    $userInfo = $user->connect($login, $pass);
 
-    if (!empty($userInfo))
-    {
-        $_SESSION['ID'] = $userInfo['ID'];
-        $_SESSION['connected'] = true;
-    }
+    $_SESSION['ID'] = $userInfo['ID'];
+    $_SESSION['connected'] = true;
+
+    require_once('View/accueil_utilisateur.php');
 }
 
 function login()
 {
-    require('View/loginView.php');
+    require_once('View/loginView.php');
 }
 
 function logout()
 {
     session_destroy();
     $_SESSION = array();
-    login();
+    require_once('../View/loginView.php');
 }
 
 function dashboard()
 {
-    require('View/accueil_utilisateur.php');
+    require_once('View/accueil_utilisateur.php');
 }
