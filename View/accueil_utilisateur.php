@@ -4,6 +4,7 @@ ob_start();
 ?>
 <p>
     Vos données ont bien été enregistrées!
+    <?php echo $_SESSION['ID']?>
 </p>
 
 <div id="Accueil">

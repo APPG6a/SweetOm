@@ -31,7 +31,7 @@ try
     {
         if (isset($_POST['login']) && isset($_POST['password']))
         {
-            connectUser($_POST['login'], $_POST['password']);
+            connectUser($_POST['login'], password_hash($_POST['password'], PASSWORD_DEFAULT));
         }
     }
     else if (isset($_GET['action']) && $_GET['action'] == 'addNewUser')
