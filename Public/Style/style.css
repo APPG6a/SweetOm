@@ -239,6 +239,11 @@ label input.isNotEmpty + .label-text {
 	display: block;
 }
 
+#menu-message div
+{
+	height: 30px;
+	background: red;
+}
 #menu-message, #type-message
 {
 	display: inline-block;

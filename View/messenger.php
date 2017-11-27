@@ -4,6 +4,7 @@ ob_start()?>
 	<div id="CorpsMessenger">
 		<!--Presentation a revoir-->
 		<div id="menu-message">
+			<div></div>
 			<a href="#sms-ecrit">Ecrire un message</a>
 			<a href="#sms-envoye">Boîte de réception</a>
 			<a href="#sms-recu">Messages envoyés</a>
