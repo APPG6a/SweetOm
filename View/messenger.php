@@ -13,8 +13,8 @@ ob_start()?>
 			<!--afficher qu'au clic d'un des trois liens au dessus besoin de Javascript-->
 			<div id="sms-ecrit">
 				<form method="POST">
-					<input id="objet-message" type="text" name="objetmessage" placeholder="objet"/> </br>
-					<textarea id="message" placeholder="Ecrire message" rows="20" cols="80"></textarea/></br>
+					<input id="objet-message" type="text" name="objetmessage" placeholder="objet"/> <br/>
+					<textarea id="message" placeholder="Ecrire message" rows="20" cols="80"></textarea><br/>
 					<input id="centrer" type="submit" name="submit" value="Envoyer">
 				</form>
 			</div>

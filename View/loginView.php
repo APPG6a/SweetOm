@@ -6,7 +6,7 @@ ob_start();
     <div class="wrapper-left">
 
         <h2>Se connecter</h2>
-        <form method="post" action="index.php?action=connectUser">
+        <form method="post" action="../index.php?action=connectUser">
             <label>
                 <input type="text" name="login" requiered id="login">
                 <div class="label-text">Identifiant</div>

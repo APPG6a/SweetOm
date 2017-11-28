@@ -8,7 +8,7 @@
 
 namespace SweetIt\SweetOm\Model;
 
-require_once("Model/Manager.php");
+require_once("Manager.php");
 
 class ConnectionManager extends Manager
 {

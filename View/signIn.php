@@ -4,7 +4,7 @@ ob_start();
 ?>
 	<div class="CorpsSignIn">
 
-		<form id="form_inscription" method="POST" action="index.php?action=addNewUser">
+		<form id="form_inscription" method="POST" action="../index.php?action=addNewUser">
 
        		
 			<div id=tete_form></div>

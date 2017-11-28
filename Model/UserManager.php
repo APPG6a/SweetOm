@@ -8,7 +8,7 @@
 
 namespace SweetIt\SweetOm\Model;
 
-require_once("Model/Manager.php");
+require_once("Manager.php");
 
 class UserManager extends Manager
 {
@@ -32,7 +32,7 @@ class UserManager extends Manager
         $db = $this->dbConnect();
 
         $req = $db->prepare('UPDATE utilisateurs
-                                      SET Nom = ?, Prenom = ?, Telephone = ?, Mail = ?, ID_SuperUser = ?, UserType = ?)
+                                      SET Nom = ?, Prenom = ?, Telephone = ?, Mail = ?, ID_SuperUser = ?, UserType = ? 
                                       WHERE ID = ?');
         $affectedLines = $req->execute(array($surname, $name, $cell, $phone, $mail, $idSuperUser, 'NormalUser', $ID));
 

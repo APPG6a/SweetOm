@@ -6,8 +6,8 @@
  * Time: 11:22
  */
 
-require_once('Model/ConnectionManager.php');
-require_once('Model/UserManager.php');
+require_once('../Model/ConnectionManager.php');
+require_once('../Model/UserManager.php');
 /**
  *
  */
@@ -36,22 +36,20 @@ function connectUser($login, $pass)
     $_SESSION['ID'] = $userInfo['ID'];
     $_SESSION['connected'] = true;
 
-    require_once('View/accueil_utilisateur.php');
+    require_once('../View/accueil_utilisateur.php');
 }
 
 function login()
 {
-    require_once('View/loginView.php');
+    require_once('../View/loginView.php');
 }
 
 function logout()
 {
-    session_destroy();
-    $_SESSION = array();
-    require_once('../View/loginView.php');
+    require_once('../View/logout.php');
 }
 
 function dashboard()
 {
-    require_once('View/accueil_utilisateur.php');
+    require_once('../View/accueil_utilisateur.php');
 }
