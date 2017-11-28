@@ -7,11 +7,11 @@ ob_start();
 
         <h2>Se connecter</h2>
         <form method="post" action="../index.php?action=connectUser">
-            <label>
-                <input type="text" name="login" requiered id="login">
+            <label class=label_form>
+                <input type="text" name="login" requiered id="login"/>
                 <div class="label-text">Identifiant</div>
             </label>
-            <label>
+            <label class="label_form">
                 <input type="password" name="password" required id="password" />
                 <div class="label-text">Mot de passe</div>
             </label>
@@ -22,7 +22,7 @@ ob_start();
 
         <h2>Première visite?</h2>
         <form method="post" action="">
-            <label>
+            <label class="label_form">
                 <input type="text" name="IdDomisep" required id="IdDomisep" />
                 <div class="label-text">Numéro Domisep</div>
             </label>

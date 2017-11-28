@@ -11,13 +11,16 @@ ob_start()?>
 		</div> 
 
 		<div id="type_message">
-			<!--afficher qu'au clic d'un des trois liens au dessus besoin de Javascript-->
+			<!--afficher qu'au clic d'un des trois liens au dessus, besoin de Javascript-->
 			<div id="sms_ecrit">
-				<form method="POST">
-					<input id="objet_message" type="text" name="objetmessage" placeholder="objet"/> <br/>
-					<p>Envoyer à:</p> <input id="recever_message" type="text" name="recever_message"/> <br/>
-					<textarea id="message" placeholder="Ecrire message" rows="20" cols="80"></textarea><br/>
-					<input id="centrer" type="submit" name="submit" value="Envoyer">
+				<form method="POST" action="">
+					<p>
+						<input id="objet_message" type="text" name="objetmessage" size="80" placeholder="objet"/> <br/><br/>
+						<label for="recever_message">Envoyer à:</label> <input id="recever_message" size="50" type="text" name="recever_message"/> <br/>
+						<textarea id="message" placeholder="Ecrire message" rows="20" cols="80"></textarea><br/>
+						<input id="centrer" type="submit" name="submit" value="Envoyer">
+					</p>
+					
 				</form>
 			</div>
 

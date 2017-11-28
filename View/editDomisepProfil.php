@@ -2,12 +2,21 @@
 $title= "Edit profil";
 ob_start()?>
 	<div id="Corps">
-		<div id="domisep_info">
-			<input type="text" name="adresse"><label for="adresse">Adresse</label>
-			<input type="text" name="Ville"><label for="ville">Ville</label>
-			<input type="tel" name="codePostal"><label for="codePostal">Code postal</label>
-			<input type="tel" name="numTel"><label for="numTel">Numéro de téléphone</label>
-			<input type="mail" name="mail"><label for="mail">Aadresse mail</label>
+		<form id="edit_domisepInfo" method="POST" action="">
+			<p>
+				<label for="adresse_domisep">Adresse</label><br/>  <input type="text" id="adresse_domisep" name="adresseDomisep"/><br/><br/>
+				<label for="ville_domisep">Ville</label><br/>  <input type="text" id="ville_domisep" name="VilleDomisep"/><br/><br/>
+				<label for="codePostal_domisep">Code postal</label><br/>  <input type="tel" id="codePostal_domisep" name="codePostalDomisep"/><br/><br/>
+				<label for="numTel_domisep">Numéro de téléphone</label><br/>  <input type="tel" id="numTel_domisep" name="numTelDomisep"/><br/><br/>
+				<label for="mail_domisep">Adresse mail</label><br/>  <input id="mail_domisep" type="mail" name="mailDomisep"/><br/><br/>
+				<input type="submit" id="center" name="submit" value="soumettre">
+			</p>
+			
+		</form>
+		<div id=info_domisepProfil>
+
+
+
 		</div>
 		
 	</div>
