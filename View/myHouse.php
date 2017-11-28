@@ -1,6 +1,7 @@
 <?php 
 $title= "House connection";
 ob_start()?>
+
 	<div class="Corps">
 		<?php 
 			// Vérifier que les variables sont biens arrivées//
@@ -28,11 +29,11 @@ ob_start()?>
 					<option> Ma chambre </option>";
 
 				echo "</select>
-					</br> <input type=\"checkbox\" name=\"capteur-lum\" > <label for=\"capteur-lum\">capteur lumière </label> </br>
-					<input  type=\"checkbox\" name=\"capteur-fum\" > <label for=\"capteur-fum\">capteur fumée </label> </br>
-					<input  type=\"checkbox\" name=\"capteur-hum\" > <label for=\"capteur-hum\">capteur humidité </label> </br>
-					<input  type=\"checkbox\" name=\"capteur-int\" > <label for=\"capteur-int\">capteur intrusion </label> </br>
-					<input  type=\"checkbox\" name=\"capteur-tem\" > <label for=\"capteur-tem \">capteur température </label> </br>";
+					</br> <input type=\"checkbox\" name=\"capteur-lum\" > <label for=\"capteur-lum\">capteur lumière </label> <br/>
+					<input  type=\"checkbox\" name=\"capteur-fum\" > <label for=\"capteur-fum\">capteur fumée </label> <br/>
+					<input  type=\"checkbox\" name=\"capteur-hum\" > <label for=\"capteur-hum\">capteur humidité </label> <br/>
+					<input  type=\"checkbox\" name=\"capteur-int\" > <label for=\"capteur-int\">capteur intrusion </label> <br/>
+					<input  type=\"checkbox\" name=\"capteur-tem\" > <label for=\"capteur-tem \">capteur température </label> <br/>";
 			
 
 				$_i=$_i+1;
@@ -40,7 +41,7 @@ ob_start()?>
 				while($_j!=$_SESSION["nbrHabt"]) //pareil pour les habitant
 				{	
 					echo "<input  type=\"checkbox\" name=\"habitant".($_j+1)."\" > 
-					<label for=\"habitant".($_j+1)."\"> ".$_POST["habitant".($_j+1).""]." </label> </br>";
+					<label for=\"habitant".($_j+1)."\"> ".$_POST["habitant".($_j+1).""]." </label> <br/>";
 						$_j=$_j+1;
 				}
 				$_j=0;
@@ -68,11 +69,11 @@ ob_start()?>
 					<option> Mes toilletes </option>";
 
 				echo "</select>
-				</br> <input type=\"checkbox\" name=\"capteur-lum\" > <label for=\"capteur-lum\">capteur lumière </label> </br>
-				<input  type=\"checkbox\" name=\"capteur-fum\" > <label for=\"capteur-fum\">capteur fumée </label> </br>
-				<input  type=\"checkbox\" name=\"capteur-hum\" > <label for=\"capteur-hum\">capteur humidité </label> </br>
-				<input  type=\"checkbox\" name=\"capteur-int\" > <label for=\"capteur-int\">capteur intrusion </label> </br>
-				<input  type=\"checkbox\" name=\"capteur-tem\" > <label for=\"capteur-tem \">capteur température </label> </br>";
+				</br> <input type=\"checkbox\" name=\"capteur-lum\" > <label for=\"capteur-lum\">capteur lumière </label> <br/>
+				<input  type=\"checkbox\" name=\"capteur-fum\" > <label for=\"capteur-fum\">capteur fumée </label> <br/>
+				<input  type=\"checkbox\" name=\"capteur-hum\" > <label for=\"capteur-hum\">capteur humidité </label> <br/>
+				<input  type=\"checkbox\" name=\"capteur-int\" > <label for=\"capteur-int\">capteur intrusion </label> <br/>
+				<input  type=\"checkbox\" name=\"capteur-tem\" > <label for=\"capteur-tem \">capteur température </label> <br/>";
 
 				$_i=$_i+1;
 				echo "</br> Associer habitant-s) </br>";
@@ -80,7 +81,7 @@ ob_start()?>
 				while($_j!=$_SESSION["nbrHabt"]) //pareil pour les habitant
 				{	
 					echo "<input  type=\"checkbox\" name=\"habitant".($_j+1)."\" > 
-					<label for=\"habitant ".($_j+1)."\"> ".$_POST["habitant ".($_j+1).""]." </label> </br>";
+					<label for=\"habitant ".($_j+1)."\"> ".$_POST["habitant ".($_j+1).""]." </label> <br/>";
 					$_j=$_j+1;
 				}
 				$_j=0;
@@ -106,18 +107,18 @@ ob_start()?>
 			
 
 				echo "</select>
-				</br> <input type=\"checkbox\" name=\"capteur-lum\" > <label for=\"capteur-lum\">capteur lumière </label> </br>
-				<input  type=\"checkbox\" name=\"capteur-fum\" > <label for=\"capteur-fum\">capteur fumée </label> </br>
-				<input  type=\"checkbox\" name=\"capteur-hum\" > <label for=\"capteur-hum\">capteur humidité </label> </br>
-				<input  type=\"checkbox\" name=\"capteur-int\" > <label for=\"capteur-int\">capteur intrusion </label> </br>
-				<input  type=\"checkbox\" name=\"capteur-tem\" > <label for=\"capteur-tem \">capteur température </label> </br>";
+				</br> <input type=\"checkbox\" name=\"capteur-lum\" > <label for=\"capteur-lum\">capteur lumière </label> <br/>
+				<input  type=\"checkbox\" name=\"capteur-fum\" > <label for=\"capteur-fum\">capteur fumée </label> <br/>
+				<input  type=\"checkbox\" name=\"capteur-hum\" > <label for=\"capteur-hum\">capteur humidité </label> <br/>
+				<input  type=\"checkbox\" name=\"capteur-int\" > <label for=\"capteur-int\">capteur intrusion </label> <br/>
+				<input  type=\"checkbox\" name=\"capteur-tem\" > <label for=\"capteur-tem \">capteur température </label> <br/>";
 
 				$_i=$_i+1;
-				echo "</br> Associer habitant(s) </br>";
+				echo "</br> Associer habitant(s) <br/>";
 				while($_j!=$_SESSION["nbrHabt"]) //pareil pour les habitant
 				{	
 					echo "<input  type=\"checkbox\" name=\"habitant ".($_j+1)."\" > 
-					<label for=\"habitant ".($_j+1)."\"> ".$_POST["habitant".($_j+1).""]." </label> </br>";
+					<label for=\"habitant ".($_j+1)."\"> ".$_POST["habitant".($_j+1).""]." </label> <br/>";
 					$_j=$_j+1;
 				}
 				$_j=0;

@@ -73,6 +73,15 @@ button:hover, button:focus {
 {
 	text-align: center;
 }
+#domisep_function, #domisep_info
+{
+	width: 60%;
+	margin: auto;
+}
+#domisep_function a
+{
+	display: block;
+}
 
 #edit_profil
 {
@@ -228,31 +237,36 @@ label input.isNotEmpty + .label-text {
 	word-wrap: break-word;
 	overflow: auto;
 }
-#menu-message
+#menu_message
 {
 	vertical-align: top;
 	width:20%;
 }
 
-#menu-message a
+#menu_message a
 {
 	display: block;
 }
 
-#menu-message div
+#menu_message div
 {
 	height: 30px;
 	background: red;
 }
-#menu-message, #type-message
+#menu_message, #type_message
 {
 	display: inline-block;
 }
 
-#objet-message
+#objet_message
 {
 	width: 500px;
 	margin-left: 50px
+}
+
+#recever_message
+{
+	width: 300px;
 }
 
 #tete_form
