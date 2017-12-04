@@ -6,8 +6,8 @@
  * Time: 11:22
  */
 
-require_once('../Model/ConnectionManager.php');
-require_once('../Model/UserManager.php');
+require_once('Model/ConnectionManager.php');
+require_once('Model/UserManager.php');
 /**
  *
  */
@@ -41,7 +41,7 @@ function connectUser($login, $pass)
 
 function login()
 {
-    require_once('../View/loginView.php');
+    require_once('View/loginView.php');
 }
 
 function logout()

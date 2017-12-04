@@ -161,9 +161,9 @@ form
 
 header
 {
-
+	display: flex;
 	background: rgb(255,167,79);
-	vertical-align: top;
+	justify-content: space-between;
 	border-radius: 7px;
 }
 
@@ -296,7 +296,7 @@ header
  	color: black;
 }
 
-#nav_user a:hpover
+#nav_user a:hover
 {
   	text-decoration: underline;
 }

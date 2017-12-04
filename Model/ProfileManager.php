@@ -38,13 +38,13 @@ class ProfileManager extends Manager
 
         $Array = $req->fetch();
 
-        $this->setNom();
-        $this->setPrenom($Array['']);
-        $this->setLogin($Array['']);
-        $this->setPassword($Array['']);
-        $this->setTelephonPortabe($Array['']);
-        $this->setMail($Array['']);
-        $this->set($Array['']);
+        $this->setNom($Array['Nom']);
+        $this->setPrenom($Array['Prenom']);
+        $this->setLogin($Array['Login']);
+        $this->setPassword($Array['Password']);
+        $this->setTelephonPortabe($Array['TelephonePortable']);
+        $this->setMail($Array['Mail']);
+        $this->setIDSuperUser($Array['ID_SuperUser']);
         $this->set($Array['']);
         $this->set($Array['']);
     }
