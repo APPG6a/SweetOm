@@ -2,21 +2,21 @@
 $title= "House connection";
 ob_start()?>
 
-	<div class="Corps">
+	<div class="corps">
 		<?php 
 			// On devra vérifier que les variables sont biens arrivées//
-			echo "<form  id=user_info method=\"POST\" action=\"accueil_utilisateur.php\">";
+			echo "<form  id=userInfo method=\"POST\" action=\"homeUser.php\">";
 
 
 			$_i=0;
 			$_j=0;
 
-			echo"<div id=corps_chambre>
+			echo"<div id=corpsChambre>
 				<p>Connecter chambre(s)</p>";
 			while($_i != $_SESSION["nbrChambre"])  
 			// on personalise la chambre i+1 en fonction du nom de la chambre des capteurs et des habitants associés
 			{
-				echo "<fieldset class=piece_chambre>
+				echo "<fieldset class=pieceChambre>
 		
 					</br> <select  name=\"chambre ".($_i+1)."\" >  
 					<option> chambre des parents </option>
@@ -56,11 +56,11 @@ ob_start()?>
 
 			echo"</div>";
 
-			echo "<div id=corps_toilette>
+			echo "<div id=corpsToilette>
 			<p> Connecter toillete(s) </p>";
 			while($_i!=$_SESSION["nbrToilette"])  //Idem pour les toilettes
 			{
-				echo "<fieldset class=piece_toilette>
+				echo "<fieldset class=pieceToilette>
 			
 					</br> <select name=\"toilette-".($_i+1)."\" >
 					<option> toillete chambre des parents </option>
@@ -98,11 +98,11 @@ ob_start()?>
 
 
 	
-			echo "<div id=corps_sejour>
+			echo "<div id=corpsSejour>
 		 	<p>Connecter séjour(s)</p>";
 			while( $_i != $_SESSION["nbrSejour"])  // Idem pour le(s) sejour(s)
 			{
-				echo "<fieldset class=piece_sejour> 
+				echo "<fieldset class=pieceSejour> 
 					
 					</br> <select  name=\"sejour_".($_i+1)."\" >
 					<option> Mon séjour </option>
@@ -133,7 +133,7 @@ ob_start()?>
 
 
 			echo "</div>";
-			echo "<input class=centrer type=\"submit\" value=\"J'enregistre mes données\">";
+			echo "<input class=\"boutonSubmit\" type=\"submit\" value=\"J'enregistre mes données\">";
 					
 			echo "</form>";
 		?>

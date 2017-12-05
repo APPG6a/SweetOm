@@ -2,7 +2,7 @@
 $title= "Edit profil";
 ob_start()?>
 	<div id="Corps">
-		<form id="edit_domisepInfo" method="POST" action="">
+		<form id="editDomisepInfo" method="POST" action="">
 			<p>
 				<label for="adresse_domisep">Adresse</label><br/>  <input type="text" id="adresse_domisep" name="adresseDomisep"/><br/><br/>
 				<label for="ville_domisep">Ville</label><br/>  <input type="text" id="ville_domisep" name="VilleDomisep"/><br/><br/>
@@ -13,9 +13,9 @@ ob_start()?>
 			</p>
 			
 		</form>
-		<div id=info_domisepProfil>
+		<div id=infoDomisepProfil>
 
-
+			<!--a extraire de la bdd-->
 
 		</div>
 		

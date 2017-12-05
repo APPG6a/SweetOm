@@ -2,24 +2,81 @@
 $title = "SignIn";
 ob_start();
 ?>
-	<div class="CorpsSignIn">
+	<div class="corpsSignIn">
 
-		<form id="form_inscription" method="POST" action="../index.php?action=addNewUser">
+		<form id="formInscription" method="POST" action="../index.php?action=addNewUser">
 
        		
-			<div id=tete_form></div>
-			<input class="info" type="text" name="nom" placeholder="Nom" required/>
-			<input class="info" type="text" name="prenom" placeholder="Prénom" required/><br />
-			<input class="info" type="mail" name="mail" placeholder="Mail" required/><br />
-			<input class="info" type="tel" name="numPort" placeholder="Numéro de portable" required/>
-			<input class="info" type="tel" name="numFix" placeholder="Numéro fixe"><br />
-			<input class="info" type="text" name="adresse" placeholder="Adresse" required/>
-			<input class="info" type="text" name="cmp_adresse" placeholder="Complément d'adresse"><br />
-			<input class="info" type="number" name="cp" placeholder="Code postal" required/>
-			<input class="info" type="text" name="ville" placeholder="Ville" required/><br />
-			<input class="info" type="text" name="pays" placeholder="Pays" required/><br />
-			<label class="centrer"><input  type="checkbox" name="a_coche"/>  j'accepte les CGU </label><br />
-			<input class= "centrer" type="submit" value="j'enregistre mes données">
+			<div id=teteForm></div>
+			<!-- chaque classe info subiront un flexblox avec les contenus séparés-->
+			<div class="info">
+				<label for="nom">
+					<p>Nom:</p> 
+					<input  type="text" name="nom" id="nom" required/> 
+				</label>
+				
+				<label for="prenom">
+					<p>prénom:</p> 
+					<input  type="text" name="prenom" id="prenom" required/> 
+				</label>
+				
+			</div>
+
+			<div class="info">
+				<label for="mail">
+					<p>e-mail:</p>
+					<input  type="mail" name="mail" id="mail" required/> 
+				</label>
+				
+			</div>
+
+			<div class="info">
+				<label for="tel">
+					<p>n° Tel: </p>
+					<input  type="tel" name="numPort" id="numPort" required/>
+				</label>
+				
+				<label for="numFix">
+					<p>n° Fix: </p>
+					<input  type="tel" name="numFix" id="numFix"/>
+				</label>
+				
+			</div>
+
+			<div class="info">
+				<label for="adresse">
+					<p>Adresse: </p>
+					<input  type="text" name="adresse" id="adresse" required/>
+				</label>
+				<label for="cmpAdresse">
+					<p>Complément d'adresse: </p>
+					<input  type="text" name="cmpAdresse"  id="cmpAdresse" />
+				</label>
+				
+			</div>
+
+			<div class="info">
+				<label for="cp">
+					<p>Code postal: </p>
+					<input  type="number" name="cp" id="cp" required/>
+				</label>	
+			</div>
+
+			<div class="info">
+				<label for="pays">
+					<p>Pays: </p>
+					<input  type="text" name="pays" id="pays" required/>
+				</label>
+				
+				<label for="ville">
+					<p>Ville: </p>
+					<input  type="text" name="ville" id="ville" required/>
+				</label>
+			</div>
+			<div class="formFoot">
+				<label class="centrer"><input  type="checkbox" name="a_coche"/>  j'accepte les CGU </label>
+				<input class= "boutonSubmit" type="submit" value="j'enregistre mes données">
+			</div>
 		</form>
 		
 	</div>

@@ -3,32 +3,40 @@ $title= "messenger";
 ob_start()?>
 	<div id="CorpsMessenger">
 		<!--Presentation a revoir-->
-		<div id="menu_message">
+		<nav id="menuMessage">
 			<div></div>
-			<a href="#sms_ecrit">Ecrire un message</a>
-			<a href="#sms_envoye">Boîte de réception</a>
-			<a href="#sms_recu">Messages envoyés</a>
-		</div> 
+			<a href="#smsEcrit">Ecrire un message</a>
+			<a href="#smsEnvoye">Boîte de réception</a>
+			<a href="#smsRecu">Messages envoyés</a>
+		</nav> 
 
-		<div id="type_message">
+		<div id="typeMessage">
 			<!--afficher qu'au clic d'un des trois liens au dessus, besoin de Javascript-->
-			<div id="sms_ecrit">
+			<div id="smsEcrit">
 				<form method="POST" action="">
-					<p>
-						<input id="objet_message" type="text" name="objetmessage" size="80" placeholder="objet"/> <br/><br/>
-						<label for="recever_message">Envoyer à:</label> <input id="recever_message" size="50" type="text" name="recever_message"/> <br/>
-						<textarea id="message" placeholder="Ecrire message" rows="20" cols="80"></textarea><br/>
-						<input id="centrer" type="submit" name="submit" value="Envoyer">
-					</p>
+					<div>
+						<input id="objetMessage" type="text" name="objetMessage" size="80" placeholder="objet"/> 
+
+						<label for="receverMessage">
+							<p>Envoyer à:</p>
+							<input id="receverMessage" size="50" type="text" name="receverMessage"/> 
+						</label> 
+
+						<textarea id="message" placeholder="Ecrire message" rows="20" cols="80"></textarea>
+						<div class="formFoot">
+							<input class="boutonSubmit" type="submit" name="submit" value="Envoyer message"/>
+						</div>
+						
+					</div>
 					
 				</form>
 			</div>
 
-			<div id="sms_recu">  
+			<div id="smsRecu">  
 				<!--extraire les 20 derniers messages reçu de la bdd-->	
 			</div>	
 
-			<div id="sms_envoye">
+			<div id="smsEnvoye">
 				<!--exttraire les messages envoyées par l'utilisateur de la bdd-->
 			</div>
 		</div>

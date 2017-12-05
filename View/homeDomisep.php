@@ -1,8 +1,8 @@
 <?php 
 $title= "Domisep's Home";
 ob_start()?>
-	<div id=Corps>
-		<div id="domisep_function">
+	<div id="corps">
+		<div id="domisepFunction">
 			<a href="editDomisepProfil.php">Editer le profil Domisep</a>
 			<a href="">Gérer les utilisateurs</a>
 			<a href="">Afficher les données</a>
