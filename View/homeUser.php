@@ -7,9 +7,9 @@ ob_start();
     <?php echo $_SESSION['ID']?>
 </p>
 
-<div id="Accueil">
-    <div id=tab_de_bord>   <p>Tableau de bord</p>    </div>
-    <a href="myHouse.php" id="edit_profil">Editer profil</a>
+<div id="accueil">
+    <a id="tabDeBord">Tableau de bord </a>
+    <a href="myHouse.php" id="editProfil">Editer profil</a>
 
 </div>
 <?php
