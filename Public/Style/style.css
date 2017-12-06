@@ -112,11 +112,6 @@ button:hover, button:focus {
 	border-radius: 0 9px 9px 0;
 }
 
-#edit_profil p
-{
-	border-radius: 0 9px 0 0;
-}
-
 #edit_profil:hover
 {
 	width: 500px;

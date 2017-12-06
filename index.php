@@ -1,6 +1,6 @@
 <?php
 
-require_once("Controller/frontend.php");
+require_once("./Controller/frontend.php");
 
 try
 {

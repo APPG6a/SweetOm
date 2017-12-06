@@ -36,7 +36,7 @@ function connectUser($login, $pass)
     $_SESSION['ID'] = $userInfo['ID'];
     $_SESSION['connected'] = true;
 
-    require_once('../View/accueil_utilisateur.php');
+    require_once('\View\homeUser.php');
 }
 
 function login()

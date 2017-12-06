@@ -19,15 +19,15 @@ class ConnectionManager extends Manager
         $req = $db->prepare("SELECT * FROM `utilisateurs` WHERE `Login` = ? AND `Password` = ?");
         $req->execute(array($login, $password));
 
-        $info = $req->fetch();
 
-        if (!empty($info))
+
+        /*if (!empty($info = $req->fetch()))
         {
             return $info;
         }
         else
         {
             throw new \Exception("Invalid User or Password");
-        }
+        }*/
     }
 }
