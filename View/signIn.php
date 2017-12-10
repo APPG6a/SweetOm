@@ -31,7 +31,7 @@ ob_start();
 			</div>
 
 			<div class="info">
-				<label for="tel">
+				<label for="numPort">
 					<p>n° Tel: </p>
 					<input  type="tel" name="numPort" id="numPort" required/>
 				</label>

@@ -316,13 +316,15 @@ header
 
 #navUser
 {
-	background: red;
+	display: flex;
 	padding: 15px;
+	justify-content: space-between;
+	background: red;
 }
 
 #navUser a
 {
-	display: inline-block;
+	display: block;
  	text-decoration: none;
  	color: black;
 }
@@ -332,6 +334,11 @@ header
   	text-decoration: underline;
 }
 
+#smsEcrit form{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
 #teteForm
 {
 	height: 15px;
