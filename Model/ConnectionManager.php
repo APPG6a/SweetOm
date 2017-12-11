@@ -19,23 +19,11 @@ class ConnectionManager extends Manager
         $req = $db->prepare("SELECT * FROM `utilisateurs` WHERE `Login` = ? AND `Password` = ?");
         $req->execute(array($login, $password));
 
-
-<<<<<<< HEAD
-
-        /*if (!empty($info = $req->fetch()))
-        {
-            return $info;
-        }
-        else
-        {
-            throw new \Exception("Invalid User or Password");
-        }*/
-=======
+        $info = $req->fetch();
         try{
             return $info;
         } catch (Exception $e) {
             die("Message ".$e->getMessage());
         }
->>>>>>> refs/remotes/origin/master
     }
 }

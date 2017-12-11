@@ -36,24 +36,21 @@ function connectUser($login, $pass)
     $_SESSION['ID'] = $userInfo['ID'];
     $_SESSION['connected'] = true;
 
-<<<<<<< HEAD
-    require_once('\View\homeUser.php');
-=======
-    require_once('View/homeUser.php');
->>>>>>> refs/remotes/origin/master
+    require_once('/View/homeUser.php');
+
 }
 
 function login()
 {
-    require_once('View/loginView.php');
+    require_once('/View/loginView.php');
 }
 
 function logout()
 {
-    require_once('../View/logout.php');
+    require_once('/View/logout.php');
 }
 
 function dashboard()
 {
-    require_once('../View/accueil_utilisateur.php');
+    require_once('/View/homeUser.php');
 }
