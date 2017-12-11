@@ -21,13 +21,10 @@ class ConnectionManager extends Manager
 
         $info = $req->fetch();
 
-        if (!empty($info))
-        {
+        try{
             return $info;
-        }
-        else
-        {
-            throw new \Exception("Invalid User or Password");
+        } catch (Exception $e) {
+            die("Message ".$e->getMessage());
         }
     }
 }
