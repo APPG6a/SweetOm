@@ -20,6 +20,7 @@ class ConnectionManager extends Manager
         $req->execute(array($login, $password));
 
 
+<<<<<<< HEAD
 
         /*if (!empty($info = $req->fetch()))
         {
@@ -29,5 +30,12 @@ class ConnectionManager extends Manager
         {
             throw new \Exception("Invalid User or Password");
         }*/
+=======
+        try{
+            return $info;
+        } catch (Exception $e) {
+            die("Message ".$e->getMessage());
+        }
+>>>>>>> refs/remotes/origin/master
     }
 }

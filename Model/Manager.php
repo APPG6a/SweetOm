@@ -21,8 +21,13 @@ class Manager
 		$login = "root";
 		$password = "";
 
-		$db = new \PDO($engine.":host=".$host.";dbname=".$dbname.";charset=".$charset, $login, $password);
+		try {
+			$db = new \PDO($engine.":host=".$host.";dbname=".$dbname.";charset=".$charset, $login, $password);
 
-		return $db;
+			return $db;
+		} catch (Exception $e) {
+			die("Message ".$e->getMessage());
+		}
+		
 	}
 }

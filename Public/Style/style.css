@@ -191,16 +191,14 @@ header
 
   }
 
-.info
-{
+.info{
 	width: 60%;
 	display: flex;
 	justify-content: space-between;
 	margin: auto;
+	flex-wrap: wrap;
 	margin-top: 20px;
 	margin-bottom: 20px;
-
-
 }
 
 .info input{
@@ -320,13 +318,15 @@ header
 
 #navUser
 {
-	background: red;
+	display: flex;
 	padding: 15px;
+	justify-content: space-between;
+	background: red;
 }
 
 #navUser a
 {
-	display: inline-block;
+	display: block;
  	text-decoration: none;
  	color: black;
 }
@@ -336,6 +336,11 @@ header
   	text-decoration: underline;
 }
 
+#smsEcrit form{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
 #teteForm
 {
 	height: 15px;
@@ -371,7 +376,9 @@ header
 
 .wrapper
 {
-	background: url('/Public/Assets/Images/sweetomHouseImage4.png');
+	display: flex;
+	flex-wrap: wrap;
+	/*background: url('/Public/Assets/Images/sweetomHouseImage4.png');*/
 	background: 100%;
 	text-align: center;
 	width: 100%;
@@ -384,7 +391,6 @@ header
 	color: black;
 	box-sizing: border-box;
 	width: 50%;
-	float: left;
 	height: 100vh;
 	transition: all 0.5s;
 }
@@ -405,7 +411,6 @@ header
 	color: black;
 	box-sizing: border-box;
 	width: 50%;
-	float: right;
 	height: 100vh;
 	transition: all 0.5s;
 }
@@ -419,3 +424,22 @@ header
 {
 	background-color: rgba(231, 76, 60, 0.5);
 }
+
+/*@media screen and (max-width: 1024px){
+	body{
+		font-size: 0.8em;
+	}
+	header{
+		padding: 20px;
+		display: flex;
+		background: rgb(255,223,202);
+		justify-content: space-between;
+		border-radius: 7px;
+		margin-bottom: 16px;
+	}
+	}
+	#logo{
+		width: 50px;
+		height: 50px;
+	}
+}*/

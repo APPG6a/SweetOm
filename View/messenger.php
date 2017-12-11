@@ -1,7 +1,7 @@
 <?php 
 $title= "messenger";
 ob_start()?>
-	<div id="CorpsMessenger">
+	<div id="corpsMessenger">
 		<!--Presentation a revoir-->
 		<nav id="menuMessage">
 			<div></div>
@@ -14,20 +14,17 @@ ob_start()?>
 			<!--afficher qu'au clic d'un des trois liens au dessus, besoin de Javascript-->
 			<div id="smsEcrit">
 				<form method="POST" action="">
-					<div>
 						<input id="objetMessage" type="text" name="objetMessage" size="80" placeholder="objet"/> 
 
 						<label for="receverMessage">
 							<p>Envoyer à:</p>
-							<input id="receverMessage" size="50" type="text" name="receverMessage"/> 
-						</label> 
-
+							<input id="receverMessage" type="text" size="60" name="receverMessage"/> 
+						</label><br>
 						<textarea id="message" placeholder="Ecrire message" rows="20" cols="80"></textarea>
+
 						<div class="formFoot">
 							<input class="boutonSubmit" type="submit" name="submit" value="Envoyer message"/>
 						</div>
-						
-					</div>
 					
 				</form>
 			</div>

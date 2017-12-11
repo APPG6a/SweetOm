@@ -36,7 +36,11 @@ function connectUser($login, $pass)
     $_SESSION['ID'] = $userInfo['ID'];
     $_SESSION['connected'] = true;
 
+<<<<<<< HEAD
     require_once('\View\homeUser.php');
+=======
+    require_once('View/homeUser.php');
+>>>>>>> refs/remotes/origin/master
 }
 
 function login()

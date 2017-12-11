@@ -30,7 +30,7 @@ ob_start()?>
 				}?>
 			</div>
 			<div class="formFoot">
-				<input class=\"boutonSubmit\" type=\"submit\" name=\"submit\" value=\"Envoyer\"/>"
+				<input class="boutonSubmit" type="submit" name="submit" value="Envoyer"/>"
 			</div>
 					
 		</form>	
