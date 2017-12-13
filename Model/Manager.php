@@ -16,7 +16,7 @@ class Manager
 	{
 		$engine = "mysql";
 		$host = "localhost";
-		$dbname = "sweeTom";
+		$dbname = "sweetom";
 		$charset = "utf8";
 		$login = "root";
 		$password = "";
