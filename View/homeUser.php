@@ -4,7 +4,16 @@ ob_start();
 ?>
 <p>
     Vos données ont bien été enregistrées!
-    <?php echo $_SESSION['ID']?>
+    <?php 
+    if ($_SESSION['connected']==true){
+    	echo $_SESSION['ID'];
+    }
+    else
+    {
+    	echo "faux";
+    	
+    }
+	?>
 </p>
 
 <div id="accueil">

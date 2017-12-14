@@ -16,7 +16,7 @@ ob_start();
                 <input type="password" name="password" required id="password" />
                 <div class="label-text">Mot de passe</div>
             </label>
-            <button>Submit</button>
+            <button>VALIDER</button>
         </form>
     </div>
     <div class="wrapper-right">
@@ -28,7 +28,7 @@ ob_start();
                 <input type="text" name="IdDomisep" required id="IdDomisep" />
                 <div class="label-text">Numéro Domisep</div>
             </label>
-            <button>Submit</button>
+            <button>VALIDER</button>
         </form>
     </div>
 </div>

@@ -10,10 +10,10 @@ ob_start()?>
 
 			$_i=0;
 			$_j=0;
-
+			echo $_POST["nbrChambre"];
 			echo"<div id=corpsChambre>
 				<p>Connecter chambre(s)</p>";
-			while($_i != $_SESSION["nbrChambre"])  
+			while($_i != $_POST["nbrChambre"])  
 			// on personalise la chambre i+1 en fonction du nom de la chambre des capteurs et des habitants associés
 			{
 				echo "<fieldset class=pieceChambre>

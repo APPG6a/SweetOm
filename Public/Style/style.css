@@ -57,13 +57,19 @@ button:hover, button:focus {
 	padding-right: 30px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	background-color: grey;
+	border: 2px solid #333333;
 	border: 1px solid black;
-	border-radius: 20px;
+	border-radius: 27px;
 }
-.boutonSubmit:hover,active{
-	background: rgb(0,128,183);
-	font-weight: bold;
+.boutonSubmit:hover, .boutonSubmit:focus{
+	background-color: #87CEFA;/*#1E90FF;*/
 }
+.boutonSubmit:active{
+	background-color: #98CEFB;
+	font-size: 0.75em; 
+}
+
 .corpsHouseInfo, .corpsSignIn, #corpsLoadUser{
 	background: url("/Public/Assets/Images/sweetomHouseImage4.png")  no-repeat;
 	background-size: 100%;
@@ -99,8 +105,8 @@ button:hover, button:focus {
 }
 #domisepFunction a:hover{
 	text-decoration: underline;
-	background: rgb(235,235,235);
-	font-size: 1.8em;
+	background: #DFF2FF;
+	font-size: 1.6em;
 	font-weight: bold;
 }
 

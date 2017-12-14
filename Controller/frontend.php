@@ -46,10 +46,10 @@ function login()
 
 function logout()
 {
-    require_once('../View/logout.php');
+    require_once('View/logout.php');
 }
 
 function dashboard()
 {
-    require_once('../View/accueil_utilisateur.php');
+    require_once('View/homeUser.php');
 }
