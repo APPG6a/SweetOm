@@ -20,7 +20,6 @@ class ConnectionManager extends Manager
         $req->execute(array($login, $password));
 
         $info = $req->fetch();
-
         try{
             return $info;
         } catch (Exception $e) {

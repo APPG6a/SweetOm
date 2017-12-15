@@ -36,12 +36,13 @@ function connectUser($login, $pass)
     $_SESSION['ID'] = $userInfo['ID'];
     $_SESSION['connected'] = true;
 
-    require_once('View/homeUser.php');
+    require_once('/View/homeUser.php');
+
 }
 
 function login()
 {
-    require_once('View/loginView.php');
+    require_once('/View/loginView.php');
 }
 
 function logout()
