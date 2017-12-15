@@ -33,6 +33,11 @@ try
             connectUser($_POST['login'], password_hash($_POST['password'], PASSWORD_DEFAULT));
         }
     }
+    else if (isset($_GET['action']) && $_GET['action'] == 'signInUser') {
+        if (isset($_POST['IdDomisep'])){
+            signInUser();
+        }
+    }
     else if (isset($_GET['action']) && $_GET['action'] == 'addNewUser')
     {
         if (!empty($_POST['nom']) &&

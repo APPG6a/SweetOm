@@ -1,5 +1,6 @@
 <?php
 $title = "SweetOm";
+$style = "style.css";
 ob_start();
 ?>
 <div class="wrapper">
@@ -22,7 +23,7 @@ ob_start();
     <div class="wrapper-right">
 
         <h2>Première visite?</h2>
-        <form method="post" action="">
+        <form method="post" action="/index.php?action=signInUser">
             
             <label class="label_form">
                 <input type="text" name="IdDomisep" required id="IdDomisep" />

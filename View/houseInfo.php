@@ -1,5 +1,6 @@
 <?php
 $title = "Edit Profil 1";
+$style = "style.css";
 ob_start()
 ?>
 <div class="corpsHouseInfo">

@@ -1,5 +1,6 @@
 <?php 
 $title= "messenger";
+$style = "style.css";
 ob_start()?>
 	<div id="corpsLoadUser">
 		<!--vérifier si Nb_habt bien arrivé par la méthode POST-->

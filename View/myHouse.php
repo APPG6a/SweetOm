@@ -1,5 +1,6 @@
 <?php 
 $title= "House connection";
+$style = "style.css";
 ob_start()?>
 
 	<div class="corps">

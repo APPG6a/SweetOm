@@ -1,0 +1,20 @@
+footer
+{
+    vertical-align: bottom;
+    background: white;
+    margin-top: 16px;
+    border-radius: 7px;
+    padding: 4px;
+
+}
+
+footer p
+{
+    display: inline-block;
+
+}
+
+footer p:hover
+{
+    color: blue;
+}

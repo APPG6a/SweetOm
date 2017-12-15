@@ -40,6 +40,11 @@ function connectUser($login, $pass)
 
 }
 
+function signInUser()
+{
+    require_once('/View/signIn.php');
+}
+
 function login()
 {
     require_once('/View/loginView.php');
