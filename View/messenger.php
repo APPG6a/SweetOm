@@ -1,13 +1,14 @@
 <?php 
 $title= "messenger";
 ob_start()?>
+
 	<div id="corpsMessenger">
 		<!--Presentation a revoir-->
 		<nav id="menuMessage">
 			<div></div>
-			<a href="#smsEcrit">Ecrire un message</a>
-			<a href="#smsEnvoye">Boîte de réception</a>
-			<a href="#smsRecu">Messages envoyés</a>
+			<a class = "choose" href="#smsEcrit" id="ecrit">Ecrire un message</a>
+			<a class = "choose" href="#smsEnvoye" id="envoye">Boîte de réception</a>
+			<a class = "choose" href="#smsRecu" id="recu">Messages envoyés</a>
 		</nav> 
 
 		<div id="typeMessage">
@@ -30,17 +31,17 @@ ob_start()?>
 			</div>
 
 			<div id="smsRecu">  
-				<!--extraire les 20 derniers messages reçu de la bdd-->	
+				ihh<!--extraire les 20 derniers messages reçu de la bdd-->	
 			</div>	
 
 			<div id="smsEnvoye">
-				<!--exttraire les messages envoyées par l'utilisateur de la bdd-->
+				ahh<!--exttraire les messages envoyées par l'utilisateur de la bdd-->
 			</div>
 		</div>
 
 	</div>
 		
-		 
+<script type="text/javascript" src="/Public/Js/messengerScript.js"></script> 
 <?php
 $content = ob_get_clean();
 require_once("template.php");
