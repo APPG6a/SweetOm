@@ -1,5 +1,6 @@
 <?php 
 $title= "Edit profil";
+$style = "style.css";
 ob_start()?>
 	<div id="Corps">
 		<form id="editDomisepInfo" method="POST" action="">

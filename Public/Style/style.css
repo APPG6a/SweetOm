@@ -144,26 +144,7 @@ button:hover, button:focus {
 	align-items: center;
 }
 
-footer
-{
-	vertical-align: bottom;
-	background: white;
-	margin-top: 16px;
-	border-radius: 7px;
-	padding: 4px;
 
-}
-
-footer p
-{
-	display: inline-block;
-
-}
-
-footer p:hover
-{
-	color: blue;
-}
 
 #formInscription
 {
@@ -175,24 +156,15 @@ footer p:hover
 
 }
 
-header
-{
-	padding: 20px;
-	display: flex;
-	background: rgb(255,223,202);
-	justify-content: space-between;
-	border-radius: 7px;
-	margin-bottom: 16px;
-}
- #hbt{
+#hbt{
  	display: flex;
  	justify-content: space-around;
  	flex-wrap: wrap;
  
- }
-  #hbt label{
+}
+#hbt label{
 
-  }
+}
 
 .info{
 	width: 60%;

@@ -1,5 +1,6 @@
 <?php
 $title = "SweetOm";
+$style = "style.css";
 ob_start();
 ?>
 <p>

@@ -1,0 +1,15 @@
+header
+{
+    padding: 20px;
+    display: flex;
+    background: rgb(255,223,202);
+    justify-content: space-between;
+    border-radius: 7px;
+    margin-bottom: 16px;
+}
+
+#logo
+{
+    width: 127px;
+    height: 127px;
+}
