@@ -38,6 +38,18 @@ try
             signInUser();
         }
     }
+    else if (isset($_GET['action']) && $_GET['action'] == 'create'){
+
+    }
+    else if (isset($_GET['action']) && $_GET['action'] == 'read'){
+
+    }
+    else if (isset($_GET['action']) && $_GET['action'] == 'update'){
+
+    }
+    else if (isset($_GET['action']) && $_GET['action'] == 'delete'){
+
+    }
     else if (isset($_GET['action']) && $_GET['action'] == 'addNewUser')
     {
         if (!empty($_POST['nom']) &&

@@ -3,13 +3,13 @@ $title="Premiere Visite";
 $style="form.css";
 ob_start();
 ?>
-    <form id="regForm" action="">
+    <form id="regForm" action="/create/user/<?php echo $_POST['IdDomisep']?>">
         <h1>Première Visite</h1>
 
         <div class="tab">Vos informations:
             <p><input type="text" name="firstName" placeholder="Prénom" oninput="this.className = ''"></p>
             <p><input type="text" name="lastName" placeholder="Nom" oninput="this.className = ''"></p>
-            <p><input type="text" name="login" disabled="true" value="<?php echo $_POST['IdDomisep']?>"></p>
+            <p><input type="text" name="login" disabled value="<?php echo $_POST['IdDomisep']?>"></p>
             <p><input type="password" name="password" placeholder="Mot de passe" oninput="this.className = ''"></p>
             <p><input type="password" name="passwordValidate" placeholder="Confirmez votre mot de passe" oninput="this.className = ''"></p>
         </div>
