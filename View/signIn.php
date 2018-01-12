@@ -3,7 +3,7 @@ $title="Premiere Visite";
 $style="form.css";
 ob_start();
 ?>
-    <form id="regForm" action="/create/user/<?php echo $_POST['IdDomisep']?>">
+    <form id="regForm" action="index.php?action=create&table=utilisateurs&id=<?php echo $_POST['IdDomisep']?>" method="post">
         <h1>Première Visite</h1>
 
         <div class="tab">Vos informations:
@@ -22,7 +22,6 @@ ob_start();
 
         <div class="tab">Adresse Principale:
             <p><input type="text" name="address" placeholder="Adresse" oninput="this.className = ''"></p>
-            <p><input type="text" name="address2" placeholder="Complément d'Adresse" oninput="this.className = ''"></p>
             <p><input type="text" name="postCode" placeholder="Code postal" oninput="this.className = ''"></p>
             <p><input type="text" name="city" placeholder="Ville" oninput="this.className = ''"></p>
             <p><input type="text" name="country" placeholder="Pays" oninput="this.className = ''"></p>

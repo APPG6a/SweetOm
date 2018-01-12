@@ -217,6 +217,11 @@ class UserManager extends Manager
         return $affectedLines;
     }
 
+    /**
+     * @param $address
+     * @param $idOwner
+     * @return bool
+     */
     function setHome($address, $idOwner)
     {
         $db = $this->dbConnect();

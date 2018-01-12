@@ -1,5 +1,6 @@
 Options +FollowSymlinks
 RewriteEngine On
 
-RewriteRule ^/$ index.php [L]
-RewriteRule ^/(create|read|update|delete)/(.+)/([0-9]+)$ index.php?action={1}&table={2}&id={3} [L]
+#RewriteRule ^/$ index.php [L]
+RewriteRule ^/(create|read|update|delete)/(.+)$ index.php [L]
+RewriteRule ^/cgu$ View/cgu.php [L]
