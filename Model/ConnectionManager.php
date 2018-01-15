@@ -16,7 +16,7 @@ class ConnectionManager extends Manager
     {
         $db = $this->dbConnect();
 
-        $req = $db->prepare("SELECT * FROM `utilisateurs` WHERE `Login` = ? AND `Password` = ?");
+        $req = $db->prepare("SELECT * FROM user WHERE `Login` = ? AND `Password` = ?");
         $req->execute(array($login, $password));
 
         $info = $req->fetch();

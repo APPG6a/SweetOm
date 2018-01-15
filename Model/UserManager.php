@@ -8,8 +8,6 @@
 
 namespace SweetIt\SweetOm\Model;
 
-require_once("Manager.php");
-
 class UserManager extends Manager
 {
     private $ID;
@@ -25,9 +23,22 @@ class UserManager extends Manager
 
     /**
      * UserManager constructor.
+     * @param null $args
      */
-    public function __construct()
+    public function __construct($args = null)
     {
+        //Actions always executed
+
+        //Check if $args is a non-empty array
+        if(is_array($args) && !empty($args))
+        {
+            //get every key and value
+            foreach ($args as $key => $value)
+            {
+                //if attribute exists, construct it
+                if (isset($this->$key)) $this->$key = $value;
+            }
+        }
     }
 
     /**
@@ -190,54 +201,13 @@ class UserManager extends Manager
         $this->ID_SuperUser = $ID_SuperUser;
     }
 
-    function getUser($id)
+    public function getAll(): array
     {
-        $db = $this->dbConnect();
-
-        $req = $db->prepare("SELECT * FROM utilisateurs WHERE ID = ?");
-        $user = $req->execute(array($id));
-
-        if (!$info = $user->fetch()){
-            return $info;
+        $array = array();
+        foreach (get_object_vars($this) as $key => $value)
+        {
+            if ($value != null) $array[$key] = $value;
         }
-        else {
-            throw new \Exception("User not found");
-        }
+        return $array;
     }
-
-    function updateUser($ID, $surname, $name, $cell, $phone, $mail, $idSuperUser = null)
-    {
-        $db = $this->dbConnect();
-
-        $req = $db->prepare('UPDATE utilisateurs
-                                      SET Nom = ?, Prenom = ?, Telephone = ?, Mail = ?, ID_SuperUser = ?, UserType = ? 
-                                      WHERE ID = ?');
-        $affectedLines = $req->execute(array($surname, $name, $cell, $phone, $mail, $idSuperUser, 'NormalUser', $ID));
-
-        return $affectedLines;
-    }
-
-    /**
-     * @param $address
-     * @param $idOwner
-     * @return bool
-     */
-    function setHome($address, $idOwner)
-    {
-        $db = $this->dbConnect();
-
-        $req = $db->prepare('INSERT INTO domicile (Adresse, ID_Proprietaire) VALUES (?, ?)');
-        $affectedLines = $req->execute(array($address,$idOwner));
-
-        return $affectedLines;
-    }
-
-    /*
-    function getHouse($idUser){
-        $db = $this->dbConnect();
-
-        $req = $db->prepare('');
-        $house = $req->execute();
-
-    }*/
 }

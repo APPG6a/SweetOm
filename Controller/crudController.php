@@ -1,4 +1,5 @@
 <?php
+namespace Controller;
 /**
  * Created by PhpStorm.
  * User: user

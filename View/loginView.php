@@ -23,7 +23,7 @@ ob_start();
     <div class="wrapper-right">
 
         <h2>Première visite?</h2>
-        <form method="post" action="/index.php?action=signInUser">
+        <form method="post" onsubmit="verifyFirstVisit(this.value)" action="/index.php?action=signInUser">
             
             <label class="label_form">
                 <input type="text" name="IdDomisep" required id="IdDomisep" />

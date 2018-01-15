@@ -1,4 +1,5 @@
 <?php
+namespace Controller;
 /**
  * Created by PhpStorm.
  * User: user
@@ -6,7 +7,7 @@
  * Time: 09:52
  */
 
-require_once('Model/UserManager.php');
+use SweetIt\SweetOm\Model\UserManager;
 
 /**
  * @param $login
@@ -23,4 +24,13 @@ function connectUser($login, $pass)
 
     require_once('../View/homeUser.php');
 
+}
+
+/**
+ * @param $post
+ */
+function singInUser($post) {
+    $user = new UserManager($post);
+
+    create($user->getAll(), 'user');
 }
