@@ -1,7 +1,6 @@
 <?php
 
 require_once("./Controller/frontend.php");
-require_once("./Controller/crudController.php");
 
 try {
     if (isset($_SESSION['connected']) && $_SESSION['connected'] === true) {

@@ -74,7 +74,7 @@ class DomicileManager extends Manager
     {
         $db = $this->dbConnect();
 
-        $req = $db->prepare("INSERT INTO domicile (Adresse, ID_Proprietaire) VALUES (?, ?)");
+        $req = $db->prepare("INSERT INTO house (Adresse, ID_Proprietaire) VALUES (?, ?)");
         $req->execute(array($this->getAddress(),$this->getIDOwner()));
         $req->closeCursor();
     }

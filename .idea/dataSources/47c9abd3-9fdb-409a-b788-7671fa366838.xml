@@ -924,7 +924,7 @@
     <table id="233" parent="6" name="cemac">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="234" parent="6" name="domicile">
+    <table id="234" parent="6" name="equipment">
       <Engine>InnoDB</Engine>
     </table>
     <table id="235" parent="6" name="faq">
@@ -936,10 +936,10 @@
     <table id="237" parent="6" name="historiquedescommandes">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="238" parent="6" name="materiel">
+    <table id="238" parent="6" name="house">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="239" parent="6" name="mesure">
+    <table id="239" parent="6" name="measure">
       <Engine>InnoDB</Engine>
     </table>
     <table id="240" parent="6" name="ordres">
@@ -951,7 +951,7 @@
     <table id="242" parent="6" name="pannes">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="243" parent="6" name="pieces">
+    <table id="243" parent="6" name="rooms">
       <Engine>InnoDB</Engine>
     </table>
     <table id="244" parent="6" name="user">
@@ -1073,14 +1073,14 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="266" parent="233" name="ID_Piece">
+    <column id="266" parent="233" name="ID_Room">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="267" parent="233" name="cemac_pieces_ID_fk">
-      <ColNames>ID_Piece</ColNames>
+      <ColNames>ID_Room</ColNames>
     </index>
     <key id="268" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
@@ -1088,9 +1088,9 @@
       <Primary>1</Primary>
     </key>
     <foreign-key id="269" parent="233" name="cemac_pieces_ID_fk">
-      <ColNames>ID_Piece</ColNames>
+      <ColNames>ID_Room</ColNames>
       <RefSchemaName>sweetom</RefSchemaName>
-      <RefTableName>pieces</RefTableName>
+      <RefTableName>rooms</RefTableName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
     <column id="270" parent="234" name="ID">
@@ -1100,201 +1100,201 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="234" name="Adresse">
-      <Position>2</Position>
-      <DataType>text|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="272" parent="234" name="ID_Proprietaire">
-      <Position>3</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="273" parent="234" name="ID_Proprietaire">
-      <ColNames>ID_Proprietaire</ColNames>
-    </index>
-    <key id="274" parent="234" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="275" parent="234" name="domicile_ibfk_1">
-      <ColNames>ID_Proprietaire</ColNames>
-      <RefSchemaName>sweetom</RefSchemaName>
-      <RefTableName>user</RefTableName>
-      <RefColNames>ID</RefColNames>
-    </foreign-key>
-    <column id="276" parent="235" name="ID">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="277" parent="235" name="Question">
-      <Position>2</Position>
-      <DataType>text|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="278" parent="235" name="Reponse">
-      <Position>3</Position>
-      <DataType>text|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="279" parent="235" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="280" parent="236" name="ID">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="281" parent="236" name="Nom">
-      <Position>2</Position>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="282" parent="236" name="CodeCeMac">
-      <Position>3</Position>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="283" parent="236" name="ID_materiel">
-      <Position>4</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="284" parent="236" name="ID_materiel">
-      <ColNames>ID_materiel</ColNames>
-    </index>
-    <key id="285" parent="236" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="286" parent="236" name="fonction_materiel_ID_fk">
-      <ColNames>ID_materiel</ColNames>
-      <RefSchemaName>sweetom</RefSchemaName>
-      <RefTableName>materiel</RefTableName>
-      <RefColNames>ID</RefColNames>
-    </foreign-key>
-    <column id="287" parent="237" name="ID">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="288" parent="237" name="DateCommande">
-      <Position>2</Position>
-      <DataType>date|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="289" parent="237" name="DateInstallation">
-      <Position>3</Position>
-      <DataType>date|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="290" parent="237" name="Prix">
-      <Position>4</Position>
-      <DataType>float|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="291" parent="237" name="ID_Commande">
-      <Position>5</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="292" parent="237" name="ID_Utilisateur">
-      <Position>6</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="293" parent="237" name="ID_Commande">
-      <ColNames>ID_Commande</ColNames>
-    </index>
-    <index id="294" parent="237" name="ID_Utilisateur">
-      <ColNames>ID_Utilisateur</ColNames>
-    </index>
-    <key id="295" parent="237" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="296" parent="237" name="historiquedescommandes_utilisateurs_ID_fk">
-      <ColNames>ID_Utilisateur</ColNames>
-      <RefSchemaName>sweetom</RefSchemaName>
-      <RefTableName>user</RefTableName>
-      <RefColNames>ID</RefColNames>
-    </foreign-key>
-    <column id="297" parent="238" name="ID">
-      <Position>1</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="298" parent="238" name="Type_materiel">
+    <column id="271" parent="234" name="Type_materiel">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="238" name="Type_mesure">
+    <column id="272" parent="234" name="Type_measure">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="300" parent="238" name="ID_Catalogue">
+    <column id="273" parent="234" name="ID_Catalogue">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="301" parent="238" name="ID_CeMac">
+    <column id="274" parent="234" name="ID_CeMac">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="302" parent="238" name="materiel_catalogue_ID_fk">
+    <index id="275" parent="234" name="materiel_catalogue_ID_fk">
       <ColNames>ID_Catalogue</ColNames>
     </index>
-    <index id="303" parent="238" name="ID_Pièce">
+    <index id="276" parent="234" name="ID_Pièce">
       <ColNames>ID_CeMac</ColNames>
     </index>
-    <key id="304" parent="238" name="PRIMARY">
+    <key id="277" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="305" parent="238" name="materiel_catalogue_ID_fk">
+    <foreign-key id="278" parent="234" name="materiel_catalogue_ID_fk">
       <ColNames>ID_Catalogue</ColNames>
       <RefSchemaName>sweetom</RefSchemaName>
       <RefTableName>catalogue</RefTableName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
-    <foreign-key id="306" parent="238" name="materiel_ibfk_1">
+    <foreign-key id="279" parent="234" name="equipment_ibfk_1">
       <ColNames>ID_CeMac</ColNames>
       <RefSchemaName>sweetom</RefSchemaName>
       <RefTableName>cemac</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="280" parent="235" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="281" parent="235" name="Question">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="282" parent="235" name="Reponse">
+      <Position>3</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="283" parent="235" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="284" parent="236" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="285" parent="236" name="Nom">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="286" parent="236" name="CodeCeMac">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="287" parent="236" name="ID_materiel">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="288" parent="236" name="ID_materiel">
+      <ColNames>ID_materiel</ColNames>
+    </index>
+    <key id="289" parent="236" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="290" parent="236" name="fonction_materiel_ID_fk">
+      <ColNames>ID_materiel</ColNames>
+      <RefSchemaName>sweetom</RefSchemaName>
+      <RefTableName>equipment</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="291" parent="237" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="292" parent="237" name="DateCommande">
+      <Position>2</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="293" parent="237" name="DateInstallation">
+      <Position>3</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="294" parent="237" name="Prix">
+      <Position>4</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="295" parent="237" name="ID_Commande">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="296" parent="237" name="ID_Utilisateur">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="297" parent="237" name="ID_Commande">
+      <ColNames>ID_Commande</ColNames>
+    </index>
+    <index id="298" parent="237" name="ID_Utilisateur">
+      <ColNames>ID_Utilisateur</ColNames>
+    </index>
+    <key id="299" parent="237" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="300" parent="237" name="historiquedescommandes_utilisateurs_ID_fk">
+      <ColNames>ID_Utilisateur</ColNames>
+      <RefSchemaName>sweetom</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="301" parent="238" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="302" parent="238" name="Adresse">
+      <Position>2</Position>
+      <DataType>text|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="303" parent="238" name="ID_Proprietaire">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="304" parent="238" name="ID_Proprietaire">
+      <ColNames>ID_Proprietaire</ColNames>
+    </index>
+    <key id="305" parent="238" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="306" parent="238" name="house_ibfk_1">
+      <ColNames>ID_Proprietaire</ColNames>
+      <RefSchemaName>sweetom</RefSchemaName>
+      <RefTableName>user</RefTableName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
     <column id="307" parent="239" name="ID">
@@ -1304,7 +1304,7 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="308" parent="239" name="DateHeure">
+    <column id="308" parent="239" name="DateTime">
       <Position>2</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
@@ -1316,17 +1316,17 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="310" parent="239" name="ID_materiel">
+    <column id="310" parent="239" name="ID_Equipment">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="311" parent="239" name="DateHeure">
-      <ColNames>DateHeure</ColNames>
+      <ColNames>DateTime</ColNames>
     </index>
     <index id="312" parent="239" name="ID_materiel">
-      <ColNames>ID_materiel</ColNames>
+      <ColNames>ID_Equipment</ColNames>
     </index>
     <key id="313" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
@@ -1334,9 +1334,9 @@
       <Primary>1</Primary>
     </key>
     <foreign-key id="314" parent="239" name="mesure_materiel_ID_fk">
-      <ColNames>ID_materiel</ColNames>
+      <ColNames>ID_Equipment</ColNames>
       <RefSchemaName>sweetom</RefSchemaName>
-      <RefTableName>materiel</RefTableName>
+      <RefTableName>equipment</RefTableName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
     <column id="315" parent="240" name="ID">
@@ -1429,7 +1429,7 @@
     <foreign-key id="333" parent="240" name="ordres_materiel__ID_fk">
       <ColNames>ID_Materiel</ColNames>
       <RefSchemaName>sweetom</RefSchemaName>
-      <RefTableName>materiel</RefTableName>
+      <RefTableName>equipment</RefTableName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
     <foreign-key id="334" parent="240" name="ordres_fonction__ID_fk">
@@ -1516,7 +1516,7 @@
     <foreign-key id="350" parent="242" name="pannes_materiel_ID_fk">
       <ColNames>ID_materiel</ColNames>
       <RefSchemaName>sweetom</RefSchemaName>
-      <RefTableName>materiel</RefTableName>
+      <RefTableName>equipment</RefTableName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
     <column id="351" parent="243" name="ID">
@@ -1558,10 +1558,10 @@
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="358" parent="243" name="pieces_ibfk_1">
+    <foreign-key id="358" parent="243" name="rooms_ibfk_1">
       <ColNames>ID_Domicile</ColNames>
       <RefSchemaName>sweetom</RefSchemaName>
-      <RefTableName>domicile</RefTableName>
+      <RefTableName>house</RefTableName>
       <RefColNames>ID</RefColNames>
     </foreign-key>
     <column id="359" parent="244" name="ID">
