@@ -13,23 +13,24 @@ use SweetIt\SweetOm\Model\crudModel;
 use SweetIt\SweetOm\Model\TimeModel;
 use SweetIt\SweetOm\Model\UserManager;
 
-include_once '../Model/CrudModel.php';
-include_once '../Model/TimeModel.php';
+require_once 'Model/CrudModel.php';
+require_once 'Model/TimeModel.php';
+
 /**
  * @param $login
  * @param $pass
  */
 function connectUser($login, $pass)
 {
-    $user = new \SweetIt\SweetOm\Model\ConnectionManager();
+    $crud = new crudModel();
 
-    $userInfo = $user->connect($login, $pass);
+    $userInfo = $crud->read(array('Login' => $login), 'user', 0)[0];
+    if (password_verify($pass, $userInfo['Password'])) {
+        $_SESSION['ID'] = $userInfo['ID'];
+        $_SESSION['connected'] = true;
+    }
 
-    $_SESSION['ID'] = $userInfo['ID'];
-    $_SESSION['connected'] = true;
-
-    require_once('../View/homeUser.php');
-
+    require_once('View/homeUser.php');
 }
 
 /**

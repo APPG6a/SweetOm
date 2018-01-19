@@ -7,6 +7,7 @@
  */
 
 namespace SweetIt\SweetOm\Model;
+require_once ('Manager.php');
 
 class UserManager extends Manager
 {

@@ -6,7 +6,6 @@
  * Time: 11:22
  */
 
-require_once('Model/ConnectionManager.php');
 require_once('Model/UserManager.php');
 /**
  *

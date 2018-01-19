@@ -1,6 +1,9 @@
 <?php
 
-require_once("./Controller/frontend.php");
+use function Controller\connectUser;
+
+require_once("./Controller/clientController.php");
+require_once ("./Controller/frontend.php");
 
 try {
     if (isset($_SESSION['connected']) && $_SESSION['connected'] === true) {
@@ -23,7 +26,7 @@ try {
         }
     } else if (isset($_GET['action']) && $_GET['action'] == 'connectUser') {
         if (isset($_POST['login']) && isset($_POST['password'])) {
-            connectUser($_POST['login'], password_hash($_POST['password'], PASSWORD_DEFAULT));
+            connectUser($_POST['login'], $_POST['password']);
         }
     } else if (isset($_GET['action']) && $_GET['action'] == 'signInUser') {
         if (isset($_POST['IdDomisep'])) {
