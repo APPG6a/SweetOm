@@ -20,7 +20,7 @@ ob_start()?>
 
 						<label for="receverMessage">
 							<p>Envoyer à:</p>
-							<input id="receverMessage" type="text" size="60" name="receverMessage"/> 
+							<input id="receverMessage" type="text" size="60" name="receverMessage" required/> 
 						</label><br>
 						<textarea id="message" placeholder="Ecrire message" rows="20" cols="80"></textarea>
 

@@ -17,6 +17,9 @@ ob_start();
                 <input type="password" name="password" required id="password" />
                 <div class="label-text">Mot de passe</div>
             </label>
+            <?php if(array_key_exists('errorConnectionMessage', $_SESSION)){
+                echo "<div class=\"error\">".$_SESSION["errorConnectionMessage"]."</div>";
+            }  ?>
             <button>VALIDER</button>
         </form>
     </div>

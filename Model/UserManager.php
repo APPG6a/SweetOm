@@ -204,7 +204,30 @@ class UserManager extends Manager
             throw new \Exception("User not found");
         }
     }
-
+    public function addNewUserToDb($login,$password,$mail){
+        $db = $this->dbConnect();
+        $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+        $req = $db->prepare('INSERT INTO user(Login,Password,Mail,UserType) VALUES(?,?,?,?)');
+        $req->execute(array($login,$passwordHashed,$mail,'customer'));
+        $req->closeCursor();
+    }
+    public function updateDomisep($phoneNumber, $address, $mail){
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE user SET PhoneNumber = ?, Address = ?, Mail = ? WHERE ID=?');
+        $req->execute(array($phoneNumber, $address, $mail,$_SESSION['ID']));
+        $req->closeCursor();
+    }
+    public function getDomisepInfo(){
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT * FROM user WHERE ID = ?');
+        $req->execute(array($_SESSION['ID']));
+        $domisepInfo = array();
+        $value = $req->fetch();
+        $domisepInfo['address'] = $value['Address'];
+        $domisepInfo['phoneNumber'] = $value['PhoneNumber'];
+        $domisepInfo['mail'] = $value['Mail'];
+        return $domisepInfo;
+    }
     function updateUser($ID, $surname, $name, $cell, $phone, $mail, $idSuperUser = null)
     {
         $db = $this->dbConnect();
@@ -226,6 +249,7 @@ class UserManager extends Manager
 
         return $affectedLines;
     }
+
 
     /*
     function getHouse($idUser){

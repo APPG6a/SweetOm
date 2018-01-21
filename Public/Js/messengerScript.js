@@ -1,8 +1,7 @@
 
 var listeTypeSms = document.getElementsByClassName("choose");
 var smsEcrit = document.getElementById("smsEcrit");
-smsEcrit
-var smsEnvoye = document.getElementById("smsEnvoye")
+var smsEnvoye = document.getElementById("smsEnvoye");
 var smsRecu = document.getElementById("smsRecu");
 document.getElementById("typeMessage").textContent = "";
 document.getElementById("typeMessage").appendChild(smsEcrit);
@@ -13,7 +12,6 @@ for( var i = 0; i<listeTypeSms.length ; i++ ){
 
 			document.getElementById("typeMessage").textContent = "";
 			document.getElementById("typeMessage").appendChild(smsEcrit);
-			console.log("1");
 		}
 
 		if (e.target.id === "envoye") {
