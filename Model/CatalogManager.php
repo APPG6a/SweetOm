@@ -142,7 +142,7 @@ class CatalogManager extends Manager
     {
         $db = $this->dbConnect();
 
-        $req = $db->prepare("INSERT INTO catalogue (Urlphoto, Nom, Description, Prix, Type_materiel, Modele) VALUES (?, ?, ?, ?, ?, ?)");
+        $req = $db->prepare("INSERT INTO catalogue (Urlphoto, Nom, Description, Prix, ID_TypeMateriel, Modele) VALUES (?, ?, ?, ?, ?, ?)");
         $req->execute(array($this->getImageURL(),$this->getName(),$this->getDescription(),$this->getPrice(),$this->getType(),$this->getRef()));
         $req->closeCursor();
     }

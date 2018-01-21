@@ -57,7 +57,7 @@ class CeMacManager extends Manager
     {
         $db = $this->dbConnect();
 
-        $req = $db->prepare("INSERT INTO cemac (ID_PIECE) VALUES (?)");
+        $req = $db->prepare("INSERT INTO cemac (ID_Room) VALUES (?)");
         $req->execute(array($this->getIDRoom()));
         $req->closeCursor();
     }
