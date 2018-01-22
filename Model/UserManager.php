@@ -7,7 +7,8 @@
  */
 
 namespace SweetIt\SweetOm\Model;
-require_once ('Manager.php');
+
+require_once("Manager.php");
 
 class UserManager extends Manager
 {
@@ -24,22 +25,9 @@ class UserManager extends Manager
 
     /**
      * UserManager constructor.
-     * @param null $args
      */
-    public function __construct($args = null)
+    public function __construct()
     {
-        //Actions always executed
-
-        //Check if $args is a non-empty array
-        if(is_array($args) && !empty($args))
-        {
-            //get every key and value
-            foreach ($args as $key => $value)
-            {
-                //if attribute exists, construct it
-                if (isset($this->$key)) $this->$key = $value;
-            }
-        }
     }
 
     /**
@@ -202,13 +190,73 @@ class UserManager extends Manager
         $this->ID_SuperUser = $ID_SuperUser;
     }
 
-    public function getAll(): array
+    function getUser($id)
     {
-        $array = array();
-        foreach (get_object_vars($this) as $key => $value)
-        {
-            if ($value != null) $array[$key] = $value;
+        $db = $this->dbConnect();
+
+        $req = $db->prepare("SELECT * FROM utilisateurs WHERE ID = ?");
+        $user = $req->execute(array($id));
+
+        if (!$info = $user->fetch()){
+            return $info;
         }
-        return $array;
+        else {
+            throw new \Exception("User not found");
+        }
     }
+    public function addNewUserToDb($login,$password,$mail){
+        $db = $this->dbConnect();
+        $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+        $req = $db->prepare('INSERT INTO user(Login,Password,Mail,UserType) VALUES(?,?,?,?)');
+        $req->execute(array($login,$passwordHashed,$mail,'customer'));
+        $req->closeCursor();
+    }
+    public function updateDomisep($phoneNumber, $address, $mail){
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE user SET PhoneNumber = ?, Address = ?, Mail = ? WHERE ID=?');
+        $req->execute(array($phoneNumber, $address, $mail,$_SESSION['ID']));
+        $req->closeCursor();
+    }
+    public function getDomisepInfo(){
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT * FROM user WHERE ID = ?');
+        $req->execute(array($_SESSION['ID']));
+        $domisepInfo = array();
+        $value = $req->fetch();
+        $domisepInfo['address'] = $value['Address'];
+        $domisepInfo['phoneNumber'] = $value['PhoneNumber'];
+        $domisepInfo['mail'] = $value['Mail'];
+        return $domisepInfo;
+    }
+    function updateUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail)
+    {
+        $db = $this->dbConnect();
+        $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+        $req = $db->prepare('UPDATE user
+          SET Login = ?, Password = ?, WaitForSignIn = ?,  LastName = ?, FirstName = ?, PhoneNumber = ?, CellNumber = ?, Mail = ?, ID_SuperUser = ?, UserType = ? 
+          WHERE ID = ?');
+        $affectedLines = $req->execute(array($login, $passwordHashed, 0, $surname, $name, $cell, $phone, $mail, NULL, 'customer', $ID));
+
+        return $affectedLines;
+    }
+
+    function setHome($address, $idOwner)
+    {
+        $db = $this->dbConnect();
+
+        $req = $db->prepare('INSERT INTO domicile (Adresse, ID_Proprietaire) VALUES (?, ?)');
+        $affectedLines = $req->execute(array($address,$idOwner));
+
+        return $affectedLines;
+    }
+
+
+    /*
+    function getHouse($idUser){
+        $db = $this->dbConnect();
+
+        $req = $db->prepare('');
+        $house = $req->execute();
+
+    }*/
 }

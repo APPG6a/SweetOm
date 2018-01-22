@@ -3,24 +3,48 @@ $title= "Edit profil";
 $style = "style.css";
 ob_start()?>
 	<div id="Corps">
-		<form id="editDomisepInfo" method="POST" action="">
-			<p>
-				<label for="adresse_domisep">Adresse</label><br/>  <input type="text" id="adresse_domisep" name="adresseDomisep"/><br/><br/>
-				<label for="ville_domisep">Ville</label><br/>  <input type="text" id="ville_domisep" name="VilleDomisep"/><br/><br/>
-				<label for="codePostal_domisep">Code postal</label><br/>  <input type="tel" id="codePostal_domisep" name="codePostalDomisep"/><br/><br/>
-				<label for="numTel_domisep">Numéro de téléphone</label><br/>  <input type="tel" id="numTel_domisep" name="numTelDomisep"/><br/><br/>
-				<label for="mail_domisep">Adresse mail</label><br/>  <input id="mail_domisep" type="mail" name="mailDomisep"/><br/><br/>
-				<input type="submit" id="center" name="submit" value="soumettre">
-			</p>
-			
+        <div id="domisepInfo">
+            <div>Adresse: <?php echo $domisepInfo["address"]; ?></div>
+            <div>Numéro de télephone: <?php echo $domisepInfo["phoneNumber"];?></div>
+            <div>Adresse Mail: <?php echo $domisepInfo["mail"];?></div>
+            <button onclick="openForm()">Mettre à jour</button>
+        </div>
+
+    <?php $address = preg_split("/[__]+/",$domisepInfo['address']);?>
+		<form id="editDomisepProfil" method="POST" action="/index.php?action=modifyDomisep">
+	
+			<div id="editDomisepProfilHead">Informations de Domisep</div>
+			<div id="editDomisepProfilBody">
+				<label for="adresseDomisep">
+					<p>Adresse</p>
+					 <?php echo"<input type=\"text\"  name=\"address\" id=\"adresseDomisep\" value='".$address["0"]."' required/>"; ?>
+				</label>
+				<label for="villeDomisep">
+					<p>Ville</p>
+					 <?php echo"<input type=\"text\"  name=\"city\" id=\"villeDomisep\" value='".$address["2"]."' required/>"; ?>
+				</label>
+				<label for="codePostalDomisep">
+					<p>Code postal</p>
+					  <?php echo"<input type=\"tel\"  name=\"cp\" id=\"codePostalDomisep\" value='".$address["1"]."' required/>"; ?>
+				</label><br/>  
+
+				<label for="numTelDomisep">
+					<p>Numéro de téléphone</p>
+					<?php echo "<input type=\"tel\"  name=\"phoneNumber\" id=\"numTelDomisep\" value='".$domisepInfo["phoneNumber"]."' required/>"; ?>
+				</label>
+				<label for="mailDomisep">
+					<p>adresse mail</p>
+					<?php echo "<input id=\"mailDomisep\" type=\"mail\" name=\"mail\" value='".$domisepInfo["mail"]."' required/>"; ?>
+				</label>  
+				<div class="send">
+					<input type="submit"  name="submit" value=">>soumettre" class="sendData">
+				</div>
+			</div>
+
 		</form>
-		<div id=infoDomisepProfil>
-
-			<!--a extraire de la bdd-->
-
-		</div>
 		
 	</div>
+<script type="text/javascript" src="/Public/Js/editDomisepScript.js"></script>
 <?php
 $content = ob_get_clean();
-require_once("template.php");
+require("template.php");
