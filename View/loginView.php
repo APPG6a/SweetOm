@@ -17,8 +17,9 @@ ob_start();
                 <input type="password" name="password" required id="password" />
                 <div class="label-text">Mot de passe</div>
             </label>
-            <?php if(array_key_exists('errorConnectionMessage', $_SESSION)){
-                echo "<div class=\"error\">".$_SESSION["errorConnectionMessage"]."</div>";
+            <?php if(array_key_exists('errorConnectionMessage1', $_SESSION)){
+                echo "<div class=\"error\">".$_SESSION["errorConnectionMessage1"]."</div>";
+                unset($_SESSION["errorConnectionMessage1"]);
             }  ?>
             <button>VALIDER</button>
         </form>
@@ -32,6 +33,14 @@ ob_start();
                 <input type="text" name="IdDomisep" required id="IdDomisep" />
                 <div class="label-text">Numéro Domisep</div>
             </label>
+            <label class="label_form">
+                <input type="password" name="passwordDomisep" required id="passwordDomisep" />
+                <div class="label-text">Mot de Passe</div>
+            </label>
+            <?php if(array_key_exists('errorConnectionMessage2', $_SESSION)){
+                echo "<div class=\"error\">".$_SESSION["errorConnectionMessage2"]."</div>";
+                unset($_SESSION["errorConnectionMessage2"]);
+            }  ?>
             <button>VALIDER</button>
         </form>
     </div>

@@ -11,7 +11,7 @@
     <?php require("header.php");
     if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']=="admin"){
     	require("domisepMenu.php");
-    }else if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']!="admin"){
+    }else if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']!="admin" && !$_SESSION['waitingForSignIn']){
     	require("userMenu.php");
     }?>
     <?php echo $content?>

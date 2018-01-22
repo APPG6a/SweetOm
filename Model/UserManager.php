@@ -228,14 +228,14 @@ class UserManager extends Manager
         $domisepInfo['mail'] = $value['Mail'];
         return $domisepInfo;
     }
-    function updateUser($ID, $surname, $name, $cell, $phone, $mail, $idSuperUser = null)
+    function updateUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail)
     {
         $db = $this->dbConnect();
-
-        $req = $db->prepare('UPDATE utilisateurs
-                                      SET Nom = ?, Prenom = ?, Telephone = ?, Mail = ?, ID_SuperUser = ?, UserType = ? 
-                                      WHERE ID = ?');
-        $affectedLines = $req->execute(array($surname, $name, $cell, $phone, $mail, $idSuperUser, 'NormalUser', $ID));
+        $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+        $req = $db->prepare('UPDATE user
+          SET Login = ?, Password = ?, WaitForSignIn = ?,  LastName = ?, FirstName = ?, PhoneNumber = ?, CellNumber = ?, Mail = ?, ID_SuperUser = ?, UserType = ? 
+          WHERE ID = ?');
+        $affectedLines = $req->execute(array($login, $passwordHashed, 0, $surname, $name, $cell, $phone, $mail, NULL, 'customer', $ID));
 
         return $affectedLines;
     }

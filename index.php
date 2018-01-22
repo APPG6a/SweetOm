@@ -47,7 +47,24 @@ try
             }
 
         }
-        else{
+        else if (isset($_GET['action']) && $_GET['action'] == 'updateNewUser'){
+            
+            if (!empty($_POST['firstName']) &&
+                !empty($_POST['lastName']) &&
+                !empty($_POST['login']) &&
+                !empty($_POST['password']) &&
+                !empty($_POST['passwordValidate']) &&
+                !empty($_POST['mail']) &&
+                !empty($_POST['cellphone']) &&
+                !empty($_POST['phone']) &&
+                !empty($_POST['address']) &&
+                !empty($_POST['postCode']) &&
+                !empty($_POST['city']) &&
+                !empty($_POST['country'])){
+                echo 'oui';
+                modifyUser($_POST, $_SESSION['ID']);
+            }
+        }else{
             dashboard();
         }
     }
@@ -60,15 +77,14 @@ try
     else{
         if (isset($_GET['action']) && $_GET['action'] == 'login'){
             login();
-        }else if (isset($_GET['action']) && $_GET['action'] == 'connectUser')
-        {
-            if (isset($_POST['login']) && isset($_POST['password']))
-            {
+        }else if (isset($_GET['action']) && $_GET['action'] == 'connectUser'){
+            if (isset($_POST['login']) && isset($_POST['password'])){
                 connectUser($_POST['login'], $_POST['password']);
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'signInUser') {
-            if (isset($_POST['IdDomisep'])){
-                signInUser();
+            if (isset($_POST['IdDomisep']) && !empty($_POST['IdDomisep'])&&
+                isset($_POST['passwordDomisep']) && !empty($_POST['passwordDomisep'])){
+                signInUser($_POST['IdDomisep'],$_POST['passwordDomisep']);
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'create'){
 
@@ -78,28 +94,12 @@ try
 
         }else if (isset($_GET['action']) && $_GET['action'] == 'delete'){
 
-        }else if (isset($_GET['action']) && $_GET['action'] == 'addNewUser'){
-
-            if (!empty($_POST['nom']) &&
-                !empty($_POST['prenom']) &&
-                !empty($_POST['mail']) &&
-                !empty($_POST['numPort']) &&
-                !empty($_POST['numFix']) &&
-                !empty($_POST['adresse']) &&
-                !empty($_POST['cp']) &&
-                !empty($_POST['ville']) &&
-                !empty($_POST['pays']) &&
-                !empty($_SESSION['ID']))
-            {
-                modifyUser($_POST, $_SESSION['ID']);
-            }
         }
         else{
             login();
         }
     }
 }
-catch (Exception $e)
-{
+catch (Exception $e){
     echo "Message : ".$e->getMessage();
 }

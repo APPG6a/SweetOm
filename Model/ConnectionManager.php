@@ -23,6 +23,7 @@ class ConnectionManager extends Manager
             $_SESSION['userType'] = $value['UserType'];
             $_SESSION['lastName'] = $value['LastName'];
             $_SESSION['firstName'] = $value['FirstName'];
+            $_SESSION['waitingForSignIn'] = $value['WaitingForSignIn'];
     }else{
         $_SESSION['connected'] = false;
     }

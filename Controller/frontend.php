@@ -17,13 +17,14 @@ function addNewUserToDb($login,$password,$mail){
 function connectUser($login, $pass)
 {
     require_once('Model/ConnectionManager.php');
-    $userObject = new \SweetIt\SweetOm\Model\ConnectionManager();
+    $connectionObject = new \SweetIt\SweetOm\Model\ConnectionManager();
 
-    $userObject->connect($login, $pass);
-    if($_SESSION['connected']==true){
+    $connectionObject->connect($login, $pass);
+    if($_SESSION['connected'] && !$_SESSION['waitingForSignIn']){
         require('/View/homeUser.php');
-        $_SESSION['errorConnectionMessage'] = "!Login ou mot de passe incorrrect veuillez réessayer";
-        require('view/loginView.php');
+    }else{
+        $_SESSION['errorConnectionMessage1'] = "!Login ou mot de passe incorrrect veuillez réessayer";
+        require('/view/loginView.php');
     }
 }
 function createNewUserPage(){
@@ -59,26 +60,35 @@ function modifyUser($Array, $ID)
     require_once('Model/UserManager.php');
     $newUser = new \SweetIt\SweetOm\Model\UserManager();
 
-    $surname = $Array['nom'];
-    $name = $Array['prenom'];
+    $login = $Array['login'];
+    $password = $Array['password'];
+    $surname = $Array['firstName'];
+    $name = $Array['lastName'];
     $mail = $Array['mail'];
-    $cell = $Array['numPort'];
-    $phone = $Array['numFix'];
-    $address = $Array['Adresse']." ".$Array['cp']." ".$Array['ville']." ".$Array['pays'];
+    $cell = $Array['cellphone'];
+    $phone = $Array['phone'];
+    $address = $Array['address']." ".$Array['postCode']." ".$Array['city']." ".$Array['country'];
 
-    $newUser->updateUser($ID, $surname, $name, $cell, $phone, $mail);
+    $newUser->updateUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail);
     $newUser->setHome($ID, $address);
 }
 function showDasboard($ID_user){
     require_once('Model/RoomManager.php');
     $roomObject = new SweetIt\SweetOm\Model\RoomManager();
     $listRoom = $roomObject->showDasboard($ID_user);
-    require("view/dashboard.php");
+    require("/view/dashboard.php");
 }
 
-function signInUser()
-{
-    require('View/signIn.php');
+function signInUser($login,$pass){
+    require_once('Model/ConnectionManager.php');
+    $connectionObject = new \SweetIt\SweetOm\Model\ConnectionManager();
+    $connectionObject->connect($login, $pass);
+    if($_SESSION['connected'] && $_SESSION['waitingForSignIn']){
+        require('/View/signIn.php');
+    }else{
+        $_SESSION['errorConnectionMessage2'] = "!Login ou mot de passe incorrrect veuillez réessayer";
+        require('/view/loginView.php');
+    }
 }
 
 
@@ -86,7 +96,7 @@ function signInUser()
 function sendMail($name, $mailReceiver, $text){
 
     echo 'oui';
-    if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mailReceiver)) {
+    if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn|gmail).[a-z]{2,4}$#", $mailReceiver)) {
         $nextLine = "\r\n";
     }else{
         $nextLine = "\n";

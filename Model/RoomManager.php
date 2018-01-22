@@ -8,7 +8,7 @@
 
 namespace SweetIt\SweetOm\Model;
 
-
+require_once("Manager.php");
 class RoomManager extends Manager
 {
     private $ID;
@@ -106,7 +106,7 @@ class RoomManager extends Manager
     public function showDashboard($ID_user){
         $db = $this->dbConnect();
         $req1 = prepare('SELECT ID FROM house WHERE ID_user = ?');
-        $req1->execute(array($ID_user))
+        $req1->execute(array($ID_user));
         $ID_house = $req1->fetch();
         $req2 = prepare('SELECT DISTINCT PieceType FROM rooms WHERE ID_house = ?');
         $req2->execute(array($ID_house));
@@ -116,14 +116,14 @@ class RoomManager extends Manager
             $i=0;
             $req3 = prepare('SELECT NomPiece,ID FROM rooms WHERE ID_Domicile = ? AND Piece_type = ?');
             $req3->execute(array($domicileID,$value1));
-            $listRoomByType[] = $value2["RoomName"]
+            $listRoomByType[] = $value2["RoomName"];
             while($value3 = $req3->fetch()){
                 $aRoom = array();
                 $aRoom['roomName'] = $value3['RoomName'];
                 $keyRoom = 'room'.$i;
                 $listRoomByType[$keyRoom] = $value2['$keyRomm'];
                 $req4 = prepare('SELECT ID FROM cemac WHERE ID_ROOM = ?');
-                $req4-> execute(array($value2['ID']))
+                $req4-> execute(array($value2['ID']));
                 $ID_cemac = $req4->fetch();
                 $req5 = prepare('SELECT ID FROM equipement WHERE ID_cemac = ?');
                 $req5->execute(array($ID_cemac));
