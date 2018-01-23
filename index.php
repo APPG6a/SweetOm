@@ -19,18 +19,36 @@ try
             logout();
         }else if (isset($_GET['action']) && $_GET['action'] == 'editDomisepProfil'){
             editDomisepProfil();
-        }else if(isset($_GET['action']) && $_GET['action'] == 'addNewUserToDb'){
+        }else if (isset($_GET['action']) && $_GET['action'] == 'messenger'){
+            messenger($_SESSION['ID']);
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'sendMessage'){
+            if(isset($_POST['object']) && !empty($_POST['object']) &&
+                isset($_POST['receiver']) && !empty($_POST['receiver'])&&
+                isset($_POST['text']) && !empty($_POST['text'])){
+                if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']!='admin'){
+                    $login = "domisep";
+                }else if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']=='admin'){
+                    $login = $_POST['receiver'];
+                } 
+                $sendOn = date('Y-m-d H:i:s');
+                sendThisMessage($_SESSION['ID'], $login, $_POST['object'], $_POST['text'], $sendOn);
+            }
+        }
+        else if(isset($_GET['action']) && $_GET['action'] == 'addNewUserToDb'){
             if(isset($_POST['firstLogin']) && !empty($_POST['firstLogin']) &&
             isset($_POST['firstPassword']) && !empty($_POST['firstPassword']) &&
             isset($_POST['name']) && !empty($_POST['name']) &&
             isset($_POST['mail']) && !empty($_POST['mail'])){
                 if(strlen($_POST['firstPassword'])>=6){
-                    echo 'hum';
+
+                    $subject = "Création de votre compte";
                     $text = "Domisep vous souhaite la bienvenue dans son réseau. Pour pouvoir bénéficier de nos services rendez-vous
-                    sur notre page en cliquant sur le lien ci-dessous. Voici votre identifiant provisoir: <br>
+                    sur notre page, section première visite, en cliquant sur le lien ci-dessous. Voici votre identifiant provisoir: <br>
                     Login: ".$_POST['firstLogin']." <br>Mot de passe: ".$_POST['firstPassword']." <br>
-                    <a href=\"/sweetom\">www.sweetom.fr</a>";
-                    sendMail($_POST['name'],$_POST['mail'],$text);
+                    <a href=\"sweetom\">www.sweetom.fr</a>";
+
+                    sendMail($_POST['name'], $_POST['mail'], $subject, $text);
                     addNewUserToDb($_POST['firstLogin'],$_POST['firstPassword'],$_POST['mail']);
                 }
             }
@@ -61,7 +79,6 @@ try
                 !empty($_POST['postCode']) &&
                 !empty($_POST['city']) &&
                 !empty($_POST['country'])){
-                echo 'oui';
                 modifyUser($_POST, $_SESSION['ID']);
             }
         }else{
@@ -78,7 +95,8 @@ try
         if (isset($_GET['action']) && $_GET['action'] == 'login'){
             login();
         }else if (isset($_GET['action']) && $_GET['action'] == 'connectUser'){
-            if (isset($_POST['login']) && isset($_POST['password'])){
+            if (isset($_POST['login']) &&  !empty($_POST['login']) &&
+                isset($_POST['password']) && !empty($_POST['password'])){
                 connectUser($_POST['login'], $_POST['password']);
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'signInUser') {

@@ -49,6 +49,14 @@ function logout()
 {
     require('View/logout.php');
 }
+function messenger($id){
+    require_once('/Model/MessengerManager.php');
+    $messageObject = new \SweetIt\SweetOm\Model\MessengerManager();
+    $listReceivedMessage = $messageObject->receivedMessage($id);
+    $listSentMessage = $messageObject->sentMessage($id);
+    require('/View/messenger.php');
+
+}
 function modifyDomisep($phoneNumber,$address,$mail){
     require_once("/Model/UserManager.php");
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
@@ -71,6 +79,7 @@ function modifyUser($Array, $ID)
 
     $newUser->updateUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail);
     $newUser->setHome($ID, $address);
+    require('/View/houseInfo.php');
 }
 function showDasboard($ID_user){
     require_once('Model/RoomManager.php');
@@ -93,9 +102,9 @@ function signInUser($login,$pass){
 
 
 
-function sendMail($name, $mailReceiver, $text){
+function sendMail($name, $mailReceiver,$subject, $text){
 
-    echo 'oui';
+
     if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn|gmail).[a-z]{2,4}$#", $mailReceiver)) {
         $nextLine = "\r\n";
     }else{
@@ -106,14 +115,12 @@ function sendMail($name, $mailReceiver, $text){
     $message_html = "<html>
                         <head></head>
                         <body>
-                            <p>Bonjour ".$name. "</p>,
+                            <p>Bonjour ".$name.",</p>
                             <div>".$text."</div>
                         </body>
                     </html>";
   
     $boundary = "-----=".md5(rand());
-
-    $subject = "Création de votre compte";
    
     $header = "From: \"domisep\"<domisep.sweetom@gmail.com>".$nextLine;
     $header.= "Reply-to: \"".$name."\" <".$mailReceiver.">".$nextLine;
@@ -132,5 +139,12 @@ function sendMail($name, $mailReceiver, $text){
     mail($mailReceiver,$subject,$message,$header);
 
 
+}
+
+function sendThisMessage($idSender, $login, $object, $text, $sendOn){
+    require_once('/Model/MessengerManager.php');
+    $messageObject = new \SweetIt\SweetOm\Model\MessengerManager();
+    $messageObject->sendThisMessage($idSender, $login, $object, $text, $sendOn);
+    messenger($_SESSION['ID']);
 }
 

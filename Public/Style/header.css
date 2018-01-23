@@ -1,11 +1,14 @@
-#head1{
-	text-decoration: underline;
-}
+
 #head1 div{
-	width: 10%
-	height 10%
+    display: inline-block;
+	width: 7px;
+	height: 7px; 
 	border-radius: 50% 50%;
 	background-color: green;
+}
+#head1 p{
+    display: inline-block;
+    text-decoration: underline;
 }
 #head2
 {

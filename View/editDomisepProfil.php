@@ -14,7 +14,7 @@ ob_start()?>
 		<form id="editDomisepProfil" method="POST" action="/index.php?action=modifyDomisep">
 	
 			<div id="editDomisepProfilHead">Informations de Domisep</div>
-			<div id="editDomisepProfilBody">
+			<div class="formBody">
 				<label for="adresseDomisep">
 					<p>Adresse</p>
 					 <?php echo"<input type=\"text\"  name=\"address\" id=\"adresseDomisep\" value='".$address["0"]."' required/>"; ?>

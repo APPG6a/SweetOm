@@ -9,7 +9,7 @@ ob_start();
         <div class="tab">Vos informations:
             <p><input type="text" name="firstName" placeholder="Prénom" oninput="this.className = ''"></p>
             <p><input type="text" name="lastName" placeholder="Nom" oninput="this.className = ''"></p>
-            <p><input type="text" name="login"  value='"<?php echo $_POST['IdDomisep']?>"'></p>
+            <p><input type="text" name="login"  value=<?php echo $_POST['IdDomisep']?>></p>
             <p><input type="password" name="password" placeholder="Mot de passe" oninput="this.className = ''"></p>
             <p><input type="password" name="passwordValidate" placeholder="Confirmez votre mot de passe" oninput="this.className = ''"></p>
         </div>

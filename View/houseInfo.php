@@ -9,45 +9,40 @@ ob_start()
 
 
         <div id=teteForm></div>
-        <p>Nous allons enregistrer vos données. Veuillez indiquer ci-dessous le nombre des différentes pièces que vous souhaitez connecter.</p>
-        <div class="info">
-        	<label for="superficie">
-        		<p>Superficie en m²: </p>
-        		<input class="info" type="number" name="superficie" id="superficie" />
-        	</label>
+        
+    
+        <div class="formBody">
+            <p>Nous allons enregistrer vos données. Veuillez indiquer ci-dessous le nombre des différentes pièces que vous souhaitez connecter.</p>
         	 <label for="nbrHabt"> 
-        	 	<p>Nombre d'habitant(s)</p> 
-        	 	<input class="info" type="number" name="nbrHabt" id="nbrHabt"  required/>
+        	 	<p>Nombre d'habitant(s):</p> 
+        	 	<input class="info" type="number" min=1 max=10 name="nbrHabt" id="nbrHabt"  required/>
         	 </label>
-        </div>
+        
 
         
-        <div class="info">
+    
         	<label for="nbrChambre">
         		<p>Nombre de chambre(s):</p>
-        		<input class="info" type="number" name="nbrChambre" id="nbrChambre" required/>
+        		<input class="info" type="number" min=1 max=10 name="nbrChambre" id="nbrChambre" required/>
         	</label>
+
         	<label for="nbrToilette">
         		<p>Nombre de salle de bain(s):</p>
-        		<input class="info" type="number" name="nbrToilette" id="nbrToilette" />
+        		<input class="info" type="number" min=1 max=10 name="nbrToilette" id="nbrToilette" />
         	</label>
-        </div>
+   
 
-        <div class="info">
+    
         	<label for="nbrSejour">
-        		<p>Nombre de séjour(s)</p>
-        		<input class="info" type="number" name="nbrSejour" id="nbrSejour" />
+        		<p>Nombre de séjour(s):</p>
+        		<input class="info" type="number" min=1 max=10 name="nbrSejour" id="nbrSejour" />
         	</label>
-        </div>
         
-       <div class="formFoot">
-          <input class= "boutonSubmit" type="submit" value="j'enregistre mes données"/> 
+           <div class="send">
+              <input class= "sendData" type="submit" min=1 max=10 value=">>valider"/> 
+           </div>
+
        </div>
-        
-
-
-
-
     </form>
 
 </div>

@@ -1,5 +1,5 @@
 <header>
-	<?php if(array_key_exists("connected",$_SESSION)){
+	<?php if(array_key_exists("firstName",$_SESSION) && array_key_exists('lastName', $_SESSION)){
 	echo "<div id=\"head1\">
 			<div></div>
 			<p>".$_SESSION["firstName"]." ".$_SESSION["lastName"]."</p>

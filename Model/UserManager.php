@@ -233,18 +233,18 @@ class UserManager extends Manager
         $db = $this->dbConnect();
         $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
         $req = $db->prepare('UPDATE user
-          SET Login = ?, Password = ?, WaitForSignIn = ?,  LastName = ?, FirstName = ?, PhoneNumber = ?, CellNumber = ?, Mail = ?, ID_SuperUser = ?, UserType = ? 
+          SET Login = ?, Password = ?, WaitingForSignIn = ?,  LastName = ?, FirstName = ?, PhoneNumber = ?, CellNumber = ?, Mail = ?, UserType = ? 
           WHERE ID = ?');
-        $affectedLines = $req->execute(array($login, $passwordHashed, 0, $surname, $name, $cell, $phone, $mail, NULL, 'customer', $ID));
-
+        $affectedLines = $req->execute(array($login, $passwordHashed, 0, $surname, $name, $cell, $phone, $mail, 'customer', $ID));
+        $req->closeCursor();
         return $affectedLines;
     }
 
-    function setHome($address, $idOwner)
+    function setHome($idOwner,$address)
     {
         $db = $this->dbConnect();
 
-        $req = $db->prepare('INSERT INTO domicile (Adresse, ID_Proprietaire) VALUES (?, ?)');
+        $req = $db->prepare('INSERT INTO house(Address, ID_Owner) VALUES (?, ?)');
         $affectedLines = $req->execute(array($address,$idOwner));
 
         return $affectedLines;
