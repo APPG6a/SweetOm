@@ -16,20 +16,25 @@ ob_start()?>
 			<div id="typeMessage">
 				<div  class="mySlide">
 					<div id="smsEcrit">
+
 						<form method="POST" action="/index.php?action=sendMessage">
-								<input id="objetMessage" type="text" name="object" size="80" placeholder="objet"/> 
-								<?php if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']=='admin'){?>
-								<label for="receverMessage">
-									<p>Envoyer à:</p>
-									<input id="receverMessage" type="text" size="60" name="receiver" placeholder="identifiant" required/> 
-								</label><br> <?php }else if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']!='admin'){?>
-								  <input id="receverMessage" type="hidden" size="60" name="receiver" placeholder="identifiant" value="domisep" required/> <?php } ?>
+							<?php if(array_key_exists('errorLogin', $_SESSION) && $_SESSION['errorLogin']){
+							  	echo "<div class=\"error\">Désolé, l'envoi du message à échouer, ce login n'éxiste pas. Veuillez entrer un login valide.</div>";
+							  	unset($_SESSION['errorLogin']);
+							  } ?>
+							<input id="objetMessage" class="inputSendMessage" type="text" name="object" size="80" placeholder="objet"/> 
+							<?php if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']=='admin'){?>
+							<label for="receverMessage" class="inputSendMessage">
+								<p>Envoyer à:</p>
+								<input id="receverMessage" type="text" size="60" name="receiver" placeholder="identifiant" required/> 
+							</label> <?php }else if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']!='admin'){?>
+							  <input id="receverMessage" class="inputSendMessage" type="hidden" size="60" name="receiver" placeholder="identifiant" value="domisep" required/> <?php } ?>
+				
+							<textarea id="message" class="inputSendMessage" name="text" placeholder="Ecrire message" rows="20" cols="80"></textarea>
 
-								<textarea id="message" name="text" placeholder="Ecrire message" rows="20" cols="80"></textarea>
-
-								<div class="send">
-									<input class="sendData" type="submit" name="submit" value="Envoyer"/>
-								</div>
+							<div class="send">
+								<input class="sendData" type="submit" name="submit" value=">>Envoyer"/>
+							</div>
 						
 						</form>
 					</div>

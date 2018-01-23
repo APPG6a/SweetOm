@@ -9,6 +9,17 @@
 /**
  *
  */
+function notEmptyList($aArray){
+    $c = 0;
+    foreach ($aArray as $value){
+        if(empty($value)){
+            $c++;
+        }
+    }
+    if ($c==0) {
+        return true;
+    }return false;
+}
 function addNewUserToDb($login,$password,$mail){
     require_once('Model/UserManager.php');
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
@@ -24,21 +35,33 @@ function connectUser($login, $pass)
         require('/View/homeUser.php');
     }else{
         $_SESSION['errorConnectionMessage1'] = "!Login ou mot de passe incorrrect veuillez réessayer";
-        require('/view/loginView.php');
+        require('/View/loginView.php');
     }
 }
 function createNewUserPage(){
-    require('view/createNewUserPage.php');
+    require('/View/createNewUserPage.php');
 }
 function dashboard()
 {
     require('View/homeUser.php');
 }
-function editDomisepProfil(){
+function editDomisepProfil($id){
     require_once("/Model/UserManager.php");
-    $userObject = new SweetIt\SweetOm\Model\UserManager();
-    $domisepInfo = $userObject->getDomisepInfo();
-    require("view/editDomisepProfil.php");
+    $userObject = new \SweetIt\SweetOm\Model\UserManager();
+    $domisepInfo = $userObject->getDomisepInfo($id);
+    require("/View/editDomisepProfil.php");
+}
+function editUserProfil($id){
+    require_once("/Model/UserManager.php");
+    $userObject = new \SweetIt\SweetOm\Model\UserManager();
+    $user = $userObject->getUserInfo($id);
+    require("/View/editUserProfil.php");
+}
+function listLogin(){
+    require_once('/Model/UserManager.php');
+    $userObject = new \SweetIt\SweetOm\Model\UserManager();
+    $listLogin = $userObject->listLogin();
+    return $listLogin;
 }
 function login()
 {
@@ -61,9 +84,15 @@ function modifyDomisep($phoneNumber,$address,$mail){
     require_once("/Model/UserManager.php");
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $userObject->updateDomisep($phoneNumber, $address, $mail);
-    editDomisepProfil();
+    editDomisepProfil($_SESSION['ID']);
 }
-function modifyUser($Array, $ID)
+function modifyUserProfil($phoneNumber,$address,$mail){
+    require_once("/Model/UserManager.php");
+    $userObject = new \SweetIt\SweetOm\Model\UserManager();
+    $userObject->updateUserProfil($phoneNumber, $address, $mail);
+    editUserProfil($_SESSION['ID']);
+}
+function updateNewUser($Array, $ID)
 {
     require_once('Model/UserManager.php');
     $newUser = new \SweetIt\SweetOm\Model\UserManager();
@@ -77,7 +106,7 @@ function modifyUser($Array, $ID)
     $phone = $Array['phone'];
     $address = $Array['address']." ".$Array['postCode']." ".$Array['city']." ".$Array['country'];
 
-    $newUser->updateUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail);
+    $newUser->updateNewUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail);
     $newUser->setHome($ID, $address);
     require('/View/houseInfo.php');
 }

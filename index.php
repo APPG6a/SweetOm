@@ -3,7 +3,7 @@ session_start();
 require_once("./Controller/frontend.php");
 
 try
-{
+{   
     if (array_key_exists('connected', $_SESSION) && $_SESSION['connected'] == true)
     {
         // In this part only functions which request a connection. Never trust user input.
@@ -18,68 +18,97 @@ try
         }else if (isset($_GET['action']) && $_GET['action'] == 'logout'){
             logout();
         }else if (isset($_GET['action']) && $_GET['action'] == 'editDomisepProfil'){
-            editDomisepProfil();
-        }else if (isset($_GET['action']) && $_GET['action'] == 'messenger'){
+            editDomisepProfil($_SESSION['ID']);
+        }else if (isset($_GET['action']) && $_GET['action'] == 'editUserProfil'){
+            editUserProfil($_SESSION['ID']);
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'messenger'){
             messenger($_SESSION['ID']);
         }
         else if (isset($_GET['action']) && $_GET['action'] == 'sendMessage'){
-            if(isset($_POST['object']) && !empty($_POST['object']) &&
-                isset($_POST['receiver']) && !empty($_POST['receiver'])&&
-                isset($_POST['text']) && !empty($_POST['text'])){
+            if(isset($_POST['object']) && 
+                isset($_POST['receiver']) &&
+                isset($_POST['text']) && notEmptyList($_POST)){
                 if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']!='admin'){
                     $login = "domisep";
                 }else if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']=='admin'){
                     $login = $_POST['receiver'];
                 } 
                 $sendOn = date('Y-m-d H:i:s');
-                sendThisMessage($_SESSION['ID'], $login, $_POST['object'], $_POST['text'], $sendOn);
+                if(in_array($login, listLogin())){
+                    sendThisMessage($_SESSION['ID'], $login, $_POST['object'], $_POST['text'], $sendOn);
+                }else{
+                    $_SESSION['errorLogin'] = true;
+                    messenger($_SESSION['ID']);
+                }
+                
             }
         }
         else if(isset($_GET['action']) && $_GET['action'] == 'addNewUserToDb'){
-            if(isset($_POST['firstLogin']) && !empty($_POST['firstLogin']) &&
-            isset($_POST['firstPassword']) && !empty($_POST['firstPassword']) &&
-            isset($_POST['name']) && !empty($_POST['name']) &&
-            isset($_POST['mail']) && !empty($_POST['mail'])){
+            if(isset($_POST['firstLogin']) &&
+            isset($_POST['firstPassword'])  &&
+            isset($_POST['name']) &&
+            isset($_POST['mail']) && notEmptyList($_POST)){
                 if(strlen($_POST['firstPassword'])>=6){
+                    if(!in_array($_POST['firstLogin'], listLogin())){
+                        $subject = "Création de votre compte";
+                        $text = "Domisep vous souhaite la bienvenue dans son réseau. Pour pouvoir bénéficier de nos services rendez-vous
+                        sur notre page, section première visite, en cliquant sur le lien ci-dessous. Voici votre identifiant provisoir: <br>
+                        Login: ".$_POST['firstLogin']." <br>Mot de passe: ".$_POST['firstPassword']." <br>
+                        <a href=\"sweetom\">www.sweetom.fr</a>";
 
-                    $subject = "Création de votre compte";
-                    $text = "Domisep vous souhaite la bienvenue dans son réseau. Pour pouvoir bénéficier de nos services rendez-vous
-                    sur notre page, section première visite, en cliquant sur le lien ci-dessous. Voici votre identifiant provisoir: <br>
-                    Login: ".$_POST['firstLogin']." <br>Mot de passe: ".$_POST['firstPassword']." <br>
-                    <a href=\"sweetom\">www.sweetom.fr</a>";
-
-                    sendMail($_POST['name'], $_POST['mail'], $subject, $text);
-                    addNewUserToDb($_POST['firstLogin'],$_POST['firstPassword'],$_POST['mail']);
+                        sendMail($_POST['name'], $_POST['mail'], $subject, $text);
+                        addNewUserToDb($_POST['firstLogin'],$_POST['firstPassword'],$_POST['mail']);
+                    }else{
+                        $_SESSION['error'] = 'Cet identifiant existe déja veuillez choisir un autre identifiant';
+                        require('/View/createNewUserPage.php');
+                    }
+                }else{
+                    $_SESSION['error'] = 'Votre mot de passe doit contenir au mois 6 caractères.';
+                    require('/View/createNewUserPage.php');
                 }
             }
         }
 
         else if(isset($_GET['action']) && $_GET['action'] == 'modifyDomisep'){
-            if(isset($_POST['address']) && !empty($_POST['address'])&&
-                isset($_POST['cp']) && !empty($_POST['cp'])&&
-                isset($_POST['city']) && !empty($_POST['city'])&&
-                isset($_POST['phoneNumber']) && !empty($_POST['phoneNumber'])&&
-                isset($_POST['mail']) && !empty($_POST['mail'])){
+            if(isset($_POST['address']) &&
+                isset($_POST['cp']) &&
+                isset($_POST['city']) &&
+                isset($_POST['phoneNumber']) &&
+                isset($_POST['mail']) && notEmptyList($_POST)){
                 $address = $_POST['address'].'__'.$_POST['cp'].'__'.$_POST['city'];
                 modifyDomisep($_POST['phoneNumber'],$address,$_POST['mail']);
+            }else{
+                echo 'boom';
             }
 
+        }else if(isset($_GET['action']) && $_GET['action'] == 'modifyUserProfil'){
+            if(isset($_POST['address']) &&
+                isset($_POST['cp']) &&
+                isset($_POST['city']) &&
+                isset($_POST['phoneNumber']) &&
+                isset($_POST['mail']) && notEmptyList($_POST)){
+                $address = $_POST['address'].'__'.$_POST['cp'].'__'.$_POST['city'];
+                modifyUserProfil($_POST['phoneNumber'],$address,$_POST['mail']);
+            }else{
+                echo 'boom';
+            }
         }
         else if (isset($_GET['action']) && $_GET['action'] == 'updateNewUser'){
             
-            if (!empty($_POST['firstName']) &&
-                !empty($_POST['lastName']) &&
-                !empty($_POST['login']) &&
-                !empty($_POST['password']) &&
-                !empty($_POST['passwordValidate']) &&
-                !empty($_POST['mail']) &&
-                !empty($_POST['cellphone']) &&
-                !empty($_POST['phone']) &&
-                !empty($_POST['address']) &&
-                !empty($_POST['postCode']) &&
-                !empty($_POST['city']) &&
-                !empty($_POST['country'])){
-                modifyUser($_POST, $_SESSION['ID']);
+            if (isset($_POST['firstName']) &&
+                isset($_POST['lastName']) &&
+                isset($_POST['login']) &&
+                isset($_POST['password']) &&
+                isset($_POST['passwordValidate']) &&
+                isset($_POST['mail']) &&
+                isset($_POST['cellphone']) &&
+                isset($_POST['phone']) &&
+                isset($_POST['address']) &&
+                isset($_POST['postCode']) &&
+                isset($_POST['city']) &&
+                isset($_POST['country']) && notEmptyList($_POST)){
+                updateNewUser($_POST, $_SESSION['ID']);
             }
         }else{
             dashboard();
@@ -95,13 +124,13 @@ try
         if (isset($_GET['action']) && $_GET['action'] == 'login'){
             login();
         }else if (isset($_GET['action']) && $_GET['action'] == 'connectUser'){
-            if (isset($_POST['login']) &&  !empty($_POST['login']) &&
-                isset($_POST['password']) && !empty($_POST['password'])){
+            if (isset($_POST['login']) &&  
+                isset($_POST['password']) && notEmptyList($_POST)){
                 connectUser($_POST['login'], $_POST['password']);
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'signInUser') {
-            if (isset($_POST['IdDomisep']) && !empty($_POST['IdDomisep'])&&
-                isset($_POST['passwordDomisep']) && !empty($_POST['passwordDomisep'])){
+            if (isset($_POST['IdDomisep']) && 
+                isset($_POST['passwordDomisep']) && notEmptyList($_POST)){
                 signInUser($_POST['IdDomisep'],$_POST['passwordDomisep']);
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'create'){

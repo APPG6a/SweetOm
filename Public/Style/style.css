@@ -203,7 +203,11 @@ button:hover, button:focus {
 	background: url("/Public/Assets/Images/edit_profil4.png") no-repeat;
 	text-decoration: underline;
 }
-
+.error{
+	padding: 3%;
+	background-color: red;
+	margin-bottom: 2%;
+}
 .formFoot{
 	display: flex;
 	flex-direction: column;
@@ -229,7 +233,6 @@ button:hover, button:focus {
 	height: 20px;
 }
 .goBack{
-	right: 0;
 	text-align: center;
 	cursor: pointer;
 	background-color: rgb(0,120,240) ;
@@ -248,7 +251,10 @@ button:hover, button:focus {
  	flex-wrap: wrap;
  
 }
-
+.inputSendMessage{
+	display: block;
+	margin-bottom: 2%;
+}
 .label_form
 {
     display: block;
@@ -331,13 +337,13 @@ button:hover, button:focus {
 }
 #menu{
 	margin-bottom: 3%;
+	cursor: pointer;
 }
 #menu div{
 	width: 20px;
 	height: 5px;
 	margin: 4px 0;
-	background-color: black
-
+	background-color: black;
 }
 #menuMessage
 {
@@ -351,7 +357,7 @@ button:hover, button:focus {
 #menuMessage p
 {
 	padding: 2%;
-	transition: : 250ms;
+	transition : 250ms;
 	cursor: pointer;
 }
 
@@ -380,7 +386,7 @@ button:hover, button:focus {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: rgb(0,0,16,0.9);
+    background-color: rgba(0,0,16,0.9);
     overflow-x: hidden;
     transition: 250ms;
     display: flex;
@@ -432,11 +438,7 @@ button:hover, button:focus {
 	width: 20%;
 }
 
-#smsEcrit form{
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-}
+
 #teteForm
 {
 	height: 15px;

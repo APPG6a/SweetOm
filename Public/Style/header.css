@@ -5,6 +5,7 @@
 	height: 7px; 
 	border-radius: 50% 50%;
 	background-color: green;
+    margin-right: 2px;
 }
 #head1 p{
     display: inline-block;

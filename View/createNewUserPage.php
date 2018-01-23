@@ -4,7 +4,11 @@ $style = "style.css";
 ob_start(); ?>
 
  <div>
+
  	<form method="POST" id="creationNewUser" action="/index.php?action=addNewUserToDb">
+ 		<?php if(array_key_exists('error', $_SESSION)){
+ 		echo "<div class=\"error\">".$_SESSION["error"]."</div>";
+ 		}?>
  		<label for="firstLogin">
  			<p>Identifiant provisoire : </p>
  			<input type="text" name="firstLogin" id="firstLogin" placeholder="login">
