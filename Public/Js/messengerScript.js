@@ -1,33 +1,65 @@
+var slideIndex= 1;
+showSlides(slideIndex);
 
-var listeTypeSms = document.getElementsByClassName("choose");
-var smsEcrit = document.getElementById("smsEcrit");
-smsEcrit
-var smsEnvoye = document.getElementById("smsEnvoye")
-var smsRecu = document.getElementById("smsRecu");
-document.getElementById("typeMessage").textContent = "";
-document.getElementById("typeMessage").appendChild(smsEcrit);
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlide");
+  var links = document.getElementsByClassName("link");
 
-for( var i = 0; i<listeTypeSms.length ; i++ ){
-	listeTypeSms[i].addEventListener("click",function(e){
-		if (e.target.id === "ecrit") {
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < links.length; i++) {
+      links[i].className = links[i].className.replace(" active", "");
+  }
+  slides[n-1].style.display = "block";  
+  links[n-1].className += " active";
+}
 
-			document.getElementById("typeMessage").textContent = "";
-			document.getElementById("typeMessage").appendChild(smsEcrit);
-			console.log("1");
-		}
+function openContentR(n){
+	var i;
+	var allContents = document.getElementsByClassName("aContentReceived");
+	var allMessagesReceived = document.getElementsByClassName("aMessageReceived");
+	for(i = 0; i<allContents.length; i++) {
+		allContents[i].style.height = "0";
+	}
+	for(i=0; i<allMessagesReceived.length; i++){
+		allMessagesReceived[i].style.display = "none";
+	}
+	allMessagesReceived[n-1].style.display = "flex";
+	allContents[n-1].style.height = "40%";
+}
+function openContentS(n){
+	var i;
+	var allContents = document.getElementsByClassName("aContentSent");
+	var allMessagesSent = document.getElementsByClassName("aMessageSent");
+	for(i = 0; i<allContents.length; i++) {
+		allContents[i].style.height = "0";
+	}
+	for(i=0; i<allMessagesSent.length; i++){
+		allMessagesSent[i].style.display = "none";
+	}
+	allMessagesSent[n-1].style.display = "flex";
+	allContents[n-1].style.height = "40%";
+}
 
-		if (e.target.id === "envoye") {
-
-			document.getElementById("typeMessage").textContent = "";
-			document.getElementById("typeMessage").appendChild(smsEnvoye);
-		}
-
-		if (e.target.id === "recu") {
-			document.getElementById("typeMessage").textContent = "";
-			document.getElementById("typeMessage").appendChild(smsRecu);
-			
-		}
-
-
-	});
+function goBackS(){
+	var allContents = document.getElementsByClassName("aContentSent");
+	var allMessagesSent = document.getElementsByClassName("aMessageSent")
+	for(i = 0; i<allContents.length; i++) {
+		allContents[i].style.height = "0";
+	}
+	for(i=0; i<allMessagesSent.length; i++){
+		allMessagesSent[i].style.display = "flex";
+	}
+}
+function goBackR(){
+	var allContents = document.getElementsByClassName("aContentReceived");
+	var allMessagesReceived = document.getElementsByClassName("aMessageReceived")
+	for(i = 0; i<allContents.length; i++) {
+		allContents[i].style.height = "0";
+	}
+	for(i=0; i<allMessagesReceived.length; i++){
+		allMessagesReceived[i].style.display = "flex";
+	}
 }

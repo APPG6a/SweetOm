@@ -3,13 +3,13 @@ $title="Premiere Visite";
 $style="form.css";
 ob_start();
 ?>
-    <form id="regForm" action="index.php?action=create&table=utilisateurs&id=<?php echo $_POST['IdDomisep']?>" method="post">
+    <form id="regForm" action="/index.php?action=updateNewUser" method="post">
         <h1>Première Visite</h1>
 
         <div class="tab">Vos informations:
             <p><input type="text" name="firstName" placeholder="Prénom" oninput="this.className = ''"></p>
             <p><input type="text" name="lastName" placeholder="Nom" oninput="this.className = ''"></p>
-            <p><input type="text" name="login" disabled value="<?php echo $_POST['IdDomisep']?>"></p>
+            <p><input type="text" name="login"  value=<?php echo $_POST['IdDomisep']?>></p>
             <p><input type="password" name="password" placeholder="Mot de passe" oninput="this.className = ''"></p>
             <p><input type="password" name="passwordValidate" placeholder="Confirmez votre mot de passe" oninput="this.className = ''"></p>
         </div>
@@ -40,7 +40,7 @@ ob_start();
             <span class="step"></span>
             <span class="step"></span>
         </div>
-        <script type="text/javascript" src="Public/Js/signInFormScript.js"></script>
+        <script type="text/javascript" src="/Public/Js/signInFormScript.js"></script>
     </form>
 <?php
 $content = ob_get_clean();

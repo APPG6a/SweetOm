@@ -1,11 +1,24 @@
-header
+
+#head1 div{
+    display: inline-block;
+	width: 7px;
+	height: 7px; 
+	border-radius: 50% 50%;
+	background-color: green;
+    margin-right: 2px;
+}
+#head1 p{
+    display: inline-block;
+    text-decoration: underline;
+}
+#head2
 {
-    padding: 20px;
+    padding: 2%;
     display: flex;
     background: rgb(255,223,202);
     justify-content: space-between;
     border-radius: 7px;
-    margin-bottom: 16px;
+    margin-bottom: 2%;
 }
 
 #logo

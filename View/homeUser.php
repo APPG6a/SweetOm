@@ -3,19 +3,6 @@ $title = "SweetOm";
 $style = "style.css";
 ob_start();
 ?>
-<p>
-    Vos données ont bien été enregistrées!
-    <?php 
-    if ($_SESSION['connected']==true){
-    	echo $_SESSION['ID'];
-    }
-    else
-    {
-    	echo "faux";
-    	
-    }
-	?>
-</p>
 
 <div id="accueil">
     <a id="tabDeBord">Tableau de bord </a>
@@ -24,4 +11,4 @@ ob_start();
 </div>
 <?php
 $content = ob_get_clean();
-require_once("template.php");
+require("template.php");

@@ -12,18 +12,20 @@ require_once("Manager.php");
 
 class ConnectionManager extends Manager
 {
-    function connect($login, $password)
-    {
+    function connect($login, $password){
         $db = $this->dbConnect();
-
-        $req = $db->prepare("SELECT * FROM user WHERE `Login` = ? AND `Password` = ?");
-        $req->execute(array($login, $password));
-
-        $info = $req->fetch();
-        try{
-            return $info;
-        } catch (Exception $e) {
-            die("Message ".$e->getMessage());
-        }
+        $req = $db->prepare("SELECT * FROM user WHERE Login = ?");
+        $req->execute(array($login));
+        $value = $req->fetch();
+        if(PASSWORD_VERIFY($password,$value['Password'])){
+            $_SESSION['connected'] = true;
+            $_SESSION["ID"] = $value['ID'];
+            $_SESSION['userType'] = $value['UserType'];
+            $_SESSION['lastName'] = $value['LastName'];
+            $_SESSION['firstName'] = $value['FirstName'];
+            $_SESSION['waitingForSignIn'] = $value['WaitingForSignIn'];
+    }else{
+        $_SESSION['connected'] = false;
     }
+    $req->closeCursor();}
 }
