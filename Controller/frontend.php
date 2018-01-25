@@ -9,17 +9,11 @@
 /**
  *
  */
-function notEmptyList($aArray){
-    $c = 0;
-    foreach ($aArray as $value){
-        if(empty($value)){
-            $c++;
-        }
-    }
-    if ($c==0) {
-        return true;
-    }return false;
-}
+
+
+
+
+
 function addNewUserToDb($login,$password,$mail){
     require_once('Model/UserManager.php');
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
@@ -37,6 +31,12 @@ function connectUser($login, $pass)
         $_SESSION['errorConnectionMessage1'] = "!Login ou mot de passe incorrrect veuillez réessayer";
         require('/View/loginView.php');
     }
+}
+function contact(){
+    require_once("/Model/UserManager.php");
+    $userObject = new \SweetIt\SweetOm\Model\UserManager();
+    $domisepInfo = $userObject->getDomisepInfo($id);
+    require('/View/contact.php');
 }
 function createNewUserPage(){
     require('/View/createNewUserPage.php');
@@ -62,6 +62,16 @@ function listLogin(){
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $listLogin = $userObject->listLogin();
     return $listLogin;
+}
+function loadHouseInfo($nbrHabitant,$nbrBedroom,$nbrToilet,$nbrLivingRoom){
+    require_once('/Model/CatalogManager.php');
+    $catalogObject = new \SweetIt\SweetOm\Model\CatalogManager();
+    $catalogList = $CatalogManager->catalogList();
+    $_SESSION['nbrBedroom'] = $nbrBedroom;
+    $_SESSION['nbrToilet']= $nbrToilet;
+    $_SESSION['nbrLivingRoom']= $nbrLivingRoom;
+
+    require('/View/bedroomRenaming.php');
 }
 function login()
 {
@@ -94,7 +104,7 @@ function modifyUserProfil($phoneNumber,$address,$mail){
 }
 function updateNewUser($Array, $ID)
 {
-    require_once('Model/UserManager.php');
+    require_once('/Model/UserManager.php');
     $newUser = new \SweetIt\SweetOm\Model\UserManager();
 
     $login = $Array['login'];
@@ -111,21 +121,21 @@ function updateNewUser($Array, $ID)
     require('/View/houseInfo.php');
 }
 function showDasboard($ID_user){
-    require_once('Model/RoomManager.php');
+    require_once('/Model/RoomManager.php');
     $roomObject = new SweetIt\SweetOm\Model\RoomManager();
     $listRoom = $roomObject->showDasboard($ID_user);
-    require("/view/dashboard.php");
+    require("/View/dashboard.php");
 }
 
 function signInUser($login,$pass){
-    require_once('Model/ConnectionManager.php');
+    require_once('/Model/ConnectionManager.php');
     $connectionObject = new \SweetIt\SweetOm\Model\ConnectionManager();
     $connectionObject->connect($login, $pass);
     if($_SESSION['connected'] && $_SESSION['waitingForSignIn']){
         require('/View/signIn.php');
     }else{
         $_SESSION['errorConnectionMessage2'] = "!Login ou mot de passe incorrrect veuillez réessayer";
-        require('/view/loginView.php');
+        require('/View/loginView.php');
     }
 }
 
@@ -140,7 +150,6 @@ function sendMail($name, $mailReceiver,$subject, $text){
         $nextLine = "\n";
     }
 
-    $message_txt = $text;
     $message_html = "<html>
                         <head></head>
                         <body>
@@ -177,3 +186,18 @@ function sendThisMessage($idSender, $login, $object, $text, $sendOn){
     messenger($_SESSION['ID']);
 }
 
+
+
+
+function insertThisRoomTypeToDb($type, $nbr, $array){
+    require_once('/Model/RoomManager.php');
+    $roomObject = new \SweetIt\SweetOm\Model\RoomManager();
+    $roomObject->insertThisRoomTypeToDb($type, $nbr, $array);
+}
+
+function toiletRenaming(){
+    require('/View/toiletRenaming.php');
+}
+function livingRoomRenaming(){
+    require('/View/livingRoomRenaming.php');
+}

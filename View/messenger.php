@@ -22,7 +22,7 @@ ob_start()?>
 							  	echo "<div class=\"error\">Désolé, l'envoi du message à échouer, ce login n'éxiste pas. Veuillez entrer un login valide.</div>";
 							  	unset($_SESSION['errorLogin']);
 							  } ?>
-							<input id="objetMessage" class="inputSendMessage" type="text" name="object" size="80" placeholder="objet"/> 
+							<input id="objetMessage" class="inputSendMessage" type="text" name="object" size="80" placeholder="objet" required/> 
 							<?php if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']=='admin'){?>
 							<label for="receverMessage" class="inputSendMessage">
 								<p>Envoyer à:</p>
@@ -30,7 +30,7 @@ ob_start()?>
 							</label> <?php }else if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']!='admin'){?>
 							  <input id="receverMessage" class="inputSendMessage" type="hidden" size="60" name="receiver" placeholder="identifiant" value="domisep" required/> <?php } ?>
 				
-							<textarea id="message" class="inputSendMessage" name="text" placeholder="Ecrire message" rows="20" cols="80"></textarea>
+							<textarea id="message" class="inputSendMessage" name="text" placeholder="Ecrire message" rows="20" cols="80" required></textarea>
 
 							<div class="send">
 								<input class="sendData" type="submit" name="submit" value=">>Envoyer"/>
