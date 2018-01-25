@@ -223,10 +223,10 @@ class UserManager extends Manager
         $req1->closeCursor();
         $db = $this->dbConnect();
         $req2 = $db->prepare('SELECT ID FROM user WHERE Login = ?');
-        $req2->execute(array($Login));
+        $req2->execute(array($login));
         $idOwner = $req2->fetch();
         $req2->closeCursor();
-        $req3 = prepare('INSERT INTO house(ID_Owner) values(?)');
+        $req3 = $db->prepare('INSERT INTO house(ID_Owner) values(?)');
         $req3->execute(array($idOwner));
         $req3->closeCurSor();
     }
