@@ -127,7 +127,7 @@ function updateNewUser($Array, $ID)
     $mail = $Array['mail'];
     $cell = $Array['cellphone'];
     $phone = $Array['phone'];
-    $address = $Array['address']." ".$Array['postCode']." ".$Array['city']." ".$Array['country'];
+    $address = $Array['address']."__".$Array['postCode']."__".$Array['city'];
 
     $newUser->updateNewUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail);
     $newUser->setHome($ID, $address);

@@ -30,7 +30,7 @@ ob_start();?>
 
          <label for="price">
             <p>Price</p> 
-            <input id="price" min=0 type="number" name="price" required/>
+            <input id="price" min=0 type="number" name="price" placeholder="prix en euros" required/>
          </label>
             
       

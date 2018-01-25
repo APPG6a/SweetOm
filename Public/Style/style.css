@@ -74,7 +74,6 @@ button:hover, button:focus {
  	display: none;
  	width: 90%;
  	margin: auto;
- 	transition: 100ms;
 }
 #catalog{
     display: flex;

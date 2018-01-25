@@ -28,7 +28,6 @@ class ConnectionManager extends Manager
             $req2 = $db->prepare('SELECT ID FROM house WHERE ID_Owner = ?');
             $req2->execute(array($_SESSION["ID"]));
             $_SESSION['idHouse'] = $req2->fetch()[0];
-            echo $_SESSION['idHouse'];
             $req2->closeCursor();
     }else{
         $_SESSION['connected'] = false;

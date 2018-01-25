@@ -24,7 +24,6 @@ ob_start();
             <p><input type="text" name="address" placeholder="Adresse" oninput="this.className = ''"></p>
             <p><input type="text" name="postCode" placeholder="Code postal" oninput="this.className = ''"></p>
             <p><input type="text" name="city" placeholder="Ville" oninput="this.className = ''"></p>
-            <p><input type="text" name="country" placeholder="Pays" oninput="this.className = ''"></p>
         </div>
 
         <div style="overflow:auto;">
