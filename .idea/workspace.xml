@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="debf3364-3b03-4317-b570-76d728cc7961" name="Default" comment="some news functions and updates">
-      <change beforePath="$PROJECT_DIR$/Controller/frontend.php" afterPath="$PROJECT_DIR$/Controller/frontend.php" />
+      <change beforePath="$PROJECT_DIR$/View/createNewUserPage.php" afterPath="$PROJECT_DIR$/View/createNewUserPage.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -358,12 +358,12 @@
       <workItem from="1515417257236" duration="7017000" />
       <workItem from="1516297431163" duration="1352000" />
       <workItem from="1516445411184" duration="13104000" />
-      <workItem from="1516564959957" duration="7623000" />
+      <workItem from="1516564959957" duration="8208000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103187000" />
+    <option name="totallyTimeSpent" value="103772000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />

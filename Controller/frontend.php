@@ -15,7 +15,7 @@
 
 
 function addNewUserToDb($login,$password,$mail){
-    require_once('/Model/UserManager.php');
+    require_once('./Model/UserManager.php');
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $userObject->addNewUserToDb($login,$password,$mail);
 }
@@ -33,7 +33,7 @@ function connectUser($login, $pass)
     }
 }
 function contact(){
-    require_once("/Model/UserManager.php");
+    require_once("./Model/UserManager.php");
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $domisepInfo = $userObject->getDomisepInfo($id);
     require('./View/contact.php');
@@ -46,10 +46,10 @@ function dashboard()
     require('./View/homeUser.php');
 }
 function editDomisepProfil($id){
-    require_once("/Model/UserManager.php");
+    require_once("./Model/UserManager.php");
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $domisepInfo = $userObject->getDomisepInfo($id);
-    require("/View/editDomisepProfil.php");
+    require("./View/editDomisepProfil.php");
 }
 function editUserProfil($id){
     require_once("/Model/UserManager.php");
@@ -58,13 +58,13 @@ function editUserProfil($id){
     require("./View/editUserProfil.php");
 }
 function listLogin(){
-    require_once('/Model/UserManager.php');
+    require_once('./Model/UserManager.php');
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $listLogin = $userObject->listLogin();
     return $listLogin;
 }
 function loadHouseInfo($nbrHabitant,$nbrBedroom,$nbrToilet,$nbrLivingRoom){
-    require_once('/Model/CatalogManager.php');
+    require_once('./Model/CatalogManager.php');
     $catalogObject = new \SweetIt\SweetOm\Model\CatalogManager();
     $catalogList = $CatalogManager->catalogList();
     $_SESSION['nbrBedroom'] = $nbrBedroom;
@@ -83,28 +83,28 @@ function logout()
     require('./View/logout.php');
 }
 function messenger($id){
-    require_once('/Model/MessengerManager.php');
+    require_once('./Model/MessengerManager.php');
     $messageObject = new \SweetIt\SweetOm\Model\MessengerManager();
     $listReceivedMessage = $messageObject->receivedMessage($id);
     $listSentMessage = $messageObject->sentMessage($id);
-    require('../View/messenger.php');
+    require('./View/messenger.php');
 
 }
 function modifyDomisep($phoneNumber,$address,$mail){
-    require_once("/Model/UserManager.php");
+    require_once("./Model/UserManager.php");
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $userObject->updateDomisep($phoneNumber, $address, $mail);
     editDomisepProfil($_SESSION['ID']);
 }
 function modifyUserProfil($phoneNumber,$address,$mail){
-    require_once("/Model/UserManager.php");
+    require_once("./Model/UserManager.php");
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $userObject->updateUserProfil($phoneNumber, $address, $mail);
     editUserProfil($_SESSION['ID']);
 }
 function updateNewUser($Array, $ID)
 {
-    require_once('/Model/UserManager.php');
+    require_once('./Model/UserManager.php');
     $newUser = new \SweetIt\SweetOm\Model\UserManager();
 
     $login = $Array['login'];
@@ -121,14 +121,14 @@ function updateNewUser($Array, $ID)
     require('../View/houseInfo.php');
 }
 function showDasboard($ID_user){
-    require_once('/Model/RoomManager.php');
+    require_once('./Model/RoomManager.php');
     $roomObject = new SweetIt\SweetOm\Model\RoomManager();
     $listRoom = $roomObject->showDasboard($ID_user);
     require("./View/dashboard.php");
 }
 
 function signInUser($login,$pass){
-    require_once('/Model/ConnectionManager.php');
+    require_once('./Model/ConnectionManager.php');
     $connectionObject = new \SweetIt\SweetOm\Model\ConnectionManager();
     $connectionObject->connect($login, $pass);
     if($_SESSION['connected'] && $_SESSION['waitingForSignIn']){
@@ -180,7 +180,7 @@ function sendMail($name, $mailReceiver,$subject, $text){
 }
 
 function sendThisMessage($idSender, $login, $object, $text, $sendOn){
-    require_once('/Model/MessengerManager.php');
+    require_once('./Model/MessengerManager.php');
     $messageObject = new \SweetIt\SweetOm\Model\MessengerManager();
     $messageObject->sendThisMessage($idSender, $login, $object, $text, $sendOn);
     messenger($_SESSION['ID']);
@@ -190,7 +190,7 @@ function sendThisMessage($idSender, $login, $object, $text, $sendOn){
 
 
 function insertThisRoomTypeToDb($type, $nbr, $array){
-    require_once('/Model/RoomManager.php');
+    require_once('./Model/RoomManager.php');
     $roomObject = new \SweetIt\SweetOm\Model\RoomManager();
     $roomObject->insertThisRoomTypeToDb($type, $nbr, $array);
 }

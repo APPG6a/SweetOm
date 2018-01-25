@@ -7,8 +7,8 @@ ob_start(); ?>
 
  	<form method="POST" id="creationNewUser" action="/index.php?action=addNewUserToDb">
  		<?php if(array_key_exists('error', $_SESSION)){
- 			unset($_SESSION['error']);
- 		echo "<div class=\"error\">".$_SESSION["error"]."</div>";
+	 		echo "<div class=\"error\">".$_SESSION["error"]."</div>";
+	 		unset($_SESSION['error']);
  		}?>
  		<label for="firstLogin">
  			<p>Identifiant provisoire : </p>
