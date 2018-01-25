@@ -5,5 +5,5 @@ function openNav() {
 
 function closeNav() {
     document.getElementById("myDashboard").style.width = "0";
-
+    console.log("yep");
 }

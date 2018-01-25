@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: THEOPHILE
- * Date: 12/12/2017
- * Time: 11:57
- */
-
 namespace SweetIt\SweetOm\Model;
 
+require_once('Manager.php');
 
 class CatalogManager extends Manager
 {
@@ -138,12 +132,57 @@ class CatalogManager extends Manager
         $this->type = $type;
     }
 
-    public function insertIntoDataBase()
+    public function insertNewSensorIntoDb($array,$urlImg)
     {
         $db = $this->dbConnect();
-
-        $req = $db->prepare("INSERT INTO catalogue (Urlphoto, Nom, Description, Prix, ID_TypeMateriel, Modele) VALUES (?, ?, ?, ?, ?, ?)");
-        $req->execute(array($this->getImageURL(),$this->getName(),$this->getDescription(),$this->getPrice(),$this->getType(),$this->getRef()));
+        $req1 = $db->prepare('SELECT ID FROM equipment_type WHERE Type = ?');
+        $req1->execute(array($array['type']));
+        $idEquipment = $req1->fetch();
+        $req1->closeCursor();
+        $req = $db->prepare("INSERT INTO catalog (PhotoUrl, Name, Description, Price, ID_EquipmentType, Model) VALUES (?, ?, ?, ?, ?, ?)");
+        $req->execute(array($urlImg, $array['name'],$array['description'],$array['price'][0],$idEquipment[0],$array['model']));
         $req->closeCursor();
+    } 
+
+
+    public function collectData(){
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT * FROM equipment_type WHERE Type=?');
+        $req->execute(array($_POST['Type']));
+        $value = $req->fetch();
+        $id_type = $value['ID'][0];
+        $req->closeCursor();
+        $stockage = './Public/Assets/Images_catalog/' . $_FILES['photo']['name'] . '';
+        $insertion = $db->prepare('INSERT INTO catalog (PhotoUrl, Name, Description, Price, ID_EquipmentType,Model) VALUES (?, ?, ?,?,?,?)');
+        $insertion->execute(array($stockage, $_POST['name'], $_POST['description'], $_POST['price'], $id_type, $_POST['model']));
+        $insertion->closeCursor();
+    }
+
+
+    public function listCatalog()
+    {
+        $db = $this->dbConnect();
+        $rep = $db->prepare('SELECT * FROM equipment_type ');
+        $rep->execute(array());
+        $listCatalog = array();
+        while ($value = $rep->fetch()) {
+            $capteurType = array();
+            $rep2 = $db->prepare('SELECT * FROM catalog WHERE ID_EquipmentType = ? ');
+            $rep2->execute(array($value['ID']));
+            $capteurType[] = $value['Type'];
+            while ($value2 = $rep2->fetch()) {
+                $capteurInfoByType = array();
+
+                $capteurInfoByType ['PhotoUrl'] = $value2['PhotoUrl'];
+                $capteurInfoByType['Name'] = $value2['Name'];
+                $capteurInfoByType['Description'] = $value2['Description'];
+                $capteurInfoByType['Price'] = $value2['Price'];
+                $capteurInfoByType['Model'] = $value2['Model'];
+                $capteurType[] = $capteurInfoByType;
+            }
+            $listCatalog[] = $capteurType;
+        }
+        $rep->closeCursor();
+        return $listCatalog;
     }
 }

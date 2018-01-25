@@ -23,19 +23,19 @@ ob_start()
     
         	<label for="nbrBedroom">
         		<p>Nombre de chambre(s):</p>
-        		<input class="info" type="number" min=1 max=10 name="nbrBedroom" id="nbrBedroom" required/>
+        		<input class="info" type="number" min=0 max=10 name="nbrBedroom" id="nbrBedroom" required/>
         	</label>
 
         	<label for="nbrToilet">
         		<p>Nombre de salle de bain(s):</p>
-        		<input class="info" type="number" min=1 max=10 name="nbrToilet" id="nbrToilet" />
+        		<input class="info" type="number" min=0 max=10 name="nbrToilet" id="nbrToilet" />
         	</label>
    
 
     
         	<label for="nbrLivingRoom">
         		<p>Nombre de séjour(s):</p>
-        		<input class="info" type="number" min=1 max=10 name="nbrLivingRoom" id="nbrLivingRoom" />
+        		<input class="info" type="number" min=0 max=10 name="nbrLivingRoom" id="nbrLivingRoom" />
         	</label>
         
            <div class="send">
