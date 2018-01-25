@@ -218,9 +218,17 @@ class UserManager extends Manager
     public function addNewUserToDb($login,$password,$mail){
         $db = $this->dbConnect();
         $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
-        $req = $db->prepare('INSERT INTO user(Login,Password,Mail,UserType) VALUES(?,?,?,?)');
-        $req->execute(array($login,$passwordHashed,$mail,'customer'));
-        $req->closeCursor();
+        $req1 = $db->prepare('INSERT INTO user(Login,Password,Mail,UserType) VALUES(?,?,?,?)');
+        $req1->execute(array($login,$passwordHashed,$mail,'customer'));
+        $req1->closeCursor();
+        $db = $this->dbConnect();
+        $req2 = $db->prepare('SELECT ID FROM user WHERE Login = ?');
+        $req2->execute(array($Login));
+        $idOwner = $req2->fetch();
+        $req2->closeCursor();
+        $req3 = prepare('INSERT INTO house(ID_Owner) values(?)');
+        $req3->execute(array($idOwner));
+        $req3->closeCurSor();
     }
     public function updateDomisep($phoneNumber, $address, $mail){
         $db = $this->dbConnect();
@@ -240,6 +248,7 @@ class UserManager extends Manager
         $req2->execute(array($address, $_SESSION['ID']));
         $req2->closeCursor();
     }
+
     public function getDomisepInfo($id){
         $db = $this->dbConnect();
         $req1 = $db->prepare('SELECT * FROM user WHERE ID = ?');
@@ -288,7 +297,7 @@ class UserManager extends Manager
     {
         $db = $this->dbConnect();
 
-        $req = $db->prepare('INSERT INTO house(Address, ID_Owner) VALUES (?, ?)');
+        $req = $db->prepare('UPDATE  house SET Address = ? WHERE ID_Owner = ?');
         $affectedLines = $req->execute(array($address,$idOwner));
 
         return $affectedLines;

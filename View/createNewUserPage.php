@@ -7,6 +7,7 @@ ob_start(); ?>
 
  	<form method="POST" id="creationNewUser" action="/index.php?action=addNewUserToDb">
  		<?php if(array_key_exists('error', $_SESSION)){
+ 			unset($_SESSION['error']);
  		echo "<div class=\"error\">".$_SESSION["error"]."</div>";
  		}?>
  		<label for="firstLogin">
@@ -26,7 +27,7 @@ ob_start(); ?>
  			<input type="mail" name="mail" id="mail">
  		</label>
  		<div class="send">
- 			<input type="submit" name="submit" value=">>envoyer" class="sendData">
+ 			<input type="submit" name="submit" value=">>Envoyer" class="sendData">
  		</div>
  		
  	</form>

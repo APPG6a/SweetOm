@@ -1,7 +1,7 @@
 <footer>
-	<p>Qui sommes nous? | </p>
-	<p>Conditions générales d'utilisation | </p>
-	<p><a href="../index.php?action=contact">Nous contacter | </p>
-	<p class="deconnexion"> <a href="index.php?action=logout"> Déconnexion </a> </p>
+	<a>Qui sommes nous? | </a>
+	<a href="/index.php?action=cgu">Conditions générales d'utilisation | </a>
+	<a href="/index.php?action=contact">Nous contacter | </a>
+	<a href="/index.php?action=logout"> Déconnexion </a> 
 </footer>
 

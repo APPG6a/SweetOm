@@ -5,7 +5,7 @@ ob_start()
 ?>
 <div class="corpsHouseInfo">
 
-    <form  id="formInscription" method="POST" action="loadUser.php">
+    <form  id="formInscription" method="POST" action="/index.php?action=houseInfo">
 
 
         <div id=teteForm></div>
@@ -13,29 +13,29 @@ ob_start()
     
         <div class="formBody">
             <p>Nous allons enregistrer vos données. Veuillez indiquer ci-dessous le nombre des différentes pièces que vous souhaitez connecter.</p>
-        	 <label for="nbrHabt"> 
+        	 <label for="nbrHabitant"> 
         	 	<p>Nombre d'habitant(s):</p> 
-        	 	<input class="info" type="number" min=1 max=10 name="nbrHabt" id="nbrHabt"  required/>
+        	 	<input class="info" type="number" min=1 max=10 name="nbrHabitant" id="nbrHabitant"  required/>
         	 </label>
         
 
         
     
-        	<label for="nbrChambre">
+        	<label for="nbrBedroom">
         		<p>Nombre de chambre(s):</p>
-        		<input class="info" type="number" min=1 max=10 name="nbrChambre" id="nbrChambre" required/>
+        		<input class="info" type="number" min=1 max=10 name="nbrBedroom" id="nbrBedroom" required/>
         	</label>
 
-        	<label for="nbrToilette">
+        	<label for="nbrToilet">
         		<p>Nombre de salle de bain(s):</p>
-        		<input class="info" type="number" min=1 max=10 name="nbrToilette" id="nbrToilette" />
+        		<input class="info" type="number" min=1 max=10 name="nbrToilet" id="nbrToilet" />
         	</label>
    
 
     
-        	<label for="nbrSejour">
+        	<label for="nbrLivingRoom">
         		<p>Nombre de séjour(s):</p>
-        		<input class="info" type="number" min=1 max=10 name="nbrSejour" id="nbrSejour" />
+        		<input class="info" type="number" min=1 max=10 name="nbrLivingRoom" id="nbrLivingRoom" />
         	</label>
         
            <div class="send">
