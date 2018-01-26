@@ -9,9 +9,9 @@
 	<a href="/index.php?action=createNewUserPage" class="myDashboardFunction">Créer un compte client</a>
 	<a href="/index.php?action=" class="myDashboardFunction">Gérer les utilisateurs</a>
 	<a href="" class="myDashboardFunction">Afficher les données</a>
-	<a href="messenger.php" class="myDashboardFunction">Messagerie</a>
-	<a href="/index.php?action=manageCatalogue" class="myDashboardFunction">Catalogue</a>
-	<a href="/index.php?action=addSensor" class="myDashboardFunction">Ajouter un nouveau capteur</a>
+	<a href="/index.php?action=messenger" class="myDashboardFunction">Messagerie</a>
+	<a href="/index.php?action=showCatalog" class="myDashboardFunction">Catalogue</a>
+	<a href="/index.php?action=addNewSensorView" class="myDashboardFunction">Ajouter un nouveau capteur</a>
     <a href="/index.php?action=editDomisepProfil" class="myDashboardFunction">Editer le profil Domisep</a>
 </div>
 <script type="text/javascript" src="/Public/Js/domisepDashboard.js"></script>

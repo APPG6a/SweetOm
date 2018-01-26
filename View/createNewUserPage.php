@@ -4,7 +4,12 @@ $style = "style.css";
 ob_start(); ?>
 
  <div>
+
  	<form method="POST" id="creationNewUser" action="/index.php?action=addNewUserToDb">
+ 		<?php if(array_key_exists('error', $_SESSION)){
+	 		echo "<div class=\"error\">".$_SESSION["error"]."</div>";
+	 		unset($_SESSION['error']);
+ 		}?>
  		<label for="firstLogin">
  			<p>Identifiant provisoire : </p>
  			<input type="text" name="firstLogin" id="firstLogin" placeholder="login">
@@ -22,7 +27,7 @@ ob_start(); ?>
  			<input type="mail" name="mail" id="mail">
  		</label>
  		<div class="send">
- 			<input type="submit" name="submit" value=">>envoyer" class="sendData">
+ 			<input type="submit" name="submit" value=">>Envoyer" class="sendData">
  		</div>
  		
  	</form>

@@ -9,7 +9,7 @@ ob_start();
         <div class="tab">Vos informations:
             <p><input type="text" name="firstName" placeholder="Prénom" oninput="this.className = ''"></p>
             <p><input type="text" name="lastName" placeholder="Nom" oninput="this.className = ''"></p>
-            <p><input type="text" name="login"  value='"<?php echo $_POST['IdDomisep']?>"'></p>
+            <p><input type="text" name="login"  value=<?php echo $_POST['IdDomisep']?>></p>
             <p><input type="password" name="password" placeholder="Mot de passe" oninput="this.className = ''"></p>
             <p><input type="password" name="passwordValidate" placeholder="Confirmez votre mot de passe" oninput="this.className = ''"></p>
         </div>
@@ -24,7 +24,6 @@ ob_start();
             <p><input type="text" name="address" placeholder="Adresse" oninput="this.className = ''"></p>
             <p><input type="text" name="postCode" placeholder="Code postal" oninput="this.className = ''"></p>
             <p><input type="text" name="city" placeholder="Ville" oninput="this.className = ''"></p>
-            <p><input type="text" name="country" placeholder="Pays" oninput="this.className = ''"></p>
         </div>
 
         <div style="overflow:auto;">

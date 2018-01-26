@@ -204,47 +204,100 @@ class UserManager extends Manager
             throw new \Exception("User not found");
         }
     }
+    public function listLogin(){
+      $db = $this->dbConnect();
+      $req = $db->prepare('SELECT Login FROM user');
+      $req->execute(array());
+      $listLogin =  array();
+      while ($value = $req->fetch()){
+        $listLogin[] = $value['Login'];
+      }
+      $req->closeCursor();
+      return $listLogin;
+    }
     public function addNewUserToDb($login,$password,$mail){
         $db = $this->dbConnect();
         $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
-        $req = $db->prepare('INSERT INTO user(Login,Password,Mail,UserType) VALUES(?,?,?,?)');
-        $req->execute(array($login,$passwordHashed,$mail,'customer'));
-        $req->closeCursor();
+        $req1 = $db->prepare('INSERT INTO user(Login,Password,Mail,UserType) VALUES(?,?,?,?)');
+        $req1->execute(array($login,$passwordHashed,$mail,'customer'));
+        $req1->closeCursor();
+        $db = $this->dbConnect();
+        $req2 = $db->prepare('SELECT ID FROM user WHERE Login = ?');
+        $req2->execute(array($login));
+        $idOwner = $req2->fetch();
+        $req2->closeCursor();
+        $req3 = $db->prepare('INSERT INTO house(ID_Owner) values(?)');
+        $req3->execute(array($idOwner));
+        $req3->closeCurSor();
     }
     public function updateDomisep($phoneNumber, $address, $mail){
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE user SET PhoneNumber = ?, Address = ?, Mail = ? WHERE ID=?');
-        $req->execute(array($phoneNumber, $address, $mail,$_SESSION['ID']));
-        $req->closeCursor();
+        $req1 = $db->prepare('UPDATE user SET PhoneNumber = ?, Mail = ? WHERE ID=?');
+        $req1->execute(array($phoneNumber, $mail, $_SESSION['ID']));
+        $req1->closeCursor();
+        $req2 = $db->prepare('UPDATE house SET Address = ? WHERE ID_Owner=?');
+        $req2->execute(array($address, $_SESSION['ID']));
+        $req2->closeCursor();
     }
-    public function getDomisepInfo(){
+     public function updateUserProfil($phoneNumber, $address, $mail){
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT * FROM user WHERE ID = ?');
-        $req->execute(array($_SESSION['ID']));
-        $domisepInfo = array();
-        $value = $req->fetch();
-        $domisepInfo['address'] = $value['Address'];
-        $domisepInfo['phoneNumber'] = $value['PhoneNumber'];
-        $domisepInfo['mail'] = $value['Mail'];
-        return $domisepInfo;
+        $req1 = $db->prepare('UPDATE user SET PhoneNumber = ?, Mail = ? WHERE ID=?');
+        $req1->execute(array($phoneNumber, $mail, $_SESSION['ID']));
+        $req1->closeCursor();
+        $req2 = $db->prepare('UPDATE house SET Address = ? WHERE ID_Owner=?');
+        $req2->execute(array($address, $_SESSION['ID']));
+        $req2->closeCursor();
     }
-    function updateUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail)
+
+    public function getDomisepInfo($id){
+        $db = $this->dbConnect();
+        $req1 = $db->prepare('SELECT * FROM user WHERE ID = ?');
+        $req1->execute(array($id));
+        $user = array();
+        $value1 = $req1->fetch();
+        $user['phoneNumber'] = $value1['PhoneNumber'];
+        $user['mail'] = $value1['Mail'];
+        $req1->closeCursor();
+        $req2 = $db->prepare('SELECT Address FROM house WHERE ID_Owner = ?');
+        $req2->execute(array($id));
+        $value2 = $req2->fetch();
+        $user['address'] = $value2['Address'];
+        $req2->closeCursor();
+        return $user;
+    }
+    public function getUserInfo($id){
+        $db = $this->dbConnect();
+        $req1 = $db->prepare('SELECT * FROM user WHERE ID = ?');
+        $req1->execute(array($id));
+        $user = array();
+        $value1 = $req1->fetch();
+        $user['phoneNumber'] = $value1['PhoneNumber'];
+        $user['mail'] = $value1['Mail'];
+        $req1->closeCursor();
+        $req2 = $db->prepare('SELECT Address FROM house WHERE ID_Owner = ?');
+        $req2->execute(array($id));
+        $value2 = $req2->fetch();
+        $user['address'] = $value2['Address'];
+        $req2->closeCursor();
+        return $user;
+    }
+    function updateNewUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail)
     {
         $db = $this->dbConnect();
         $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
         $req = $db->prepare('UPDATE user
-          SET Login = ?, Password = ?, WaitForSignIn = ?,  LastName = ?, FirstName = ?, PhoneNumber = ?, CellNumber = ?, Mail = ?, ID_SuperUser = ?, UserType = ? 
+          SET Login = ?, Password = ?, WaitingForSignIn = ?,  LastName = ?, FirstName = ?, PhoneNumber = ?, CellNumber = ?, Mail = ?, UserType = ? 
           WHERE ID = ?');
-        $affectedLines = $req->execute(array($login, $passwordHashed, 0, $surname, $name, $cell, $phone, $mail, NULL, 'customer', $ID));
-
+        $affectedLines = $req->execute(array($login, $passwordHashed, 0, $surname, $name, $cell, $phone, $mail, 'customer', $ID));
+        $req->closeCursor();
         return $affectedLines;
     }
 
-    function setHome($address, $idOwner)
+    function setHome($idOwner,$address)
     {
         $db = $this->dbConnect();
 
-        $req = $db->prepare('INSERT INTO domicile (Adresse, ID_Proprietaire) VALUES (?, ?)');
+        $req = $db->prepare('UPDATE  house SET Address = ? WHERE ID_Owner = ?');
         $affectedLines = $req->execute(array($address,$idOwner));
 
         return $affectedLines;

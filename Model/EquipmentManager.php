@@ -8,7 +8,7 @@
 
 namespace SweetIt\SweetOm\Model;
 
-
+require_once('Manager.php');
 class EquipmentManager extends Manager
 {
     private $ID;
@@ -102,5 +102,17 @@ class EquipmentManager extends Manager
     public function setIDCeMac($ID_CeMac)
     {
         $this->ID_CeMac = $ID_CeMac;
+    }
+    public function listTypesSensors(){
+    $db = $this->dbConnect();
+    $rep = $db->query('SELECT * FROM equipment_type');
+    $listTypesSensors = array();
+    while ($values = $rep->fetch()) {
+
+       $listTypesSensors[] = $values['Type'];
+    }
+    $rep->closeCursor();
+    return $listTypesSensors;
+
     }
 }

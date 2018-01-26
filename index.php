@@ -1,70 +1,209 @@
 <?php
 session_start();
+
 require_once("./Controller/frontend.php");
 
+function issetList($aArray,$arrayKey){
+        foreach ($arrayKey as $value) {
+            if(!isset($aArray[$value])){
+                return false;
+            }
+        }
+        return true;
+}
+
+function notEmptyList($aArray){
+    foreach ($aArray as $value){
+        if(empty($value)){
+            return false;
+        }
+    }
+    return true;
+}
+
 try
-{
+{   
     if (array_key_exists('connected', $_SESSION) && $_SESSION['connected'] == true)
     {
-        // In this part only functions which request a connection. Never trust user input.
-
-        if (isset($_GET['action']) && $_GET['action'] == "dashboard"){
+        // In this part  functions which request a connection. Never trust user input.
+        if (isset($_GET['action']) && $_GET['action'] == 'cgu'){
+        require('./View/cgu.php');
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'contact'){
+        contact();
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'addNewSensorView'){
+            addNewSensorView();
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == "dashboard"){
                 dashboard();
         }else if(isset($_GET['action']) && $_GET['action']== 'createNewUserPage'){
             createNewUserPage();
         }
         else if(isset($_GET['action']) && $_GET['action'] == 'showDashbord'){
             showDashbord($_SESSION['ID_Domicile']);
-        }else if (isset($_GET['action']) && $_GET['action'] == 'logout'){
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'showCatalog'){
+            showCatalog();
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'logout'){
             logout();
         }else if (isset($_GET['action']) && $_GET['action'] == 'editDomisepProfil'){
-            editDomisepProfil();
-        }else if(isset($_GET['action']) && $_GET['action'] == 'addNewUserToDb'){
-            if(isset($_POST['firstLogin']) && !empty($_POST['firstLogin']) &&
-            isset($_POST['firstPassword']) && !empty($_POST['firstPassword']) &&
-            isset($_POST['name']) && !empty($_POST['name']) &&
-            isset($_POST['mail']) && !empty($_POST['mail'])){
+            editDomisepProfil($_SESSION['ID']);
+        }else if (isset($_GET['action']) && $_GET['action'] == 'editUserProfil'){
+            editUserProfil($_SESSION['ID']);
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'messenger'){
+            messenger($_SESSION['ID']);
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'sendMessage'){
+            if(issetList($_POST,['object','receiver','text']) && notEmptyList($_POST)){
+                if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']!='admin'){
+                    $login = "domisep";
+                }else if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']=='admin'){
+                    $login = $_POST['receiver'];
+                } 
+                $sendOn = date('Y-m-d H:i:s');
+                if(in_array($login, listLogin())){
+                    sendThisMessage($_SESSION['ID'], $login, $_POST['object'], $_POST['text'], $sendOn);
+                }else{
+                    $_SESSION['errorLogin'] = true;
+                    messenger($_SESSION['ID']);
+                }
+                
+            }
+        }
+        else if(isset($_GET['action']) && $_GET['action'] == 'addNewUserToDb'){
+            if(issetList($_POST, ['firstLogin', 'firstPassword', 'name', 'mail']) && notEmptyList($_POST)){
                 if(strlen($_POST['firstPassword'])>=6){
-                    echo 'hum';
-                    $text = "Domisep vous souhaite la bienvenue dans son réseau. Pour pouvoir bénéficier de nos services rendez-vous
-                    sur notre page en cliquant sur le lien ci-dessous. Voici votre identifiant provisoir: <br>
-                    Login: ".$_POST['firstLogin']." <br>Mot de passe: ".$_POST['firstPassword']." <br>
-                    <a href=\"/sweetom\">www.sweetom.fr</a>";
-                    sendMail($_POST['name'],$_POST['mail'],$text);
-                    addNewUserToDb($_POST['firstLogin'],$_POST['firstPassword'],$_POST['mail']);
+                    if(!in_array($_POST['firstLogin'], listLogin())){
+                        $subject = "Création de votre compte";
+                        $text = "Domisep vous souhaite la bienvenue dans son réseau. Pour pouvoir bénéficier de nos services rendez-vous
+                        sur notre page, section première visite, en cliquant sur le lien ci-dessous. Voici votre identifiant provisoir: <br>
+                        Login: ".$_POST['firstLogin']." <br>Mot de passe: ".$_POST['firstPassword']." <br>
+                        <a href=\"sweetom\">www.sweetom.fr</a>";
+
+                        sendMail($_POST['name'], $_POST['mail'], $subject, $text);
+                        addNewUserToDb($_POST['firstLogin'],$_POST['firstPassword'],$_POST['mail']);
+                    }else{
+                        $_SESSION['error'] = 'Cet identifiant existe déja veuillez choisir un autre identifiant';
+                        require('./View/createNewUserPage.php');
+                    }
+                }else{
+                    $_SESSION['error'] = 'Votre mot de passe doit contenir au mois 6 caractères.';
+                    require('./View/createNewUserPage.php');
                 }
             }
         }
 
         else if(isset($_GET['action']) && $_GET['action'] == 'modifyDomisep'){
-            if(isset($_POST['address']) && !empty($_POST['address'])&&
-                isset($_POST['cp']) && !empty($_POST['cp'])&&
-                isset($_POST['city']) && !empty($_POST['city'])&&
-                isset($_POST['phoneNumber']) && !empty($_POST['phoneNumber'])&&
-                isset($_POST['mail']) && !empty($_POST['mail'])){
+            if(issetList($_POST, ['address', 'cp', 'city', 'phoneNumber', 'mail']) && notEmptyList($_POST)){
                 $address = $_POST['address'].'__'.$_POST['cp'].'__'.$_POST['city'];
                 modifyDomisep($_POST['phoneNumber'],$address,$_POST['mail']);
+            }else{
+                echo 'boom';
             }
 
+        }else if(isset($_GET['action']) && $_GET['action'] == 'modifyUserProfil'){
+            if(issetList($_POST, ['address', 'cp', 'city', 'phoneNumber', 'mail']) && notEmptyList($_POST)){
+                $address = $_POST['address'].'__'.$_POST['cp'].'__'.$_POST['city'];
+                modifyUserProfil($_POST['phoneNumber'],$address,$_POST['mail']);
+            }else{
+                echo 'boom';
+            }
+        }
+        else if(isset($_GET['action']) && $_GET['action'] == 'houseInfo'){
+            if(issetList($_POST,['nbrHabitant', 'nbrBedroom', 'nbrToilet', 'nbrLivingRoom']) && notEmptyList($_POST)){
+                loadHouseInfo($_POST['nbrHabitant'],$_POST['nbrBedroom'],$_POST['nbrToilet'],$_POST['nbrLivingRoom']);
+            }
+        }
+        else if(isset($_GET['action']) && $_GET['action'] == 'bedroomRenaming'){
+            $test = 0;
+            for ($c=0; $c<$_SESSION['nbrBedroom'] ; $c++) { 
+                $i = $c+1;
+                $room = 'room'.$i;
+                if($c%2==0 && !isset($_POST[$room])){
+                    $test++;
+                }
+                $surface = 'surface'.$i;
+                if($c%2!=0 && !isset($_POST[$surface])){
+                    $test++;
+                }
+            }
+            if($test == 0  && notEmptyList($_POST)){
+                $type = 'Chambre';
+                insertThisRoomTypeToDb($type, $_SESSION['nbrBedroom'], $_POST);
+                setCemacByRoom($_SESSION['nbrBedroom'],$_POST);
+                toiletRenaming();
+            }
+        }
+        else if(isset($_GET['action']) && $_GET['action'] == 'toiletRenaming'){
+            $test = 0;
+            for ($c=0; $c <$_SESSION['nbrToilet'] ; $c++) {
+                           $i = $c+1;
+                $room = 'room'.$i;
+                if($c%2==0 && !isset($_POST[$room])){
+                    $test++;
+                }
+                $surface = 'surface'.$i;
+                if($c%2!=0 && !isset($_POST[$surface])){
+                    $test++;
+                }
+            }
+            if($test == 0  && notEmptyList($_POST)){
+                $type = 'Salle de bain';
+                insertThisRoomTypeToDb($type, $_SESSION['nbrToilet'], $_POST);
+                livingRoomRenaming();
+            }
+        }
+        else if(isset($_GET['action']) && $_GET['action'] == 'livingRoomRenaming'){
+            $test = 0;
+            for ($c=0; $c <$_SESSION['nbrLivingRoom'] ; $c++) {
+                             $i = $c+1;
+                $room = 'room'.$i;
+                if($c%2==0 && !isset($_POST[$room])){
+                    $test++;
+                }
+                $surface = 'surface'.$i;
+                if($c%2!=0 && !isset($_POST[$surface])){
+                    $test++;
+                }
+            }
+            if($test == 0  && notEmptyList($_POST)){
+                $type = 'Séjour';
+                insertThisRoomTypeToDb($type, $_SESSION['nbrLivingRoom'], $_POST);
+                livingRoomRenaming();
+            }
         }
         else if (isset($_GET['action']) && $_GET['action'] == 'updateNewUser'){
             
-            if (!empty($_POST['firstName']) &&
-                !empty($_POST['lastName']) &&
-                !empty($_POST['login']) &&
-                !empty($_POST['password']) &&
-                !empty($_POST['passwordValidate']) &&
-                !empty($_POST['mail']) &&
-                !empty($_POST['cellphone']) &&
-                !empty($_POST['phone']) &&
-                !empty($_POST['address']) &&
-                !empty($_POST['postCode']) &&
-                !empty($_POST['city']) &&
-                !empty($_POST['country'])){
-                echo 'oui';
-                modifyUser($_POST, $_SESSION['ID']);
+            if (issetList($_POST,['firstName','lastName','login','password','passwordValidate','mail','cellphone','phone','address','postCode','city','country']) 
+                 && notEmptyList($_POST)){
+                updateNewUser($_POST, $_SESSION['ID']);
             }
-        }else{
+        }
+
+        else if(isset($_GET['action']) && $_GET['action']=='insertNewSensorIntoDb'){
+            if(issetList($_POST,['name','description','price','type','model']) && notEmptyList($_POST) && isset($_FILES['picture'])){
+                if ($_FILES['picture']['size'] <= 1000000){
+
+                    $infosfichier = pathinfo($_FILES['picture']['name']);
+                    $extension_upload = $infosfichier['extension'];
+                    $extensions_allowed = array('jpg', 'jpeg', 'gif', 'png');
+                    if (in_array($extension_upload, $extensions_allowed)){
+
+                        $urlImg = './Public/Assets/Images_catalog/' . basename($_FILES['picture']['name']) ;
+                        move_uploaded_file($_FILES['picture']['tmp_name'], $urlImg);
+                        insertNewSensorIntoDb($_POST,$urlImg);
+                        echo $urlImg;
+                    }
+                }
+            }      
+        }
+
+
+
+        else{
             dashboard();
         }
     }
@@ -78,12 +217,11 @@ try
         if (isset($_GET['action']) && $_GET['action'] == 'login'){
             login();
         }else if (isset($_GET['action']) && $_GET['action'] == 'connectUser'){
-            if (isset($_POST['login']) && isset($_POST['password'])){
+            if (issetList($_POST, ['login', 'password']) && notEmptyList($_POST)){
                 connectUser($_POST['login'], $_POST['password']);
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'signInUser') {
-            if (isset($_POST['IdDomisep']) && !empty($_POST['IdDomisep'])&&
-                isset($_POST['passwordDomisep']) && !empty($_POST['passwordDomisep'])){
+            if (issetList($_POST, ['IdDomisep', 'passwordDomisep']) && notEmptyList($_POST)){
                 signInUser($_POST['IdDomisep'],$_POST['passwordDomisep']);
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'create'){
@@ -94,11 +232,16 @@ try
 
         }else if (isset($_GET['action']) && $_GET['action'] == 'delete'){
 
+        }else if (isset($_GET['action']) && $_GET['action'] == 'cgu'){
+            require('./View/cgu.php');
+        }else if (isset($_GET['action']) && $_GET['action'] == 'contact'){
+            contact();
         }
         else{
             login();
         }
     }
+
 }
 catch (Exception $e){
     echo "Message : ".$e->getMessage();
