@@ -1,0 +1,54 @@
+<?php
+$title = 'Connecter les chambres';
+$style = "style.css";
+ob_start();
+
+?>
+<div>
+	
+	<div id="connectedRoom">
+		<form class="renamingForm" method="POST" action="/index.php?action=connectedHouse">
+			<?php
+			$i = 0;
+			foreach ($_SESSION['listBedroom'] as $aBedroom) {
+				$c= $i+1; ?>
+				<div class = "mySlide">
+					<strong>Connecté la chambre : <?php echo $aBedroom; ?></strong>
+					<div class="sensor">
+			<?php foreach ($listCatalog as $capteurType) { ?>
+						<label class="sensorByType" for=<?php echo $capteurType[0]; ?>>
+							<p><?php echo $capteurType[0]  ?></p>
+							<select name=<?php echo $capteurType[0];?>>
+								<option>Aucun</option>
+								<?php for ($j = count($capteurType)-1; $j>0; $j=$j-1){?>
+								<option><?php echo $capteurType[$j]['Model']; ?></option>
+								<?php } ?>
+							</select>
+						</label>
+					
+					
+			<?php } ?>
+			 		</div>
+					 <div class="send">
+						<?php if($i!=count($_SESSION['listBedroom'])-1){?>
+						<p class="next" <?php echo "onclick=\"showNextSlides(".$c.")\""; ?>>Next</p>
+						<?php } ?>
+						<?php if($i== count($_SESSION['listBedroom'])-1){?>
+							<input type="submit"  value="valider">
+						<?php } ?>
+						<?php if($i!=0){?>
+						<p class="back" <?php echo "onclick=\"showPreventSlides(".$i.")\""; ?>>Back</p>
+						<?php } ?>
+					</div>
+				</div>
+				
+			<?php 
+			$i++;
+			} ?>
+		</form>
+	</div>
+</div>
+<script type="text/javascript" src="/Public/Js/roomRenamingScript.js"></script> 
+<?php 
+$content = ob_get_clean();
+require('template.php');
