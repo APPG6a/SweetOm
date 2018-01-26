@@ -224,7 +224,7 @@ class UserManager extends Manager
         $db = $this->dbConnect();
         $req2 = $db->prepare('SELECT ID FROM user WHERE Login = ?');
         $req2->execute(array($login));
-        $idOwner = $req2->fetch();
+        $idOwner = $req2->fetch()[0];
         $req2->closeCursor();
         $req3 = $db->prepare('INSERT INTO house(ID_Owner) values(?)');
         $req3->execute(array($idOwner));
@@ -281,35 +281,37 @@ class UserManager extends Manager
         $req2->closeCursor();
         return $user;
     }
-    function updateNewUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail)
+    public function updateNewUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail)
     {
         $db = $this->dbConnect();
         $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
         $req = $db->prepare('UPDATE user
           SET Login = ?, Password = ?, WaitingForSignIn = ?,  LastName = ?, FirstName = ?, PhoneNumber = ?, CellNumber = ?, Mail = ?, UserType = ? 
           WHERE ID = ?');
-        $affectedLines = $req->execute(array($login, $passwordHashed, 0, $surname, $name, $cell, $phone, $mail, 'customer', $ID));
+        $affectedLines = $req->execute(array(htmlspecialchars($login), $passwordHashed, 0, htmlspecialchars($surname), htmlspecialchars($name), $cell, $phone, htmlspecialchars($mail), 'customer', $ID));
         $req->closeCursor();
         return $affectedLines;
     }
 
-    function setHome($idOwner,$address)
+    public function setHome($idOwner,$address)
     {
         $db = $this->dbConnect();
-
         $req = $db->prepare('UPDATE  house SET Address = ? WHERE ID_Owner = ?');
         $affectedLines = $req->execute(array($address,$idOwner));
 
         return $affectedLines;
     }
+    public function listElement($elt,$table){
+      $db = $this->dbConnect();
+      $req = $db->query("SELECT ".$elt." FROM ".$table."");
+      $listElement = array();
+      while($value = $req->fetch()){
+        $listElement[] = $value[$elt];
+      }
+      $req->closeCursor();
+      return $listElement;
+    }
 
 
-    /*
-    function getHouse($idUser){
-        $db = $this->dbConnect();
 
-        $req = $db->prepare('');
-        $house = $req->execute();
-
-    }*/
 }

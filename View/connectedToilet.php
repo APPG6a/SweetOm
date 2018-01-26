@@ -7,13 +7,13 @@ ob_start();
 <div>
 	
 	<div id="connectedRoom">
-		<form class="renamingForm" method="POST" action="/index.php?action=connectedBedroom">
+		<form class="renamingForm" method="POST" action="/index.php?action=connectedToilet">
 			<?php
 			$i = 0;
-			foreach ($_SESSION['listBedroom'] as $aRoom) {
+			foreach ($_SESSION['listToilet'] as $aRoom) {
 				$c= $i+1; ?>
 				<div class = "mySlide">
-					<strong>Connecté la chambre : <?php echo $aRoom; ?></strong>
+					<strong>Connecté la Salle de bain : <?php echo $aRoom; ?></strong>
 					<div class="sensor">
 			<?php foreach ($listCatalog as $capteurType){
 						$d = 1;
@@ -33,10 +33,10 @@ ob_start();
 			<?php } ?>
 			 		</div>
 					 <div class="send">
-						<?php if($i!=count($_SESSION['listBedroom'])-1){?>
+						<?php if($i!=count($_SESSION['listToilet'])-1){?>
 						<p class="next" <?php echo "onclick=\"showNextSlides(".$c.")\""; ?>>Next</p>
 						<?php } ?>
-						<?php if($i== count($_SESSION['listBedroom'])-1){?>
+						<?php if($i== count($_SESSION['listToilet'])-1){?>
 							<input type="submit"  value="valider">
 						<?php } ?>
 						<?php if($i!=0){?>

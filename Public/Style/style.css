@@ -141,8 +141,6 @@ button:hover, button:focus {
 }
 
 .corpsHouseInfo, .corpsHouseInfo, .corpsSignIn, #corpsLoadUser{
-	background: url("/Public/Assets/Images/sweetomHouseImage4.png")  no-repeat;
-	background-size: 100%;
 	padding: 20px;
 	
 }
@@ -255,9 +253,25 @@ button:hover, button:focus {
 	padding: 3%;
 	background-color: red;
 	margin-bottom: 2%;
+
 }
 
+#errorBlock{
+	width: 60%;
+	display: flex;
+	margin: auto;
+	background-color: white;
+	min-height: 150px;
+	box-shadow: 0 8px 6px -6px black;
 
+}
+#errorText{
+	margin-left: 3%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .formBody{
 	padding: 1% 3%;
 
@@ -447,7 +461,7 @@ button:hover, button:focus {
 
 
 .myBody{
-	
+	min-height: 500px;
 }
 
 #myDashboard{

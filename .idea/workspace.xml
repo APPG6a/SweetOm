@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="debf3364-3b03-4317-b570-76d728cc7961" name="Default" comment="some news functions and updates">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/Controller/frontend.php" afterPath="$PROJECT_DIR$/Controller/frontend.php" />
+      <change beforePath="$PROJECT_DIR$/Model/CeMacManager.php" afterPath="$PROJECT_DIR$/Model/CeMacManager.php" />
+      <change beforePath="$PROJECT_DIR$/View/connectedBedroom.php" afterPath="$PROJECT_DIR$/View/connectedBedroom.php" />
+      <change beforePath="$PROJECT_DIR$/View/toiletRenaming.php" afterPath="$PROJECT_DIR$/View/toiletRenaming.php" />
+      <change beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,30 +29,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="signIn.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/View/signIn.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="frontend.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Controller/frontend.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
               <caret line="60" column="59" lean-forward="false" selection-start-line="60" selection-start-column="59" selection-end-line="60" selection-end-column="59" />
-              <folding>
-                <marker date="1516983463000" expanded="true" signature="5507:5739" ph="..." />
-                <marker date="1516983463000" expanded="true" signature="5576:5711" ph="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EquipmentManager.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EquipmentManager.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Model/EquipmentManager.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1780">
@@ -60,6 +51,16 @@
                 <marker date="1516983657667" expanded="true" signature="2972:3010" ph="SELECT ID FR... cemac" />
                 <marker date="1516983657667" expanded="true" signature="3200:3256" ph="INSERT INTO equipment... " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="connectedLivingRoom.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/View/connectedLivingRoom.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -477,12 +478,12 @@
       <workItem from="1515417257236" duration="7017000" />
       <workItem from="1516297431163" duration="1352000" />
       <workItem from="1516445411184" duration="13104000" />
-      <workItem from="1516564959957" duration="8902000" />
+      <workItem from="1516564959957" duration="9530000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104466000" />
+    <option name="totallyTimeSpent" value="105094000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -526,13 +527,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Model/OrderHistory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2436">
-          <caret line="121" column="5" lean-forward="false" selection-start-line="121" selection-start-column="5" selection-end-line="121" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/measuresManager.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="691">
@@ -844,10 +838,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="60" column="59" lean-forward="false" selection-start-line="60" selection-start-column="59" selection-end-line="60" selection-end-column="59" />
-          <folding>
-            <marker date="1516983463000" expanded="true" signature="5507:5739" ph="..." />
-            <marker date="1516983463000" expanded="true" signature="5576:5711" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -862,6 +853,14 @@
             <marker date="1516983657667" expanded="true" signature="2972:3010" ph="SELECT ID FR... cemac" />
             <marker date="1516983657667" expanded="true" signature="3200:3256" ph="INSERT INTO equipment... " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/connectedLivingRoom.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

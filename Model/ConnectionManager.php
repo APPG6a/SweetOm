@@ -19,6 +19,7 @@ class ConnectionManager extends Manager
         $value = $req->fetch();
         if(PASSWORD_VERIFY($password,$value['Password'])){
             $_SESSION['connected'] = true;
+            $_SESSION['login'] = $value['Login'];
             $_SESSION["ID"] = $value['ID'];
             $_SESSION['userType'] = $value['UserType'];
             $_SESSION['lastName'] = $value['LastName'];

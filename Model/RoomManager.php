@@ -150,7 +150,7 @@ class RoomManager extends Manager
             $surface = 'surface'.($i+1);
             $db = $this->dbConnect();
             $req2 = $db->prepare('INSERT INTO room(Surface, RoomType, RoomName, ID_Domicile) VALUES (?,?,?,?)');
-            $req2-> execute(array($array[$surface], $type, $array[$room], $idDomicile[0]));
+            $req2-> execute(array($array[$surface], $type, htmlspecialchars($array[$room]), $idDomicile[0]));
             $req2->closeCursor();
         }
     }

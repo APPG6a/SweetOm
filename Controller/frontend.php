@@ -132,6 +132,9 @@ function updateNewUser($Array, $ID)
 
     $newUser->updateNewUser($ID, $login, $password, $surname, $name, $cell, $phone, $mail);
     $newUser->setHome($ID, $address);
+
+    $_SESSION['loginTemp'] = $login;
+    $_SESSION['passwordTemp'] = $password;
     require('./View/houseInfo.php');
 }
 function showDasboard($ID_user){
@@ -229,8 +232,24 @@ function connectedBedroom(){
     $listCatalog = getCatalogByType();
     require('./View/connectedBedroom.php');
 }
+function connectedToilet(){
+    echo "im here";
+    $listCatalog = getCatalogByType();
+    require('./View/connectedToilet.php');
+}
+function connectedLivingRoom(){
+    $listCatalog = getCatalogByType();
+    require('./View/connectedLivingRoom.php');
+}
 function addSensorByRoom($nbr, $array){
     require_once('./Model/EquipmentManager.php');
     $equipmentObject = new SweetIt\SweetOm\Model\EquipmentManager();
     $equipmentObject->addSensorByRoom($nbr, $array);
 }
+function listElement($elt,$table){
+    require_once('./Model/UserManager.php');
+    $userObject = new \SweetIt\SweetOm\Model\UserManager();
+    $listElement = $userObject->listElement($elt,$table);
+    return $listElement;
+}
+   

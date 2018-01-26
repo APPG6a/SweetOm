@@ -5,7 +5,12 @@
 body {
     background-color: #f1f1f1;
 }
+.error{
+    padding: 3%;
+    background-color: red;
+    margin-bottom: 2%;
 
+}
 #regForm {
     background-color: #ffffff;
     margin: 50px auto;
