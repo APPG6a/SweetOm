@@ -13,6 +13,7 @@ ob_start()?>
 					<label for=<?php echo "room".($i+1); ?> class="mySlide">
 						<p>Nom du séjour <?php echo ($i+1); ?> :</p>
 						<input type="text" class="inputForm" id=<?php echo "room".($i+1) ?> name=<?php echo "room".($i+1); ?> required>
+						<input type="number" min=1 name=<?php echo "surface".($i+1); ?> placeholder="Superficie en m²">
 						<div class="send">
 							<?php if($i!=$_SESSION['nbrLivingRoom']-1){?>
 							<p class="next" <?php echo "onclick=\"showNextSlides(".$c.")\""?>>Next</p>
@@ -26,7 +27,6 @@ ob_start()?>
 
 						</div>
 					</label> 
-			
 				<?php
 					$i++;
 					}

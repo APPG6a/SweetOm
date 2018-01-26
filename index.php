@@ -27,10 +27,13 @@ try
     {
         // In this part  functions which request a connection. Never trust user input.
         if (isset($_GET['action']) && $_GET['action'] == 'cgu'){
-        require('View/cgu.php');
+        require('./View/cgu.php');
         }
         else if (isset($_GET['action']) && $_GET['action'] == 'contact'){
         contact();
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'addNewSensorView'){
+            addNewSensorView();
         }
         else if (isset($_GET['action']) && $_GET['action'] == "dashboard"){
                 dashboard();
@@ -39,7 +42,11 @@ try
         }
         else if(isset($_GET['action']) && $_GET['action'] == 'showDashbord'){
             showDashbord($_SESSION['ID_Domicile']);
-        }else if (isset($_GET['action']) && $_GET['action'] == 'logout'){
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'showCatalog'){
+            showCatalog();
+        }
+        else if (isset($_GET['action']) && $_GET['action'] == 'logout'){
             logout();
         }else if (isset($_GET['action']) && $_GET['action'] == 'editDomisepProfil'){
             editDomisepProfil($_SESSION['ID']);
@@ -80,11 +87,11 @@ try
                         addNewUserToDb($_POST['firstLogin'],$_POST['firstPassword'],$_POST['mail']);
                     }else{
                         $_SESSION['error'] = 'Cet identifiant existe déja veuillez choisir un autre identifiant';
-                        require('/View/createNewUserPage.php');
+                        require('./View/createNewUserPage.php');
                     }
                 }else{
                     $_SESSION['error'] = 'Votre mot de passe doit contenir au mois 6 caractères.';
-                    require('/View/createNewUserPage.php');
+                    require('./View/createNewUserPage.php');
                 }
             }
         }
@@ -126,6 +133,7 @@ try
             if($test == 0  && notEmptyList($_POST)){
                 $type = 'Chambre';
                 insertThisRoomTypeToDb($type, $_SESSION['nbrBedroom'], $_POST);
+                setCemacByRoom($_SESSION['nbrBedroom'],$_POST);
                 toiletRenaming();
             }
         }
@@ -144,7 +152,7 @@ try
             }
             if($test == 0  && notEmptyList($_POST)){
                 $type = 'Salle de bain';
-                //insertThisRoomTypeToDb($type, $_SESSION['nbrToilet'], $_POST);
+                insertThisRoomTypeToDb($type, $_SESSION['nbrToilet'], $_POST);
                 livingRoomRenaming();
             }
         }
@@ -163,7 +171,7 @@ try
             }
             if($test == 0  && notEmptyList($_POST)){
                 $type = 'Séjour';
-                //insertThisRoomTypeToDb($type, $_SESSION['nbrLivingRoom'], $_POST);
+                insertThisRoomTypeToDb($type, $_SESSION['nbrLivingRoom'], $_POST);
                 livingRoomRenaming();
             }
         }
@@ -173,7 +181,29 @@ try
                  && notEmptyList($_POST)){
                 updateNewUser($_POST, $_SESSION['ID']);
             }
-        }else{
+        }
+
+        else if(isset($_GET['action']) && $_GET['action']=='insertNewSensorIntoDb'){
+            if(issetList($_POST,['name','description','price','type','model']) && notEmptyList($_POST) && isset($_FILES['picture'])){
+                if ($_FILES['picture']['size'] <= 1000000){
+
+                    $infosfichier = pathinfo($_FILES['picture']['name']);
+                    $extension_upload = $infosfichier['extension'];
+                    $extensions_allowed = array('jpg', 'jpeg', 'gif', 'png');
+                    if (in_array($extension_upload, $extensions_allowed)){
+
+                        $urlImg = './Public/Assets/Images_catalog/' . basename($_FILES['picture']['name']) ;
+                        move_uploaded_file($_FILES['picture']['tmp_name'], $urlImg);
+                        insertNewSensorIntoDb($_POST,$urlImg);
+                        echo $urlImg;
+                    }
+                }
+            }      
+        }
+
+
+
+        else{
             dashboard();
         }
     }
@@ -203,7 +233,7 @@ try
         }else if (isset($_GET['action']) && $_GET['action'] == 'delete'){
 
         }else if (isset($_GET['action']) && $_GET['action'] == 'cgu'){
-            require('View/cgu.php');
+            require('./View/cgu.php');
         }else if (isset($_GET['action']) && $_GET['action'] == 'contact'){
             contact();
         }

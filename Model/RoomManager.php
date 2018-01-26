@@ -141,7 +141,7 @@ class RoomManager extends Manager
     }
     public function insertThisRoomTypeToDb($type,$nbr, $array){
         $db = $this->dbConnect();
-        $c = $nbr/2;
+        $c = count($array)/2;
   
         $req1 = $db->prepare('SELECT ID FROM house WHERE ID_Owner = ?');
         $req1-> execute(array($_SESSION['ID']));
@@ -152,7 +152,7 @@ class RoomManager extends Manager
             $surface = 'surface'.($i+1);
             $db = $this->dbConnect();
             $req2 = $db->prepare('INSERT INTO room(Surface, RoomType, RoomName, ID_Domicile) VALUES (?,?,?,?)');
-            $req2-> execute(array($array[$surface][0], $type, $array[$room], $idDomicile[0]));
+            $req2-> execute(array($array[$surface], $type, $array[$room], $idDomicile[0]));
             $req2->closeCursor();
         }
     }

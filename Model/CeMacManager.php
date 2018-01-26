@@ -61,4 +61,23 @@ class CeMacManager extends Manager
         $req->execute(array($this->getIDRoom()));
         $req->closeCursor();
     }
+    public function setCeMacByRoom($nbr,$array){
+        $listId = array();
+        $nbrRoom = count($array)/2;
+        for($i = 0; $i<$nbrRoom; $i++){
+            $room = 'room'.($i+1);
+            $db = $this->dbConnect();
+            $req = $db->prepare('SELECT ID FROM room WHERE ID_Domicile = ? AND RoomName=?');
+            $req->execute(array($_SESSION['idHouse'],$array[$room]));
+            $listId[] = $req->fetch()[0];
+            $req->closeCursor();
+        }
+        foreach ($listId as $idRoom) {
+            var_dump($listId);
+            $db = $this->dbConnect();
+            $req = $db->prepare('INSERT INTO cemac(ID_Room) VALUES (?)');
+            $req->execute(array($idRoom));
+            $req->closeCursor();
+        }
+    }
 }

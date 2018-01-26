@@ -24,8 +24,14 @@ class ConnectionManager extends Manager
             $_SESSION['lastName'] = $value['LastName'];
             $_SESSION['firstName'] = $value['FirstName'];
             $_SESSION['waitingForSignIn'] = $value['WaitingForSignIn'];
+            $req->closeCursor();
+            $req2 = $db->prepare('SELECT ID FROM house WHERE ID_Owner = ?');
+            $req2->execute(array($_SESSION["ID"]));
+            $_SESSION['idHouse'] = $req2->fetch()[0];
+            $req2->closeCursor();
     }else{
         $_SESSION['connected'] = false;
     }
-    $req->closeCursor();}
+
+    }
 }
