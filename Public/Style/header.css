@@ -15,7 +15,7 @@
 {
     padding: 2%;
     display: flex;
-    background: rgb(255,223,202);
+    background: rgb(82, 82, 82);
     justify-content: space-between;
     border-radius: 7px;
     margin-bottom: 2%;
@@ -26,3 +26,5 @@
     width: 127px;
     height: 127px;
 }
+
+/* pour le bouton déconnecter, voir footer.css*/

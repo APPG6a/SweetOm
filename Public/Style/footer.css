@@ -1,20 +1,61 @@
 footer
 {
     vertical-align: bottom;
-    background: white;
+    background: rgb(82, 82, 82);
     margin-top: 10%;
     border-radius: 7px;
     padding: 2%;
 
 }
 
-footer p
+#Informations
 {
-    display: inline-block;
-
+	margin: auto;
+	text-align: center;
+	color: #9E9E9E
 }
 
-footer p:hover
+#deconnection
 {
-    color: blue;
+	text-align: right;
+	size: 40%;
+}
+
+#Déconnexion
+{
+    background-color: #333333;
+    border: 2px solid #333333;
+    border-radius: 27px;
+    color: #BABABA;
+    cursor: pointer;
+    font-size: 10px;
+    margin-top: 10px;
+    padding: 15px 30px;
+    transition: all 200ms;
+    text-transform: uppercase;
+}
+
+#Déconnexion:hover, #Déconnexion:focus {
+    background-color: white;
+    color: #333333;
+    outline: 0;
+}
+#CGU
+{
+	text-align: right;
+	color: #BABABA;
+}
+
+
+#Designed
+{
+	margin-bottom: -50px;
+	font-style: italic;
+	color: #757575;
+	font-size: 80%;
+}
+
+em
+{
+	font-size: 70%;
 }
