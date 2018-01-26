@@ -4,9 +4,9 @@
 		echo "<div id=\"head1\">
 			<div></div>";
 		if($_SESSION['userType'] == 'admin'){
-			echo "<p>Domisep</p>";
+			echo "<a href=\"/index.php?action=editDomisepProfil\">Domisep</a>";
 		}else{
-			echo "<p>".$_SESSION["firstName"]." ".$_SESSION["lastName"]."</p>";
+			echo "<a href=\"/index.php?action=editUserProfil\">".$_SESSION["firstName"]." ".$_SESSION["lastName"]."</a>";
 		}
 	
 			

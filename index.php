@@ -79,7 +79,7 @@ try
                     if(!in_array($_POST['firstLogin'], listLogin())){
                         $subject = "Création de votre compte";
                         $text = "Domisep vous souhaite la bienvenue dans son réseau. Pour pouvoir bénéficier de nos services rendez-vous
-                        sur notre page, section première visite, en cliquant sur le lien ci-dessous. Voici votre identifiant provisoir: <br>
+                        sur notre page, section première visite, en cliquant sur le lien ci-dessous. Voici votre identifiant provisoire: <br>
                         Login: ".$_POST['firstLogin']." <br>Mot de passe: ".$_POST['firstPassword']." <br>
                         <a href=\"sweetom\">www.sweetom.fr</a>";
 
@@ -119,65 +119,71 @@ try
         }
         else if(isset($_GET['action']) && $_GET['action'] == 'bedroomRenaming'){
             $test = 0;
-            for ($c=0; $c<$_SESSION['nbrBedroom'] ; $c++) { 
+            $nbrRoom = $_SESSION['nbrBedroom'];
+            $listRoom = array();
+            for ($c=0; $c<$nbrRoom; $c++) { 
                 $i = $c+1;
                 $room = 'room'.$i;
-                if($c%2==0 && !isset($_POST[$room])){
-                    $test++;
-                }
                 $surface = 'surface'.$i;
-                if($c%2!=0 && !isset($_POST[$surface])){
+                if(!isset($_POST[$room]) OR !isset($_POST[$surface])){
                     $test++;
                 }
+                $listRoom[]=$_POST[$room];
+        
             }
             if($test == 0  && notEmptyList($_POST)){
                 $type = 'Chambre';
+                $_SESSION['listBedroom'] = $listRoom;
                 insertThisRoomTypeToDb($type, $_SESSION['nbrBedroom'], $_POST);
                 setCemacByRoom($_SESSION['nbrBedroom'],$_POST);
-                toiletRenaming();
+                connectedBedroom();
+                //toiletRenaming();
             }
         }
         else if(isset($_GET['action']) && $_GET['action'] == 'toiletRenaming'){
             $test = 0;
-            for ($c=0; $c <$_SESSION['nbrToilet'] ; $c++) {
-                           $i = $c+1;
+            $nbrRoom = $_SESSION['nbrToilet'];
+            $listToilet = array();
+            for ($c=0; $c <$nbrToilet ; $c++) {
+                $i = $c+1;
                 $room = 'room'.$i;
-                if($c%2==0 && !isset($_POST[$room])){
-                    $test++;
-                }
                 $surface = 'surface'.$i;
-                if($c%2!=0 && !isset($_POST[$surface])){
+                if(!isset($_POST[$room]) OR !isset($_POST['surface'])){
                     $test++;
                 }
+
+                $listToilet[] = $_POST[$room];                
             }
             if($test == 0  && notEmptyList($_POST)){
                 $type = 'Salle de bain';
+                $_SESSION['listToilet'] = $listToilet;
                 insertThisRoomTypeToDb($type, $_SESSION['nbrToilet'], $_POST);
                 livingRoomRenaming();
             }
         }
         else if(isset($_GET['action']) && $_GET['action'] == 'livingRoomRenaming'){
             $test = 0;
-            for ($c=0; $c <$_SESSION['nbrLivingRoom'] ; $c++) {
-                             $i = $c+1;
+            $nbrLivingRoom = $_SESSION['nbrLivingRoom'];
+            $listLivingRoom = array();
+            for ($c=0; $c <$nbrLivingRoom ; $c++) {
+                $i = $c+1;
                 $room = 'room'.$i;
-                if($c%2==0 && !isset($_POST[$room])){
-                    $test++;
-                }
                 $surface = 'surface'.$i;
-                if($c%2!=0 && !isset($_POST[$surface])){
+                if(!isset($_POST[$room]) OR !isset($_POST[$surface])){
                     $test++;
                 }
+                $listLivingRoom[] = $_POST[$room]; 
             }
             if($test == 0  && notEmptyList($_POST)){
                 $type = 'Séjour';
-                insertThisRoomTypeToDb($type, $_SESSION['nbrLivingRoom'], $_POST);
+                $_SESSION['listLivingRoom'] = $listLivingRoom;
+                //insertThisRoomTypeToDb($type, $_SESSION['nbrLivingRoom'], $_POST);
                 livingRoomRenaming();
             }
         }
         else if (isset($_GET['action']) && $_GET['action'] == 'updateNewUser'){
             
-            if (issetList($_POST,['firstName','lastName','login','password','passwordValidate','mail','cellphone','phone','address','postCode','city','country']) 
+            if (issetList($_POST,['firstName','lastName','login','password','passwordValidate','mail','cellphone','phone','address','postCode','city']) 
                  && notEmptyList($_POST)){
                 updateNewUser($_POST, $_SESSION['ID']);
             }
@@ -201,7 +207,22 @@ try
             }      
         }
 
-
+        else if(isset($_GET['action']) && $_GET['action']=='connectedBedroom'){
+            $type = ['Température','Luminosité','Humidité','Fumée','Présence','CO2','Caméra','Pression'];
+            $test = 0;
+            for ($i=0; $i<$_SESSION['nbrBedroom']; $i++){
+                $newType = array();
+                foreach ($type as $aType) {
+                    $newType[] = $aType.($i+1);
+                }
+                if(!issetList($_POST,$newType)){
+                    $test++;
+                }
+            }
+            if($test==0 && notEmptyList($_POST)){
+               addSensorByRoom($_SESSION['listBedroom'],$_POST);
+            }
+        }
 
         else{
             dashboard();

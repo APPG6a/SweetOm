@@ -15,7 +15,7 @@ ob_start(); ?>
  			<input type="text" name="firstLogin" id="firstLogin" placeholder="login">
  		</label for="firstPasword">
  		<label>
- 			<p>Mot de passe provisoir : </p>
+ 			<p>Mot de passe provisoire : </p>
  			<input type="password" name="firstPassword" id="firstPasword" placeholder="6 caractères minimum">
  		</label>
  		<label for="name">

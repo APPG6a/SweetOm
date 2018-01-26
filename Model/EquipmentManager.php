@@ -9,6 +9,7 @@
 namespace SweetIt\SweetOm\Model;
 
 require_once('Manager.php');
+
 class EquipmentManager extends Manager
 {
     private $ID;
@@ -114,5 +115,35 @@ class EquipmentManager extends Manager
     $rep->closeCursor();
     return $listTypesSensors;
 
+    }
+    public function addSensorByRoom($arrayRoom, $arrayPost){
+        // found in database idcemac and id catalog
+        $i = 1;
+        foreach ($arrayRoom as $aRoom){
+            $db = $this->dbConnect();
+            $type = ['Température'.$i,'Luminosité'.$i,'Humidité'.$i,'Fumée'.$i,'Présence'.$i,'CO2'.$i,'Caméra'.$i,'Pression'.$i];
+            $req2 = $db->prepare('SELECT ID FROM room WHERE ID_Domicile = ? AND RoomName = ?');
+            $req2->execute(array($_SESSION['idHouse'], $aRoom));
+            $idRoom = $req2->fetch()[0];
+            $req2->closeCursor();
+            foreach ($type as $aType) {
+                if($arrayPost[$aType]!='Aucun'){
+                    $req1 = $db->prepare('SELECT ID FROM catalog where model = ?');
+                    $req1->execute(array($arrayPost[$aType]));
+                    $idCatalog = $req1->fetch()[0];
+                    $req1->closeCursor();
+                    $req3 = $db->prepare('SELECT ID FROM cemac WHERE ID_Room = ?');
+                    $req3->execute(array($idRoom));
+                    $idCemac = $req3->fetch()[0];
+                    $req3->closeCursor();
+                    $req4 = $db->prepare('INSERT INTO equipment(ID_Catalog, ID_Cemac) VALUES (?,?)');
+                    $req4->execute(array($idCatalog,$idCemac));
+                    $req4->closeCursor();
+                }
+            }
+            $i++;
+        }
+       
+        
     }
 }

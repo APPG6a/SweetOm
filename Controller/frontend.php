@@ -84,7 +84,8 @@ function loadHouseInfo($nbrHabitant,$nbrBedroom,$nbrToilet,$nbrLivingRoom){
 function getCatalogByType(){
     require_once('./Model/CatalogManager.php');
     $catalogObject = new \SweetIt\SweetOm\Model\CatalogManager();
-    $catalogList = $CatalogManager->listCatalog();
+    $listCatalog = $catalogObject->listCatalog();
+    return $listCatalog;
 }
 function login()
 {
@@ -223,4 +224,13 @@ function toiletRenaming(){
 }
 function livingRoomRenaming(){
     require('./View/livingRoomRenaming.php');
+}
+function connectedBedroom(){
+    $listCatalog = getCatalogByType();
+    require('./View/connectedBedroom.php');
+}
+function addSensorByRoom($nbr, $array){
+    require_once('./Model/EquipmentManager.php');
+    $equipmentObject = new SweetIt\SweetOm\Model\EquipmentManager();
+    $equipmentObject->addSensorByRoom($nbr, $array);
 }

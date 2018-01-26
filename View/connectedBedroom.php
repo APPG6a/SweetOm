@@ -7,7 +7,7 @@ ob_start();
 <div>
 	
 	<div id="connectedRoom">
-		<form class="renamingForm" method="POST" action="/index.php?action=connectedHouse">
+		<form class="renamingForm" method="POST" action="/index.php?action=connectedBedroom">
 			<?php
 			$i = 0;
 			foreach ($_SESSION['listBedroom'] as $aBedroom) {
@@ -15,10 +15,13 @@ ob_start();
 				<div class = "mySlide">
 					<strong>Connecté la chambre : <?php echo $aBedroom; ?></strong>
 					<div class="sensor">
-			<?php foreach ($listCatalog as $capteurType) { ?>
+			<?php foreach ($listCatalog as $capteurType){
+						$d = 1;
+				?>
+						
 						<label class="sensorByType" for=<?php echo $capteurType[0]; ?>>
 							<p><?php echo $capteurType[0]  ?></p>
-							<select name=<?php echo $capteurType[0];?>>
+							<select name=<?php echo $capteurType[0].($i+1);?>>
 								<option>Aucun</option>
 								<?php for ($j = count($capteurType)-1; $j>0; $j=$j-1){?>
 								<option><?php echo $capteurType[$j]['Model']; ?></option>
