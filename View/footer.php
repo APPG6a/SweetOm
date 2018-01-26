@@ -9,14 +9,14 @@
 
 	<div id="Informations">
 		<h1>Informations pratiques</h1>
-		<p>DomISEP<br/>
+		<p>DOMISEP<br/>
 		10 rue de Vanves<br/>
 		92170 Issy-Les-Moulineaux<br/>
 		09 87 65 43 21</p>
 	</div>
 
 	<div id="Designed">
-		<p id="SweetIt">Designed by <em>©</em>SweetIT</p><br/>
+		<p id="SweetIt">Designed by SweetIT<em>©</em></p><br/>
 	</div>
 
 	

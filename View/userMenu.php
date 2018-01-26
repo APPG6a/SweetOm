@@ -8,7 +8,7 @@
 	<a href="index.php/action=createNewUser" class="myDashboardFunction">Mes capteurs</a>
 	<a href="index.php/action=updateDomisepProfil" class="myDashboardFunction">Editer mon profil</a>
 	<a href="/index.php?action=showCatalog" class="myDashboardFunction">Catalogue</a>
-	<a href="/index.php?action=editUserProfil" class="myDashboardFunction">Mes informations personnels</a>
+	<a href="/index.php?action=editUserProfil" class="myDashboardFunction">Mes informations personnelles</a>
 	<a href="/index.php?action=messenger" class="myDashboardFunction">Messagerie</a>
 </div>
 <script type="text/javascript" src="Public/Js/domisepDashboard.js"></script>
