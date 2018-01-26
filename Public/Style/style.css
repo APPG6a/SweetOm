@@ -38,9 +38,27 @@
 .aMessageReceived:hover, .aMessageReceived:active, .aMessageReceived:focus, .aMessageSent:hover, .aMessageSent:active, .aMessageSent:focus{
 	background-color: #C0C0C0;
 }
-body{
-	background-color: rgb(230,230,230);
+
+body {
+	position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    height: 100%;
+    margin:0;
+    padding:0;
+    background-size: 100% ;
+    width:100%;  
+    color:black;
 }
+body:before {
+        content: "";
+        position: fixed;
+        height: 100%; width: 100%;
+        background: url("../../Public/Assets/Images/sweetomHouseImage4.png");
+        background-size: cover;
+        z-index: -1; /* Keep the background behind the content */     
+        -webkit-filter: blur(4px);
+        background-size: 100%; 
+    }
 
 button {
 	background-color: #333333;
@@ -61,7 +79,7 @@ button:hover, button:focus {
 	outline: 0;
 }
 .capteurInfoByType{
-	background-color: pink;
+	background-color: rgba(255, 228, 196, 0.8);
 	display: inline-flex;
 	margin-bottom: 3%;
 	width: 70%;
@@ -93,11 +111,13 @@ button:hover, button:focus {
 	text-align: justify;
 	width: 85%;
 	margin: auto;
+	background-color: rgba(227,227,227, 0.7);
+	padding: 3%;
 }
 #creationNewUser{
 	width: 60%;
 	margin: auto;
-	background-color: #C0C0C0;
+	background-color: rgba(227,227,227, 0.8);
 	box-shadow: 0 8px 6px -6px black;
 	padding: 4%;
 }
@@ -173,7 +193,7 @@ button:hover, button:focus {
 	font-weight: bold;
 }
 #domisepInfo{
-	background-color: #C0C0C0;
+	background-color: rgba(227,227,227, 0.7);
 	width: 60%;
 	margin: auto;
 	box-shadow: 0 8px 6px -6px black;
@@ -193,7 +213,7 @@ button:hover, button:focus {
 #editDomisepProfilHead, #newSensorFormHead{
 	text-align: center;
 	padding: 3% 0;
-	background-color: #1560BD;
+	background-color: rgba(230, 126, 48, 0.8);
 	font-size: 1.3em;
 	
 }
@@ -379,6 +399,7 @@ button:hover, button:focus {
 	margin-bottom: 3%;
 	cursor: pointer;
 	display: inline-block;
+	margin-left: 0.8%;
 }
 #menu div{
 	width: 20px;
@@ -390,7 +411,7 @@ button:hover, button:focus {
 {
 	vertical-align: top;
 	width: 20%;
-	background: rgb(215,215,215);
+	background: rgba(227,227,227, 0.7);
 	margin-right: 5%;
 	min-height: 500px;
 }
@@ -411,7 +432,7 @@ button:hover, button:focus {
 #menuMessage div
 {
 	height: 3px;
-	background: red;
+	background: rgb(97,97,97);
 
 }
 .menuType {
@@ -421,6 +442,7 @@ button:hover, button:focus {
 	transition: 0.3s;
 	margin-right: 3%;
 	height: 500px;
+	background: rgba(157,157,157, 0.7);
 }
 
 
@@ -481,7 +503,7 @@ button:hover, button:focus {
 #newSensorFormBody{
 	display: flex;
 	flex-direction: column;
-	background-color: #C0C0C0;
+	background-color: rgba(227,227,227, 0.8);
 	box-shadow: 0 8px 6px -6px black;
 	padding: 4% 4%;
 }
