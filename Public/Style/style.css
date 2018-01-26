@@ -399,6 +399,7 @@ button:hover, button:focus {
 	margin-bottom: 3%;
 	cursor: pointer;
 	display: inline-block;
+	margin-left: 0.8%;
 }
 #menu div{
 	width: 20px;
