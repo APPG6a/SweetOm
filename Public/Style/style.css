@@ -48,6 +48,7 @@ body {
     background-size: 100% ;
     width:100%;  
     color:black;
+    font-family: Verdana, sans-serif;
 }
 body:before {
         content: "";
