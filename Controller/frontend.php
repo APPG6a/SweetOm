@@ -10,9 +10,6 @@
  *
  */
 
-
-
-
 function addNewSensorView(){
     require_once('./Model/EquipmentManager.php');
     $catalogObject = new \SweetIt\SweetOm\Model\EquipmentManager();
@@ -278,6 +275,11 @@ function showCatalog(){
     $listCatalog = $catalogObject->listCatalog();
     require('./View/Catalog.php');
 }
+function showCatalogOption(){
+    require_once('./Model/CatalogManager.php');
+    $catalogObject = new \SweetIt\SweetOm\Model\CatalogManager();
+    $listCatalog = $catalogObject->listCatalog();
+}
 
 function signInUser($login,$pass){
     require_once('./Model/ConnectionManager.php');
@@ -295,7 +297,11 @@ function toiletRenaming(){
     require('./View/toiletRenaming.php');
 }
 
-
+function isNotInDbRoom($room){
+    require_once('./Model/RoomManager.php');
+    $roomObject = new \SweetIt\SweetOm\Model\RoomManager();
+    return $roomObject->isNotInDbRoom($room);
+}
 
 
 

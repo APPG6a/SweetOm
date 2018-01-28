@@ -154,4 +154,15 @@ class RoomManager extends Manager
             $req2->closeCursor();
         }
     }
+    public function isNotInDbRoom($room){
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT RoomName FROM room WHERE ID_Domicile = ?');
+        $req->execute(array($_SESSION['idHouse']));
+        while ($value = $req->fetch()){
+            if($room == $value['RoomName']){
+                return false;
+            }
+        }
+        return true;
+    }
 }
