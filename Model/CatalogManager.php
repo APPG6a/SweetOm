@@ -134,13 +134,14 @@ class CatalogManager extends Manager
 
     public function insertNewSensorIntoDb($array,$urlImg)
     {
+      
         $db = $this->dbConnect();
         $req1 = $db->prepare('SELECT ID FROM equipment_type WHERE Type = ?');
         $req1->execute(array($array['type']));
-        $idEquipment = $req1->fetch();
+        $idEquipment = $req1->fetch()[0];
         $req1->closeCursor();
         $req = $db->prepare("INSERT INTO catalog (PhotoUrl, Name, Description, Price, ID_EquipmentType, Model) VALUES (?, ?, ?, ?, ?, ?)");
-        $req->execute(array($urlImg, $array['name'],$array['description'],$array['price'][0],$idEquipment[0],$array['model']));
+        $req->execute(array($urlImg, $array['name'],$array['description'],$array['price'][0],$idEquipment,$array['model']));
         $req->closeCursor();
     } 
 

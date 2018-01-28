@@ -3,8 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="debf3364-3b03-4317-b570-76d728cc7961" name="Default" comment="some news functions and updates">
       <change beforePath="$PROJECT_DIR$/Controller/frontend.php" afterPath="$PROJECT_DIR$/Controller/frontend.php" />
-      <change beforePath="$PROJECT_DIR$/Model/CeMacManager.php" afterPath="$PROJECT_DIR$/Model/CeMacManager.php" />
+      <change beforePath="$PROJECT_DIR$/Model/CatalogManager.php" afterPath="$PROJECT_DIR$/Model/CatalogManager.php" />
+      <change beforePath="$PROJECT_DIR$/Model/EquipmentManager.php" afterPath="$PROJECT_DIR$/Model/EquipmentManager.php" />
+      <change beforePath="$PROJECT_DIR$/Model/UserManager.php" afterPath="$PROJECT_DIR$/Model/UserManager.php" />
+      <change beforePath="$PROJECT_DIR$/Public/Style/form.css" afterPath="$PROJECT_DIR$/Public/Style/form.css" />
+      <change beforePath="$PROJECT_DIR$/Public/Style/header.css" afterPath="$PROJECT_DIR$/Public/Style/header.css" />
+      <change beforePath="$PROJECT_DIR$/Public/Style/style.css" afterPath="$PROJECT_DIR$/Public/Style/style.css" />
+      <change beforePath="$PROJECT_DIR$/View/bedroomRenaming.php" afterPath="$PROJECT_DIR$/View/bedroomRenaming.php" />
+      <change beforePath="$PROJECT_DIR$/View/catalog.php" afterPath="$PROJECT_DIR$/View/catalog.php" />
       <change beforePath="$PROJECT_DIR$/View/connectedBedroom.php" afterPath="$PROJECT_DIR$/View/connectedBedroom.php" />
+      <change beforePath="$PROJECT_DIR$/View/connectedLivingRoom.php" afterPath="$PROJECT_DIR$/View/connectedLivingRoom.php" />
+      <change beforePath="$PROJECT_DIR$/View/connectedToilet.php" afterPath="$PROJECT_DIR$/View/connectedToilet.php" />
+      <change beforePath="$PROJECT_DIR$/View/createNewUserPage.php" afterPath="$PROJECT_DIR$/View/createNewUserPage.php" />
+      <change beforePath="$PROJECT_DIR$/View/domisepMenu.php" afterPath="$PROJECT_DIR$/View/domisepMenu.php" />
+      <change beforePath="$PROJECT_DIR$/View/errorPage.php" afterPath="$PROJECT_DIR$/View/errorPage.php" />
+      <change beforePath="$PROJECT_DIR$/View/footer.php" afterPath="$PROJECT_DIR$/View/footer.php" />
+      <change beforePath="$PROJECT_DIR$/View/livingRoomRenaming.php" afterPath="$PROJECT_DIR$/View/livingRoomRenaming.php" />
+      <change beforePath="$PROJECT_DIR$/View/messenger.php" afterPath="$PROJECT_DIR$/View/messenger.php" />
       <change beforePath="$PROJECT_DIR$/View/toiletRenaming.php" afterPath="$PROJECT_DIR$/View/toiletRenaming.php" />
       <change beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
     </list>
@@ -29,12 +44,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="frontend.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="frontend.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Controller/frontend.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="60" column="59" lean-forward="false" selection-start-line="60" selection-start-column="59" selection-end-line="60" selection-end-column="59" />
-              <folding />
+            <state relative-caret-position="260">
+              <caret line="297" column="2" lean-forward="false" selection-start-line="297" selection-start-column="2" selection-end-line="297" selection-end-column="2" />
+              <folding>
+                <marker date="1517103817500" expanded="true" signature="6795:7027" ph="..." />
+                <marker date="1517103817500" expanded="true" signature="6864:6999" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -45,17 +63,17 @@
             <state relative-caret-position="-1780">
               <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
               <folding>
-                <marker date="1516983657667" expanded="true" signature="1809:1837" ph="SELECT * FRO... equipment_type" />
-                <marker date="1516983657667" expanded="true" signature="2398:2456" ph="SELECT ID FR... room" />
-                <marker date="1516983657667" expanded="true" signature="2731:2769" ph="SELECT ID FR... catalog" />
-                <marker date="1516983657667" expanded="true" signature="2972:3010" ph="SELECT ID FR... cemac" />
-                <marker date="1516983657667" expanded="true" signature="3200:3256" ph="INSERT INTO equipment... " />
+                <marker date="1517101235146" expanded="true" signature="1809:1837" ph="SELECT * FRO... equipment_type" />
+                <marker date="1517101235146" expanded="true" signature="2398:2456" ph="SELECT ID FR... room" />
+                <marker date="1517101235146" expanded="true" signature="2731:2769" ph="SELECT ID FR... catalog" />
+                <marker date="1517101235146" expanded="true" signature="2972:3010" ph="SELECT ID FR... cemac" />
+                <marker date="1517101235146" expanded="true" signature="3200:3256" ph="INSERT INTO equipment... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="connectedLivingRoom.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="connectedLivingRoom.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/View/connectedLivingRoom.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -88,8 +106,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Public/Style/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1758">
-              <caret line="421" column="14" lean-forward="false" selection-start-line="421" selection-start-column="14" selection-end-line="421" selection-end-column="14" />
+            <state relative-caret-position="2591">
+              <caret line="470" column="14" lean-forward="false" selection-start-line="470" selection-start-column="14" selection-end-line="470" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -121,7 +139,7 @@
             <state relative-caret-position="538">
               <caret line="287" column="40" lean-forward="false" selection-start-line="287" selection-start-column="40" selection-end-line="287" selection-end-column="40" />
               <folding>
-                <marker date="1516878662902" expanded="true" signature="3195:3234" ph="SELECT * FRO... utilisateurs" />
+                <marker date="1517101357370" expanded="true" signature="3195:3234" ph="SELECT * FRO... utilisateurs" />
               </folding>
             </state>
           </provider>
@@ -478,12 +496,12 @@
       <workItem from="1515417257236" duration="7017000" />
       <workItem from="1516297431163" duration="1352000" />
       <workItem from="1516445411184" duration="13104000" />
-      <workItem from="1516564959957" duration="9530000" />
+      <workItem from="1516564959957" duration="10119000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105094000" />
+    <option name="totallyTimeSpent" value="105683000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -700,12 +718,12 @@
         <state relative-caret-position="300">
           <caret line="121" column="54" lean-forward="false" selection-start-line="121" selection-start-column="54" selection-end-line="121" selection-end-column="54" />
           <folding>
-            <marker date="1516982936542" expanded="true" signature="1711:1749" ph="SELECT ID FR... house" />
-            <marker date="1516982936542" expanded="true" signature="1854:1909" ph="SELECT DISTI... rooms" />
-            <marker date="1516982936542" expanded="true" signature="2111:2181" ph="SELECT NomPi... rooms" />
-            <marker date="1516982936542" expanded="true" signature="2566:2604" ph="SELECT ID FR... cemac" />
-            <marker date="1516982936542" expanded="true" signature="2770:2814" ph="SELECT ID FR... equipement" />
-            <marker date="1516982936542" expanded="true" signature="2950:2998" ph="SELECT Data measure" />
+            <marker date="1517100870558" expanded="true" signature="1711:1749" ph="SELECT ID FR... house" />
+            <marker date="1517100870558" expanded="true" signature="1854:1909" ph="SELECT DISTI... rooms" />
+            <marker date="1517100870558" expanded="true" signature="2111:2181" ph="SELECT NomPi... rooms" />
+            <marker date="1517100870558" expanded="true" signature="2566:2604" ph="SELECT ID FR... cemac" />
+            <marker date="1517100870558" expanded="true" signature="2770:2814" ph="SELECT ID FR... equipement" />
+            <marker date="1517100870558" expanded="true" signature="2950:2998" ph="SELECT Data measure" />
           </folding>
         </state>
       </provider>
@@ -755,7 +773,7 @@
         <state relative-caret-position="323">
           <caret line="24" column="46" lean-forward="false" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
           <folding>
-            <marker date="1516982930005" expanded="true" signature="303:337" ph="SELECT * FRO... user" />
+            <marker date="1517100974080" expanded="true" signature="303:337" ph="SELECT * FRO... user" />
           </folding>
         </state>
       </provider>
@@ -781,7 +799,7 @@
         <state relative-caret-position="538">
           <caret line="287" column="40" lean-forward="false" selection-start-line="287" selection-start-column="40" selection-end-line="287" selection-end-column="40" />
           <folding>
-            <marker date="1516878662902" expanded="true" signature="3195:3234" ph="SELECT * FRO... utilisateurs" />
+            <marker date="1517101357370" expanded="true" signature="3195:3234" ph="SELECT * FRO... utilisateurs" />
           </folding>
         </state>
       </provider>
@@ -812,8 +830,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Public/Style/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1758">
-          <caret line="421" column="14" lean-forward="false" selection-start-line="421" selection-start-column="14" selection-end-line="421" selection-end-column="14" />
+        <state relative-caret-position="2591">
+          <caret line="470" column="14" lean-forward="false" selection-start-line="470" selection-start-column="14" selection-end-line="470" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -834,24 +852,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/frontend.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="60" column="59" lean-forward="false" selection-start-line="60" selection-start-column="59" selection-end-line="60" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Model/EquipmentManager.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1780">
           <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding>
-            <marker date="1516983657667" expanded="true" signature="1809:1837" ph="SELECT * FRO... equipment_type" />
-            <marker date="1516983657667" expanded="true" signature="2398:2456" ph="SELECT ID FR... room" />
-            <marker date="1516983657667" expanded="true" signature="2731:2769" ph="SELECT ID FR... catalog" />
-            <marker date="1516983657667" expanded="true" signature="2972:3010" ph="SELECT ID FR... cemac" />
-            <marker date="1516983657667" expanded="true" signature="3200:3256" ph="INSERT INTO equipment... " />
+            <marker date="1517101235146" expanded="true" signature="1809:1837" ph="SELECT * FRO... equipment_type" />
+            <marker date="1517101235146" expanded="true" signature="2398:2456" ph="SELECT ID FR... room" />
+            <marker date="1517101235146" expanded="true" signature="2731:2769" ph="SELECT ID FR... catalog" />
+            <marker date="1517101235146" expanded="true" signature="2972:3010" ph="SELECT ID FR... cemac" />
+            <marker date="1517101235146" expanded="true" signature="3200:3256" ph="INSERT INTO equipment... " />
           </folding>
         </state>
       </provider>
@@ -861,6 +871,17 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/frontend.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="297" column="2" lean-forward="false" selection-start-line="297" selection-start-column="2" selection-end-line="297" selection-end-column="2" />
+          <folding>
+            <marker date="1517103817500" expanded="true" signature="6795:7027" ph="..." />
+            <marker date="1517103817500" expanded="true" signature="6864:6999" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

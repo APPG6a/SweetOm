@@ -4,7 +4,7 @@ $style = "style.css";
 ob_start();
 
 ?>
-<div>
+<div class= "myBody">
 	
 	<div id="connectedRoom">
 		<form class="renamingForm" method="POST" action="/index.php?action=connectedLivingRoom">
@@ -40,7 +40,7 @@ ob_start();
 							<input type="submit"  value="valider">
 						<?php } ?>
 						<?php if($i!=0){?>
-						<p class="back" <?php echo "onclick=\"showPreventSlides(".$i.")\""; ?>>Back</p>
+						<a href="#" class="back" <?php echo "onclick=\"showPreventSlides(".$i.")\""; ?>>Back</a>
 						<?php } ?>
 					</div>
 				</div>

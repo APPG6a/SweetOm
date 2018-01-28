@@ -249,17 +249,17 @@ class UserManager extends Manager
         $req2->closeCursor();
     }
 
-    public function getDomisepInfo($id){
+    public function getDomisepInfo(){
         $db = $this->dbConnect();
         $req1 = $db->prepare('SELECT * FROM user WHERE ID = ?');
-        $req1->execute(array($id));
+        $req1->execute(array(2));
         $user = array();
         $value1 = $req1->fetch();
         $user['phoneNumber'] = $value1['PhoneNumber'];
         $user['mail'] = $value1['Mail'];
         $req1->closeCursor();
         $req2 = $db->prepare('SELECT Address FROM house WHERE ID_Owner = ?');
-        $req2->execute(array($id));
+        $req2->execute(array(2));
         $value2 = $req2->fetch();
         $user['address'] = $value2['Address'];
         $req2->closeCursor();

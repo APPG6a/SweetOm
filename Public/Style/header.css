@@ -1,6 +1,7 @@
 #head1{
     margin-top: 1%;
     margin-bottom: 2%;
+    margin-left: 1%;
 }
 #head1 div{
     display: inline-block;
@@ -27,8 +28,8 @@
 
 #logo
 {
-    width: 127px;
-    height: 127px;
+    width: 9%;
+    height: 9%;
 }
 
 /* pour le bouton déconnecter, voir footer.css*/

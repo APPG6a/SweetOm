@@ -136,7 +136,7 @@ class EquipmentManager extends Manager
                     $req3->execute(array($idRoom));
                     $idCemac = $req3->fetch()[0];
                     $req3->closeCursor();
-                    $req4 = $db->prepare('INSERT INTO equipment(ID_Catalog, ID_Cemac) VALUES (?,?)');
+                    $req4 = $db->prepare('INSERT INTO equipment(ID_Catalog, ID_CeMac) VALUES (?,?)');
                     $req4->execute(array($idCatalog,$idCemac));
                     $req4->closeCursor();
                 }

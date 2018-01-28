@@ -3,7 +3,7 @@ $title = "Ajouter un nouvel utilisateur";
 $style = "style.css";
 ob_start(); ?>
 
- <div>
+ <div class= "myBody">
 
  	<form method="POST" id="creationNewUser" action="/index.php?action=addNewUserToDb">
  		<?php if(array_key_exists('error', $_SESSION)){

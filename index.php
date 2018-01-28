@@ -1,4 +1,5 @@
 <?php
+session_cache_limiter('private_no_expire, must-revalidate');
 session_start();
 
 require_once("./Controller/frontend.php");
@@ -24,7 +25,8 @@ function notEmptyList($aArray){
 try
 {   
     if (array_key_exists('connected', $_SESSION) && $_SESSION['connected'] == true)
-    {
+    {   
+        getDomisepProfil();
         // In this part  functions which request a connection. Never trust user input.
         if (isset($_GET['action']) && $_GET['action'] == 'cgu'){
         require('./View/cgu.php');
@@ -49,12 +51,15 @@ try
         else if (isset($_GET['action']) && $_GET['action'] == 'logout'){
             logout();
         }else if (isset($_GET['action']) && $_GET['action'] == 'editDomisepProfil'){
-            editDomisepProfil($_SESSION['ID']);
+            editDomisepProfil();
         }else if (isset($_GET['action']) && $_GET['action'] == 'editUserProfil'){
             editUserProfil($_SESSION['ID']);
         }
         else if (isset($_GET['action']) && $_GET['action'] == 'messenger'){
             messenger($_SESSION['ID']);
+        }
+        else if (isset($_GET['action']) && $_GET['action']== 'getAllDelivery'){
+            getAllDelivery();
         }
 
 
@@ -63,6 +68,8 @@ try
 
         else if (isset($_GET['action']) && $_GET['action'] == 'sendMessage'){
             if(issetList($_POST,['object','receiver','text']) && notEmptyList($_POST)){
+                $_SESSION['objectTemp'] = $_POST['object'];
+                $_SESSION['textTemp'] = $_POST['text'];
                 if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']!='admin'){
                     $login = "domisep";
                 }else if(array_key_exists('userType', $_SESSION) && $_SESSION['userType']=='admin'){
@@ -70,6 +77,8 @@ try
                 } 
                 $sendOn = date('Y-m-d H:i:s');
                 if(in_array($login, listElement('Login','user'))){
+                    unset($_SESSION['objectTemp']);
+                    unset($_SESSION['textTemp']);
                     sendThisMessage($_SESSION['ID'], $login, htmlspecialchars($_POST['object']), htmlspecialchars($_POST['text']), $sendOn);
                 }else{
                     $_SESSION['errorLogin'] = true;
@@ -105,17 +114,17 @@ try
                     require('./View/createNewUserPage.php');
                 }
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veillez vous rediriger vers la page précédente");
             }
         }
 
 
         else if(isset($_GET['action']) && $_GET['action'] == 'modifyDomisep'){
-            if(issetList($_POST, ['address', 'cp', 'city', 'phoneNumber', 'mail']) && notEmptyList($_POST) && is_numeric($_POST['phoneNumber'])){
+            if(issetList($_POST, ['address', 'cp', 'city', 'phoneNumber', 'mail']) && notEmptyList($_POST) && is_numeric($_POST['cp'])){
                 $address = $_POST['address'].'__'.$_POST['cp'].'__'.$_POST['city'];
                 modifyDomisep($_POST['phoneNumber'],$address,$_POST['mail']);
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
                 
             }
         }
@@ -125,7 +134,7 @@ try
                 $address = htmlspecialchars($_POST['address']).'__'.htmlspecialchars($_POST['cp']).'__'.htmlspecialchars($_POST['city']);
                 modifyUserProfil(htmlspecialchars($_POST['phoneNumber']),$address,htmlspecialchars($_POST['mail']));
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
                 
             }
         }
@@ -162,7 +171,7 @@ try
                 setCemacByRoom($_SESSION['nbrBedroom'],$_POST);
                 connectedBedroom();
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
                 
             }
         }
@@ -189,7 +198,7 @@ try
                 setCemacByRoom($_SESSION['nbrToilet'],$_POST);
                 connectedToilet();
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
                 
             }
         }
@@ -215,7 +224,7 @@ try
                 setCemacByRoom($_SESSION['nbrLivingRoom'],$_POST);
                 connectedLivingRoom();
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
                 
             }
         }
@@ -224,7 +233,7 @@ try
         else if (isset($_GET['action']) && $_GET['action'] == 'updateNewUser'){
             
             if (issetList($_POST,['firstName','lastName','login','password','passwordValidate','mail','cellphone','phone','address','postCode','city']) 
-                 && notEmptyList($_POST) && is_numeric($_POST['cellphone']) && is_numeric($_POST['postCode']) && is_numeric($_POST['phone'])){
+                 && notEmptyList($_POST) && is_numeric($_POST['cellphone']) && is_numeric($_POST['postCode'])){
                 $_SESSION['firstNameTemp'] = $_POST['firstName'];
                 $_SESSION['lastNameTemp'] = $_POST['lastName'];
                 $_SESSION['loginTemp'] = $_POST['login'];
@@ -265,7 +274,7 @@ try
                 }
                 
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
                 
             }
         }
@@ -300,7 +309,7 @@ try
                     
                 }
             }else{
-                throw new Exception("Un problème est survenu lors de l'envoi veuillez vous rediriger vers la page. Les champs doivent contenir le bon type. Au cas échant veuillez choisir un autre fichier.");
+                throw new Exception("Un problème est survenu lors de l'envoi veuillez vous rediriger vers la page. Veillez à la concordance des champs. Au cas échant, veuillez choisir un autre fichier.");
                 
             }      
         }
@@ -320,6 +329,7 @@ try
             }
             if($test==0 && notEmptyList($_POST)){
                addSensorByRoom($_SESSION['listBedroom'],$_POST);
+               addDelivery($_SESSION['listBedroom'],$_POST);
                toiletRenaming();
                
             }else{
@@ -343,6 +353,7 @@ try
             }
             if($test==0 && notEmptyList($_POST)){
                addSensorByRoom($_SESSION['listToilet'],$_POST);
+               addDelivery($_SESSION['listToilet'],$_POST);
                livingRoomRenaming();
             }else{
                 throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
@@ -365,6 +376,7 @@ try
             }
             if($test==0 && notEmptyList($_POST)){
                addSensorByRoom($_SESSION['listLivingRoom'],$_POST);
+               addDelivery($_SESSION['listLivingRoom'],$_POST);
                connectUser($_SESSION['loginTemp'], $_SESSION['passwordTemp']);
                unset($_SESSION['passwordTemp']);
                unset($_SESSION['nbrLivingRoom']);
@@ -378,9 +390,25 @@ try
                 
             }
         }
+        else if(isset($_GET['action']) && $_GET['action']=='delivered'){
+            if(issetList($_POST,['userDelivery']) && notEmptyList($_POST)){
+                delivered($_POST['userDelivery']);
+            }else{
+                
+            }
+        }else if(isset($_GET['action']) && $_GET['action']=='myDelivery'){
+            getADelivery($_SESSION['ID']);
+        
+               
+        } 
+            
 
         else{
-            dashboard();
+            if($_SESSION['userType']=='admin'){
+                getAllDelivery();
+            }else{
+                require('./View/homeUser.php');
+            }
         }
     }
 
@@ -390,6 +418,7 @@ try
 
 
     else{
+        getDomisepProfil();
         if (isset($_GET['action']) && $_GET['action'] == 'login'){
             login();
         }else if (isset($_GET['action']) && $_GET['action'] == 'connectUser'){
@@ -414,7 +443,7 @@ try
             contact();
         }
         else{
-            login();
+            logout();
         }
     }
 

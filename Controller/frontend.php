@@ -29,6 +29,13 @@ function addSensorByRoom($arrayRoom, $array){
     $equipmentObject = new SweetIt\SweetOm\Model\EquipmentManager();
     $equipmentObject->addSensorByRoom($arrayRoom, $array);
 }
+
+function addDelivery($arrayRoom, $array){
+    require_once('./Model/DeliveryManager.php');
+    $equipmentObject = new SweetIt\SweetOm\Model\DeliveryManager();
+    $equipmentObject->addDelivery($arrayRoom, $array);
+}
+
 function connectedBedroom(){
     $listCatalog = getCatalogByType();
     require('./View/connectedBedroom.php');
@@ -48,12 +55,19 @@ function connectUser($login, $pass){
 
     $connectionObject->connect($login, $pass);
     if($_SESSION['connected'] && !$_SESSION['waitingForSignIn']){
-        require('./View/homeUser.php');
+        if($_SESSION['userType']=='admin'){
+                getAllDelivery();
+        }else{
+            require('./View/homeUser.php');
+        }
     }else{
+        loguut();
         $_SESSION['errorConnectionMessage1'] = "!Login ou mot de passe incorrrect veuillez réessayer";
         require('./View/loginView.php');
     }
 }
+
+
 function contact(){
     require_once("./Model/UserManager.php");
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
@@ -67,10 +81,16 @@ function dashboard()
 {
     require('./View/homeUser.php');
 }
-function editDomisepProfil($id){
+function delivered($login){
+    require_once('./Model/DeliveryManager.php');
+    $deliveryObject = new \SweetIt\SweetOm\Model\DeliveryManager();
+    $deliveryObject->delivered($login);
+    getAllDelivery();
+}
+function editDomisepProfil(){
     require_once("./Model/UserManager.php");
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
-    $domisepInfo = $userObject->getDomisepInfo($id);
+    $domisepInfo = $userObject->getDomisepInfo();
     require("./View/editDomisepProfil.php");
 }
 function editUserProfil($id){
@@ -84,6 +104,26 @@ function getCatalogByType(){
     $catalogObject = new \SweetIt\SweetOm\Model\CatalogManager();
     $listCatalog = $catalogObject->listCatalog();
     return $listCatalog;
+}
+function getDomisepProfil(){
+    require_once("./Model/UserManager.php");
+    $userObject = new \SweetIt\SweetOm\Model\UserManager();
+    $domisepInfo = $userObject->getDomisepInfo();
+    $_SESSION['domisepPhoneNumber'] = $domisepInfo['phoneNumber'];
+    $_SESSION['domisepMail'] = $domisepInfo['mail'];
+    $_SESSION['domisepAddress'] = $domisepInfo['address'];
+}
+function getAllDelivery(){
+    require_once('./Model/DeliveryManager.php');
+    $deliveryObject = new SweetIt\SweetOm\Model\DeliveryManager();
+    $listDeliveryByUser = $deliveryObject->getAllDelivery();
+    require('./View/showDelivery.php');
+}
+function getADelivery($id){
+    require_once('./Model/DeliveryManager.php');
+    $deliveryObject = new SweetIt\SweetOm\Model\DeliveryManager();
+    $listDelivery = $deliveryObject->getADelivery($id);
+    require('./View/myDelivery.php');
 }
 function insertNewSensorIntoDb($array,$urlImg){
     require_once('./Model/CatalogManager.php');

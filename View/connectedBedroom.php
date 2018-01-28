@@ -34,13 +34,13 @@ ob_start();
 			 		</div>
 					 <div class="send">
 						<?php if($i!=count($_SESSION['listBedroom'])-1){?>
-						<p class="next" <?php echo "onclick=\"showNextSlides(".$c.")\""; ?>>Next</p>
+						<a href="#" class="next" <?php echo "onclick=\"showNextSlides(".$c.")\""; ?>>Next</a>
 						<?php } ?>
 						<?php if($i== count($_SESSION['listBedroom'])-1){?>
 							<input type="submit"  value="valider">
 						<?php } ?>
 						<?php if($i!=0){?>
-						<p class="back" <?php echo "onclick=\"showPreventSlides(".$i.")\""; ?>>Back</p>
+						<a href="#" class="back" <?php echo "onclick=\"showPreventSlides(".$i.")\""; ?>>Back</a>
 						<?php } ?>
 					</div>
 				</div>

@@ -19,13 +19,13 @@ ob_start()?>
 						<input type="number" min=1 name=<?php echo "surface".($i+1); ?> placeholder="Superficie en m²" required>
 						<div class="send">
 							<?php if($i!=$_SESSION['nbrBedroom']-1){?>
-							<p class="next" <?php echo "onclick=\"showNextSlides(".$c.")\""?>>Next</p>
+							<a href="#" class="next" <?php echo "onclick=\"showNextSlides(".$c.")\""?>>Suivant</a>
 							<?php } ?>
 							<?php if($i==$_SESSION['nbrBedroom']-1){?>
 								<input type="submit"  value="valider">
 							<?php } ?>
 							<?php if($i!=0){?>
-							<p class="back" <?php echo "onclick=\"showPreventSlides(".$i.")\""?>>Back</p>
+							<a  href="#" class="back" <?php echo "onclick=\"showPreventSlides(".$i.")\""?>>Précédent</a>
 							<?php } ?>
 
 						</div>
