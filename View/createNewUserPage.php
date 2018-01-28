@@ -3,7 +3,7 @@ $title = "Ajouter un nouvel utilisateur";
 $style = "style.css";
 ob_start(); ?>
 
- <div>
+ <div class= "myBody">
 
  	<form method="POST" id="creationNewUser" action="/index.php?action=addNewUserToDb">
  		<?php if(array_key_exists('error', $_SESSION)){
@@ -15,7 +15,7 @@ ob_start(); ?>
  			<input type="text" name="firstLogin" id="firstLogin" placeholder="login">
  		</label for="firstPasword">
  		<label>
- 			<p>Mot de passe provisoir : </p>
+ 			<p>Mot de passe provisoire : </p>
  			<input type="password" name="firstPassword" id="firstPasword" placeholder="6 caractères minimum">
  		</label>
  		<label for="name">

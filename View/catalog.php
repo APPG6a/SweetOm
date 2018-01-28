@@ -25,9 +25,10 @@ ob_start();
                         if (array_key_exists($j, $capteurType)) {
                             ?>
                             <div class="capteurInfoByType">
-                                <img src=../<?php echo $capteurType[$j]['PhotoUrl'] ?> class="imageCatalog">
-
                                 <div>
+                                    <img src=../<?php echo $capteurType[$j]['PhotoUrl'] ?> class="imageCatalog">
+                                </div>
+                                <div id="capteurInfo">
                                     <p>Nom: <?php echo $capteurType[$j]['Name']
                                         ?></p>
                                     <p>Description: <?php echo $capteurType[$j]['Description']
