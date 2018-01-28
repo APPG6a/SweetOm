@@ -2,7 +2,7 @@
 $title= "Edit profil";
 $style = "style.css";
 ob_start()?>
-	<div id="Corps">
+	<div class= "myBody">
         <div id="domisepInfo">
             <div>Adresse: <?php echo $domisepInfo["address"]; ?></div>
             <div>Numéro de télephone: <?php echo $domisepInfo["phoneNumber"];?></div>

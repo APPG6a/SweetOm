@@ -1,4 +1,8 @@
-
+#head1{
+    margin-top: 1%;
+    margin-bottom: 2%;
+    margin-left: 1%;
+}
 #head1 div{
     display: inline-block;
 	width: 7px;
@@ -7,9 +11,10 @@
 	background-color: green;
     margin-right: 2px;
 }
-#head1 p{
+#head1 a{
     display: inline-block;
     text-decoration: underline;
+    color: black;
 }
 #head2
 {
@@ -23,8 +28,8 @@
 
 #logo
 {
-    width: 127px;
-    height: 127px;
+    width: 9%;
+    height: 9%;
 }
 
 /* pour le bouton déconnecter, voir footer.css*/

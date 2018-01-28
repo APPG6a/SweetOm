@@ -73,7 +73,6 @@ class CeMacManager extends Manager
             $req->closeCursor();
         }
         foreach ($listId as $idRoom) {
-            var_dump($listId);
             $db = $this->dbConnect();
             $req = $db->prepare('INSERT INTO cemac(ID_Room) VALUES (?)');
             $req->execute(array($idRoom));

@@ -140,19 +140,17 @@ class RoomManager extends Manager
     return $listRoom;
     }
     public function insertThisRoomTypeToDb($type,$nbr, $array){
-        $db = $this->dbConnect();
-        $c = count($array)/2;
-  
+        $db = $this->dbConnect();  
         $req1 = $db->prepare('SELECT ID FROM house WHERE ID_Owner = ?');
         $req1-> execute(array($_SESSION['ID']));
         $idDomicile = $req1->fetch();
         $req1->closeCursor();
-        for ($i=0; $i<$c ; $i++) {
+        for ($i=0; $i<$nbr; $i++) {
             $room = 'room'.($i+1);
             $surface = 'surface'.($i+1);
             $db = $this->dbConnect();
             $req2 = $db->prepare('INSERT INTO room(Surface, RoomType, RoomName, ID_Domicile) VALUES (?,?,?,?)');
-            $req2-> execute(array($array[$surface], $type, $array[$room], $idDomicile[0]));
+            $req2-> execute(array($array[$surface], $type, htmlspecialchars($array[$room]), $idDomicile[0]));
             $req2->closeCursor();
         }
     }

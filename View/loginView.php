@@ -31,7 +31,7 @@ ob_start();
             
             <label class="label_form">
                 <input type="text" name="IdDomisep" required id="IdDomisep" />
-                <div class="label-text">Numéro Domisep</div>
+                <div class="label-text">IDENTIFIANT</div>
             </label>
             <label class="label_form">
                 <input type="password" name="passwordDomisep" required id="passwordDomisep" />
