@@ -101,7 +101,8 @@ button:hover, button:focus {
 }
 
 #capteurInfo{
-	padding: 4% 4%;
+	text-align: justify;
+	padding: 3% 3%;
 	width: 60%;
 }
 .capteurType{
@@ -242,6 +243,16 @@ button:hover, button:focus {
 }
 #domisepInfo div{
 	margin-bottom: 3%;
+}
+.eachRoom{
+	width: 60%
+	margin: auto;
+	padding: 2%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-bottom: 2%;
+	background-color: #F5F5F5;
 }
 #editDomisepProfil{
 	display: none;
@@ -706,12 +717,49 @@ table{
 	margin: auto;
 	overflow-wrap: wrap;
 }
+#updateARoom{
+	width: 60%;
+	margin: auto;
+	background-color: #C0C0C0;
+	box-shadow: 0 8px 6px -6px black;
+	opacity : 0.8;
+	padding: 4%;
+}
+.updateUserRoom{
+	width: 70%;
+	margin: auto;
+}
+.updateUserRoom a{
+	display: block;
+	font-size: 1.5em;
+	text-align: center;
+	text-decoration: none;
+	padding-top: 7%;
+	padding-bottom: 7%;
+	margin-bottom: 7%;
+	background-color: #CCCCCC;
+	box-shadow: 0 8px 6px -6px black;
+	color: black;
+	transition: 200ms;
+	opacity: 0.9;
+
+
+}
+.updateUserRoom a:hover{
+	filter: brightness(70%);
+  -webkit-filter: brightness(70%);
+  -moz-filter: brightness(70%);
+  -o-filter: brightness(70%);
+  -ms-filter: brightness(70%);
+}
 .userDeliveryInfo{
 	cursor: pointer;
 	width:100%;
+	transition: 150ms;
 }
-.userDeliveryInfo:hover, .userDeliveryInfo:active, .userDeliveryInfo:focus{
-
+.userDeliveryInfo:hover,.userDeliveryInfo:focus, .userDeliveryInfo:active, .userDeliveryInfo:visited{
+	background-color: black;
+	color: white;
 }
 #userDeliveryInfoHead{
 	margin-top: 2%;

@@ -1,9 +1,34 @@
 <?php
-session_cache_limiter('private_no_expire, must-revalidate');
 session_start();
+
+// for stopping the refresh
+if(!empty($_POST) OR !empty($_FILES))
+{
+    $_SESSION['save'] = $_POST ;
+    $_SESSION['saveFILES'] = $_FILES ;
+    
+    $fichierActuel = $_SERVER['PHP_SELF'] ;
+    if(!empty($_SERVER['QUERY_STRING']))
+    {
+        $currentFile .= '?' . $_SERVER['QUERY_STRING'] ;
+    }
+    
+    header('Location: ' . $currentFile);
+    exit;
+}
+
+if(isset($_SESSION['save']))
+{
+    $_POST = $_SESSION['save'] ;
+    $_FILES = $_SESSION['saveFILES'] ;
+    
+    unset($_SESSION['save'], $_SESSION['saveFILES']);
+}
+//--//
 
 require_once("./Controller/frontend.php");
 
+// test if files arrived correctly
 function issetList($aArray,$arrayKey){
         foreach ($arrayKey as $value) {
             if(!isset($aArray[$value])){
@@ -21,7 +46,7 @@ function notEmptyList($aArray){
     }
     return true;
 }
-
+//
 try
 {   
     if (array_key_exists('connected', $_SESSION) && $_SESSION['connected'] == true)
@@ -370,6 +395,24 @@ try
             }
         }
 
+        else if(isset($_GET['action']) && $_GET['action']=='connectedRoom'){
+            $type = ['Température','Luminosité','Humidité','Fumée','Présence','CO2','Caméra','Pression'];
+            $test = 0;
+            foreach ($type as $aType) {
+                if(!isset($_POST[$aType])){
+                    $test++;
+                }
+            }
+            if($test==0 && notEmptyList($_POST)){
+               addSensorByRoomName($_SESSION['roomName'],$_POST);
+               addDeliveryByRoomName($_SESSION['roomName'],$_POST);
+               getADelivery($_SESSION['ID']);
+            }else{
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                
+            }
+        }
+
 
         else if(isset($_GET['action']) && $_GET['action']=='connectedLivingRoom'){
             $type = ['Température','Luminosité','Humidité','Fumée','Présence','CO2','Caméra','Pression'];
@@ -408,7 +451,19 @@ try
         }else if(isset($_GET['action']) && $_GET['action']=='myDelivery'){
             getADelivery($_SESSION['ID']);
                     
-        } 
+        }else if(isset($_GET['action']) && $_GET['action'] == 'updateUserRoom'){
+            updateUserRoom();
+        }
+        else if(isset($_GET['action']) && $_GET['action']=='updateARoom'){
+            updateARoom();
+        }
+        else if(isset($_GET['action']) && $_GET['action']=='addSensorHere'){
+            if(isset($_POST['roomName'])){
+                addNewSensorRoomView($_POST['roomName']);  
+            }
+            
+        }
+
             
 
         else{

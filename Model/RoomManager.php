@@ -165,4 +165,17 @@ class RoomManager extends Manager
         }
         return true;
     }
+
+    public function listRoom(){
+        $listRoom = array();
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT RoomName,RoomType FROM room WHERE ID_Domicile = ?');
+        $req->execute(array($_SESSION['idHouse']));
+        while ($value = $req->fetch()) {
+            $aRoom["roomName"] = $value['RoomName'];
+            $aRoom["roomType"] = $value['RoomType'];
+            $listRoom[] = $aRoom ;
+        }
+        return $listRoom;
+    }
 }

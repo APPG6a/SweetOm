@@ -21,16 +21,38 @@ function addNewUserToDb($login,$password,$mail){
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $userObject->addNewUserToDb($login,$password,$mail);
 }
+function addNewSensorRoomView($roomName){
+    require_once('./Model/DeliveryManager.php');
+    $deliveryObject = new SweetIt\SweetOm\Model\DeliveryManager();
+    $listDelivery = $deliveryObject->getADelivery($_SESSION['ID']);
+    if($listDelivery!=null){
+        throw new Exception("Vous avez des commandes en cours");
+        
+    }
+    $_SESSION['roomName'] = $roomName;
+    $listCatalog = getCatalogByType();
+    require('./View/addNewSensorRoom.php');
+}
 function addSensorByRoom($arrayRoom, $array){
     require_once('./Model/EquipmentManager.php');
     $equipmentObject = new SweetIt\SweetOm\Model\EquipmentManager();
     $equipmentObject->addSensorByRoom($arrayRoom, $array);
+}
+function addSensorByRoomName($roomName, $array){
+    require_once('./Model/EquipmentManager.php');
+    $equipmentObject = new SweetIt\SweetOm\Model\EquipmentManager();
+    $equipmentObject->addSensorByRoomName($roomName, $array);
 }
 
 function addDelivery($arrayRoom, $array){
     require_once('./Model/DeliveryManager.php');
     $equipmentObject = new SweetIt\SweetOm\Model\DeliveryManager();
     $equipmentObject->addDelivery($arrayRoom, $array);
+}
+function addDeliveryByRoomName($roomName, $array){
+    require_once('./Model/DeliveryManager.php');
+    $equipmentObject = new SweetIt\SweetOm\Model\DeliveryManager();
+    $equipmentObject->addDeliveryByRoomName($roomName, $array);
 }
 
 function connectedBedroom(){
@@ -42,7 +64,6 @@ function connectedLivingRoom(){
     require('./View/connectedLivingRoom.php');
 }
 function connectedToilet(){
-    echo "im here";
     $listCatalog = getCatalogByType();
     require('./View/connectedToilet.php');
 }
@@ -50,7 +71,7 @@ function connectUser($login, $pass){
     require_once('Model/ConnectionManager.php');
     $connectionObject = new \SweetIt\SweetOm\Model\ConnectionManager();
 
-    $connectionObject->connect($login, $pass);
+    $connectionObject->connect1($login, $pass);
     if($_SESSION['connected'] && !$_SESSION['waitingForSignIn']){
         if($_SESSION['userType']=='admin'){
                 getAllDelivery();
@@ -58,7 +79,6 @@ function connectUser($login, $pass){
             require('./View/homeUser.php');
         }
     }else{
-        loguut();
         $_SESSION['errorConnectionMessage1'] = "!Login ou mot de passe incorrrect veuillez réessayer";
         require('./View/loginView.php');
     }
@@ -157,7 +177,23 @@ function loadHouseInfo($nbrHabitant,$nbrBedroom,$nbrToilet,$nbrLivingRoom){
     $_SESSION['nbrToilet']= $nbrToilet;
     $_SESSION['nbrLivingRoom']= $nbrLivingRoom;
 
-    require('./View/bedroomRenaming.php');
+    if($_SESSION['nbrBedroom']>0){
+        require('./View/bedroomRenaming.php');
+    }
+    else{
+        if($_SESSION['nbrToilet']>0){
+            require('./View/toiletRenaming.php');
+        }
+        else{
+            if($_SESSION['nbrLivingRoom']>0){
+                require('./View/LivingRoomRenaming.php');
+            }else{
+                throw new Exception("Vous devez choisir au type de pièce");
+                
+            }
+        }
+    }
+    
 }
 
 function login(){
@@ -284,7 +320,7 @@ function showCatalogOption(){
 function signInUser($login,$pass){
     require_once('./Model/ConnectionManager.php');
     $connectionObject = new \SweetIt\SweetOm\Model\ConnectionManager();
-    $connectionObject->connect($login, $pass);
+    $connectionObject->connect2($login, $pass);
     if($_SESSION['connected'] && $_SESSION['waitingForSignIn']){
         require('./View/signIn.php');
     }else{
@@ -304,6 +340,15 @@ function isNotInDbRoom($room){
 }
 
 
+function updateUserRoom(){
+    require('./View/UpdateUserRoom.php');
+}
+function updateARoom(){
+    require_once('./Model/RoomManager.php');
+    $roomObject = new \SweetIt\SweetOm\Model\RoomManager();
+    $listRoom = $roomObject->listRoom();
+    require('./View/updateARoom.php');
+}
 
 
 

@@ -56,7 +56,7 @@ ob_start();
 
     <?php
     $i=1;
-    echo "<div class=\"menuType\">";
+    echo "<div class=\"menuType2\">";
     foreach ($listCatalog as $capteurType) {
 
 
@@ -73,7 +73,7 @@ ob_start();
                     <?php for ($j = count($capteurType)-1; $j>0; $j=$j-1) {
                         if (array_key_exists($j, $capteurType)) {
                             ?>
-                            <div class="capteurInfoByType2">
+                            <div class="capteurInfoByType">
                                 <div>
                                     <img src=../<?php echo $capteurType[$j]['PhotoUrl'] ?> class="imageCatalog">
                                 </div>

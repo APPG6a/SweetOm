@@ -6,7 +6,7 @@ ob_start();
 
 <div id="accueil">
     <a id="tabDeBord">Tableau de bord </a>
-    <a href="myHouse.php" id="editProfil">Editer profil</a>
+    <a href="/index.php?action=updateUserRoom" id="editProfil">Editer profil</a>
 
 </div>
 <?php
