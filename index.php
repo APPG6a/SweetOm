@@ -487,10 +487,15 @@ try
         }else if (isset($_GET['action']) && $_GET['action'] == 'connectUser'){
             if (issetList($_POST, ['login', 'password']) && notEmptyList($_POST)){
                 connectUser($_POST['login'], $_POST['password']);
+            }else{
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'signInUser') {
             if (issetList($_POST, ['IdDomisep', 'passwordDomisep']) && notEmptyList($_POST)){
                 signInUser($_POST['IdDomisep'],$_POST['passwordDomisep']);
+            }else{
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'create'){
 
