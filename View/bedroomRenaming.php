@@ -15,7 +15,7 @@ ob_start()?>
 				<form class="renamingForm" method="POST" action="/index.php?action=bedroomRenaming">
 				<?php
 					while($i < $_SESSION['nbrBedroom']){
-						$c=$i+1
+						$c=$i+1;
 				?>
 					<label for=<?php echo "room".($i+1); ?> class="mySlide">
 						<p>Nom de la chambre <?php echo ($i+1); ?> :</p>

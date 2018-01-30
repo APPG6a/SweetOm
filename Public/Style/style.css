@@ -305,7 +305,7 @@ button:hover, button:focus {
 }
 .error{
 	padding: 3%;
-	background-color: red;
+	background-color: #FF5E4D;
 	margin-bottom: 2%;
 
 }
@@ -323,6 +323,7 @@ button:hover, button:focus {
 	display: flex;
 	min-height: 150px;
 	box-shadow: 0 8px 6px -6px black;
+	justify-content: center;
 
 }
 #errorLogo{
@@ -331,11 +332,13 @@ button:hover, button:focus {
 	color: red;
 }
 #errorText{
+	width: 70%;
 	margin-left: 3%;
 	text-align: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding: 1%;
 }
 .formBody{
 	padding: 1% 3%;
@@ -580,6 +583,9 @@ button:hover, button:focus {
  	text-decoration: none;
  	color: black;
 }
+.newRoom{
+	margin-bottom: 3%;
+}
 #newSensor{
 	width: 60%;
 	margin: auto;	
@@ -611,6 +617,54 @@ button:hover, button:focus {
 	text-align: center;
 	padding: 2%;
 	margin-top: 2%;
+}
+#ok{
+	text-align: center;
+	width: 80%;
+	margin: auto;
+	padding: 4%;
+	font-size: 1.2em;
+	background-color: #57D53B;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	transition: 100ms;
+	opacity: 0.9;
+}
+#passwordLost{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 2%;
+	
+}
+#passwordLost form{
+	width: 45%;
+	min-height: 300px;
+	padding: 2%;
+}
+#passwordLost label input{
+	width: 90%;
+}
+#passwordLost label{
+	display: block;
+	margin-bottom: 4%;
+}
+#passwordLostLeft{
+	border-left: 1px solid black;
+}
+#passwordLostBlock{
+	width: 90%;
+	margin: auto;
+	min-height: 500px;
+	background-color: #C0C0C0;
+	opacity: 0.9;
+	margin-top: 7%;
+}
+#passwordLostBlock a{
+	display: block;
+	width: 50%;
+	margin: auto;
+	font-size: 1.1em;
+	text-align: center;
 }
 .renamingForm{
 	display: flex;

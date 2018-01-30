@@ -6,7 +6,7 @@ ob_start(); ?>
 <div class="myBody">
 	<div class = "updateUserRoom">
 		<a href="/index.php?action=updateARoom">Ajouter des capteurs à une pièce</a>
-		<a href="/index.php?action=connectNewRoom">Connecté un nouvelle pièce</a>
+		<a href="/index.php?action=addNewRoom">Connecter une nouvelle pièce</a>
 	</div>
 	
 </div>

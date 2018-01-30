@@ -312,6 +312,24 @@ class UserManager extends Manager
       return $listElement;
     }
 
+    public function getMail($myLogin){
+      $db = $this->dbConnect();
+      $req = $db->prepare('SELECT Mail FROM user WHERE Login = ?');
+      $req->execute(array($myLogin));
+      $value = $req->fetch(); 
+      $mail = $value['Mail'];
+      $req->closeCursor();
+      return $mail;
+    }
+
+    public function updatePassword($login,$newPassword){
+      $db = $this->dbConnect();
+      $passwordHashed = password_hash($newPassword, PASSWORD_DEFAULT);
+      $req = $db->prepare('UPDATE user SET password = ? WHERE Login = ?');
+      $req->execute(array($passwordHashed,$login));
+      $req->closeCursor();
+    }
+
 
 
 }

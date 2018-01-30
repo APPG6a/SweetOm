@@ -9,7 +9,9 @@
 /**
  *
  */
-
+function addNewRoom(){
+    require('./View/roomRenaming.php');
+}
 function addNewSensorView(){
     require_once('./Model/EquipmentManager.php');
     $catalogObject = new \SweetIt\SweetOm\Model\EquipmentManager();
@@ -21,14 +23,17 @@ function addNewUserToDb($login,$password,$mail){
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $userObject->addNewUserToDb($login,$password,$mail);
 }
-function addNewSensorRoomView($roomName){
+function testDelivery(){
     require_once('./Model/DeliveryManager.php');
     $deliveryObject = new SweetIt\SweetOm\Model\DeliveryManager();
     $listDelivery = $deliveryObject->getADelivery($_SESSION['ID']);
     if($listDelivery!=null){
-        throw new Exception("Vous avez des commandes en cours");
+        throw new Exception("Vous avez déjà des commandes en cours");
         
     }
+}
+function addNewSensorRoomView($roomName){
+   testDelivery();
     $_SESSION['roomName'] = $roomName;
     $listCatalog = getCatalogByType();
     require('./View/addNewSensorRoom.php');
@@ -188,7 +193,7 @@ function loadHouseInfo($nbrHabitant,$nbrBedroom,$nbrToilet,$nbrLivingRoom){
             if($_SESSION['nbrLivingRoom']>0){
                 require('./View/LivingRoomRenaming.php');
             }else{
-                throw new Exception("Vous devez choisir au type de pièce");
+                throw new Exception("Vous devez choisir un type de pièce");
                 
             }
         }
@@ -245,6 +250,22 @@ function updateNewUser($Array, $ID){
     $_SESSION['loginTemp'] = $login;
     $_SESSION['passwordTemp'] = $password;
     require('./View/houseInfo.php');
+}
+function updatePassword($login,$passwordDomisep,$newPassword){
+    require_once('./Model/PasswordLostManager.php');
+    $passwordLostObject = new \SweetIt\SweetOm\Model\PasswordLostManager();
+    $connection = $passwordLostObject->connect($login,$passwordDomisep);
+    if($connection){
+        require_once('./Model/UserManager.php');
+        $userObject = new \SweetIt\SweetOm\Model\UserManager();
+        $userObject->updatePassword($login,$newPassword);
+        $_SESSION['send'] = 'Mot de passe enregistré';
+        require('./View/passwordLost.php');
+    }
+    else{
+        $_SESSION['error2']= "Votre identifiant et le mot de passe qui vous a été envoyé ne correspondent pas";
+        require('./View/passwordLost.php');
+    }
 }
 
 
@@ -350,7 +371,32 @@ function updateARoom(){
     require('./View/updateARoom.php');
 }
 
+function passwordLost(){
+    require('./View/passwordLost.php');
+}
 
+function getMyPassword($myLogin,$myMail){
+    require_once('./Model/UserManager.php');
+    $userObject = new \SweetIt\SweetOm\Model\UserManager();
+    $mail = $userObject->getMail($myLogin);
+    if($mail==$myMail){
+        $passwordTemp = bin2hex(random_bytes(5));
+        require_once('./Model/PasswordLostManager.php');
+        $passwordLostObject = new \SweetIt\SweetOm\Model\PasswordLostManager();
+        $passwordLostObject->insertPasswordTemp($myLogin,$passwordTemp);
+        $subject = "Récupération mot de passe";
+        $text = " <div>Vous avez tentez de récupérer votre mot de passe. Nous vous envoyons un mot de passe provisoire afin de pouvoir le rénitialiser.</div>  <div>Ce message vous a été envoyé automatiquement de Domisep. Si vous n'êtes pas à l'origine de ce message, veuillez l'ignorer et/ou nous le signaler.</div>
+            <div>Mot de passe: ".$passwordTemp." </div>
+            <a href=\"sweetom\">www.sweetom.fr</a>";
+
+        sendMail($myLogin,$mail,$subject,$text);
+        $_SESSION['send'] = 'Votre message a bien été envoyé';
+        require('./View/passwordLost.php');
+    }else{
+        $_SESSION['error'] = "l'identifiant et l'adresse mail ne correspondent pas.";
+        require('./View/passwordLost.php');
+    }
+}
 
 
 

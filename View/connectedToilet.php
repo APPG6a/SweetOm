@@ -4,7 +4,7 @@ $style = "style.css";
 ob_start();
 
 ?>
-<div class= "myBody">
+<div class= "connection">
 	
 	<div id="connectedRoom">
 		<form class="renamingForm" method="POST" action="/index.php?action=connectedToilet">
