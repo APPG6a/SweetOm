@@ -12,19 +12,19 @@ ob_start(); ?>
  		}?>
  		<label for="firstLogin">
  			<p>Identifiant provisoire : </p>
- 			<input type="text" name="firstLogin" id="firstLogin" placeholder="login">
+ 			<input type="text" name="firstLogin" id="firstLogin" placeholder="login" required>
  		</label for="firstPasword">
  		<label>
  			<p>Mot de passe provisoire : </p>
- 			<input type="password" name="firstPassword" id="firstPasword" placeholder="6 caractères minimum">
+ 			<input type="password" name="firstPassword" id="firstPasword" placeholder="6 caractères minimum" required>
  		</label>
  		<label for="name">
  			<p>Nom du client </p>
- 			<input type="text" name="name" id="name">
+ 			<input type="text" name="name" id="name" required>
  		</label for="firstPasword">
  		<label for="mail">
  			<p>Adresse Mail du client </p>
- 			<input type="mail" name="mail" id="mail">
+ 			<input type="mail" name="mail" id="mail" required>
  		</label>
  		<div class="send">
  			<input type="submit" name="submit" value=">>Envoyer" class="sendData">

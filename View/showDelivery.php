@@ -62,7 +62,7 @@ ob_start();
 					<input type="hidden" name="userDelivery" <?php echo "value='".$aUser[0]['login']."'";?>>
 					<div class="send">
 						<input type="submit" name="submit" value="valider la commande" class="sendData">
-						<a href="#" class="goBack" onclick="goBack()">retour</a>
+						<a href="#" class="go" onclick="goBack()">retour</a>
 					</div>
 				</form>
 			</div>
@@ -77,6 +77,5 @@ ob_start();
 	<?php } ?>
 </div>
 <?php 
-//
 $content = ob_get_clean();
 require('template.php');

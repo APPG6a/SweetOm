@@ -146,4 +146,31 @@ class EquipmentManager extends Manager
        
         
     }
+    public function addSensorByRoomName($roomName, $arrayPost){
+            // found in database idcemac and id catalog
+        $db = $this->dbConnect();
+        $type = ['Température','Luminosité','Humidité','Fumée','Présence','CO2','Caméra','Pression'];
+        $req2 = $db->prepare('SELECT ID FROM room WHERE ID_Domicile = ? AND RoomName = ?');
+        $req2->execute(array($_SESSION['idHouse'], $roomName));
+        $idRoom = $req2->fetch()[0];
+        $req2->closeCursor();
+        $i = 0;
+        foreach ($type as $aType) {
+            if($arrayPost[$aType]!='Aucun'){
+                $req1 = $db->prepare('SELECT ID FROM catalog WHERE model = ?');
+                $req1->execute(array($arrayPost[$aType]));
+                $idCatalog = $req1->fetch()[0];
+                $req1->closeCursor();
+                $req3 = $db->prepare('SELECT ID FROM cemac WHERE ID_Room = ?');
+                $req3->execute(array($idRoom));
+                $idCemac = $req3->fetch()[0];
+                $req3->closeCursor();
+                $req4 = $db->prepare('INSERT INTO equipment(ID_Catalog, ID_CeMac) VALUES (?,?)');
+                $req4->execute(array($idCatalog,$idCemac));
+                $req4->closeCursor();
+                $i++;
+            }
+        }
+        $_SESSION['nbrEquipment'] = $i;
+    }
 }
