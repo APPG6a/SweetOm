@@ -116,7 +116,7 @@ function editDomisepProfil(){
     require("./View/editDomisepProfil.php");
 }
 function editUserProfil($id){
-    require_once("/Model/UserManager.php");
+     require_once("./Model/UserManager.php");
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $user = $userObject->getUserInfo($id);
     require("./View/editUserProfil.php");
