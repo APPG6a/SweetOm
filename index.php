@@ -121,7 +121,7 @@ try
                 
                 
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
                 
             }
         }
@@ -150,7 +150,7 @@ try
                     require('./View/createNewUserPage.php');
                 }
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
             }
         }
 
@@ -160,7 +160,7 @@ try
                 $address = $_POST['address'].'__'.$_POST['cp'].'__'.$_POST['city'];
                 modifyDomisep($_POST['phoneNumber'],$address,$_POST['mail']);
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez également à la concordance des champs");
                 
             }
         }
@@ -170,7 +170,7 @@ try
                 $address = htmlspecialchars($_POST['address']).'__'.htmlspecialchars($_POST['cp']).'__'.htmlspecialchars($_POST['city']);
                 modifyUserProfil(htmlspecialchars($_POST['phoneNumber']),$address,htmlspecialchars($_POST['mail']));
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez également à la concordance des champs");
                 
             }
         }
@@ -180,7 +180,7 @@ try
             if(issetList($_POST,['nbrHabitant', 'nbrBedroom', 'nbrToilet', 'nbrLivingRoom']) && is_numericList($_POST)){
                 loadHouseInfo($_POST['nbrHabitant'],$_POST['nbrBedroom'],$_POST['nbrToilet'],$_POST['nbrLivingRoom']);
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
                 
             }
         }
@@ -208,7 +208,7 @@ try
                 showCatalogOption();
                 connectedBedroom();
             }else{
-                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurer vous égualement de la validité des champs';
+                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurez-vous également de la validité des champs';
                 require('./View/bedroomRenaming.php');
                 
             }
@@ -221,7 +221,7 @@ try
                 addNewSensorRoomView($_POST['room1']);
 
             }else{
-                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurer vous égualement de la validité des champs';
+                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurez-vous également de la validité des champs';
                 require('./View/roomRenaming.php');
             }
         }
@@ -250,7 +250,7 @@ try
                 showCatalogOption();
                 connectedToilet();
             }else{
-                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurer vous égualement de la validité des champs';
+                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurez-vous également de la validité des champs';
                 require('./View/bedroomRenaming.php');
                 
             }
@@ -279,7 +279,7 @@ try
                 showCatalogOption();
                 connectedLivingRoom();
             }else{
-                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurer vous égualement de la validité des champs';
+                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurez-vous également de la validité des champs';
                 require('./View/bedroomRenaming.php');
                 
             }
@@ -321,7 +321,7 @@ try
                             require("./View/signIn.php");
                         }
                     }else{
-                        $_SESSION['error'] = 'Les deux mots de passe ne correspondent pas. Veuillez égualement à avoir 6 caractères au minimum';
+                        $_SESSION['error'] = 'Les deux mots de passe ne correspondent pas. Veillez également à avoir 6 caractères au minimum';
                         require("./View/signIn.php");
                     }
                 }else{
@@ -330,7 +330,7 @@ try
                 }
                 
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez également à la concordance des champs");
                 
             }
         }
@@ -352,11 +352,11 @@ try
                             insertNewSensorIntoDb($_POST,$urlImg);
                             echo $urlImg;
                         }else{
-                            throw new Exception("Ce type de fichier n'est pas supporté. veuillez choisir une image appropriée.");
+                            throw new Exception("Ce type de fichier n'est pas supporté. Veuillez choisir une image appropriée.");
                             
                         }
                     }else{
-                        throw new Exception("Ce fichier est beaucoup trop lourd. Assurer vous que le fichier fasse minimum 10Mo");
+                        throw new Exception("Ce fichier est beaucoup trop lourd. Assurez-vous que le fichier fasse maximum 10Mo");
                         
                     }
                 
@@ -365,7 +365,7 @@ try
                     
                 }
             }else{
-                throw new Exception("Un problème est survenu lors de l'envoi veuillez vous rediriger vers la page. Veillez à la concordance des champs. Au cas échant, veuillez choisir un autre fichier.");
+                throw new Exception("Un problème est survenu lors de l'envoi, veuillez vous rediriger vers la page. Veillez à la concordance des champs. Au cas échant, veuillez choisir un autre fichier.");
                 
             }      
         }
@@ -405,7 +405,7 @@ try
                
                
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
                 
             }
         }
@@ -440,7 +440,7 @@ try
                }
                
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
                 
             }
         }
@@ -458,7 +458,7 @@ try
                addDeliveryByRoomName($_SESSION['roomName'],$_POST);
                getADelivery($_SESSION['ID']);
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
                 
             }
         }
@@ -488,7 +488,7 @@ try
                unset($_SESSION['listBedroom']);
                unset($_SESSION['listLivingRoom']);
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
                 
             }
         }
@@ -540,14 +540,14 @@ try
             if (issetList($_POST, ['login', 'password']) && notEmptyList($_POST)){
                 connectUser($_POST['login'], $_POST['password']);
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
                 
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'signInUser') {
             if (issetList($_POST, ['IdDomisep', 'passwordDomisep']) && notEmptyList($_POST)){
                 signInUser($_POST['IdDomisep'],$_POST['passwordDomisep']);
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
             }
         }
 

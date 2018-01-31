@@ -15,7 +15,7 @@ ob_start();
 
 		<div id="passwordLost">
 			<form method="POST"  action="/index.php?action=getMyPassword">
-				<p>Mot de passe Oublié</p>
+				<p>Mot de passe oublié</p>
 				<label>
 					<input type="text" placeholder= "identifiant" name="myLogin">
 				</label>
@@ -33,7 +33,7 @@ ob_start();
 				}?>
 			</form>
 			<form method="POST" id="passwordLostLeft" action="/index.php?action=updatePassword">
-				<p>Rénitialiser Mot de passe</p>
+				<p>Réinitialiser votre mot de passe</p>
 				<label>
 					<input type="text"  name="myLogin" placeholder= "identifiant">
 				</label>

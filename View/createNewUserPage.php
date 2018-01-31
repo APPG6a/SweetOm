@@ -29,7 +29,7 @@ ob_start(); ?>
  			<input type="text" name="name" id="name" required>
  		</label for="firstPasword">
  		<label for="mail">
- 			<p>Adresse Mail du client </p>
+ 			<p>Adresse mail du client </p>
  			<input type="mail" name="mail" id="mail" required>
  		</label>
  		<div class="send">

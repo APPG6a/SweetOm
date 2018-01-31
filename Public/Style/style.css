@@ -259,7 +259,7 @@ button:hover, button:focus {
 	display: none;
 	width: 60%;
 	margin: auto;
-	background-color: #C0C0C0;
+	background-color: rgba(227,227,227, 0.7);
 	box-shadow: 0 8px 6px -6px black;
 	
 }
@@ -641,7 +641,7 @@ button:hover, button:focus {
 	
 }
 #passwordLost form{
-	width: 45%;
+	width: 25%;
 	min-height: 300px;
 	padding: 2%;
 }
@@ -659,8 +659,7 @@ button:hover, button:focus {
 	width: 90%;
 	margin: auto;
 	min-height: 500px;
-	background-color: #C0C0C0;
-	opacity: 0.9;
+	background-color: rgba(227,227,227, 0.7);
 	margin-top: 7%;
 }
 #passwordLostBlock a{
@@ -685,12 +684,13 @@ button:hover, button:focus {
 }
 .renamingForm label{
 	margin-bottom: 2%;
+	background-color: rgba(227,227,227, 0.7);
 }
 #roomRenaming, #toiletRenaming, #livingRoomRenaming{
 	width: 50%;
 	margin: auto;
 	box-shadow: 0 8px 6px -6px black;
-	background-color: #C0C0C0;
+	background-color: rgba(227,227,227, 0.7);
 	padding: 2%;
 }
 #connectedRoom{
@@ -861,6 +861,13 @@ table{
 .wrapper-left:hover
 {
 	background-color: rgba(241, 196, 15, 0.5);
+}
+
+.wrapper-left a
+{
+	color: rgb(61, 61, 61);
+	font-size: 80%;
+
 }
 
 .wrapper-right
