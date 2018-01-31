@@ -141,11 +141,40 @@ function getAllDelivery(){
     $listDeliveryByUser = $deliveryObject->getAllDelivery();
     require('./View/showDelivery.php');
 }
+function getAllSensors($login){
+    require_once('./Model/DeliveryManager.php');
+    $deliveryObject = new SweetIt\SweetOm\Model\DeliveryManager();
+    $listDeliveredByUser = $deliveryObject->getAllSensors($login);
+    $_SESSION['find'] = true;
+    require('./View/showAllSensors.php');
+}
 function getADelivery($id){
     require_once('./Model/DeliveryManager.php');
     $deliveryObject = new SweetIt\SweetOm\Model\DeliveryManager();
     $listDelivery = $deliveryObject->getADelivery($id);
-    require('./View/showDelivery.php');
+    require('./View/myDelivery.php');
+}
+function getMyPassword($myLogin,$myMail){
+    require_once('./Model/UserManager.php');
+    $userObject = new \SweetIt\SweetOm\Model\UserManager();
+    $mail = $userObject->getMail($myLogin);
+    if($mail==$myMail){
+        $passwordTemp = bin2hex(random_bytes(5));
+        require_once('./Model/PasswordLostManager.php');
+        $passwordLostObject = new \SweetIt\SweetOm\Model\PasswordLostManager();
+        $passwordLostObject->insertPasswordTemp($myLogin,$passwordTemp);
+        $subject = "Récupération mot de passe";
+        $text = " <div>Vous avez tenté de récupérer votre mot de passe. Nous vous envoyons un mot de passe provisoire afin de pouvoir le rénitialiser.</div>  <div>Ce message vous a été envoyé automatiquement de Domisep. Si vous n'êtes pas à l'origine de ce message, veuillez l'ignorer et/ou nous le signaler.</div>
+            <div>Mot de passe: ".$passwordTemp." </div>
+            <a href=\"sweetom\">www.sweetom.fr</a>";
+
+        sendMail($myLogin,$mail,$subject,$text);
+        $_SESSION['send'] = 'Votre message a bien été envoyé';
+        require('./View/passwordLost.php');
+    }else{
+        $_SESSION['error'] = "l'identifiant et l'adresse mail ne correspondent pas.";
+        require('./View/passwordLost.php');
+    }
 }
 function insertNewSensorIntoDb($array,$urlImg){
     require_once('./Model/CatalogManager.php');
@@ -337,6 +366,9 @@ function showCatalogOption(){
     $catalogObject = new \SweetIt\SweetOm\Model\CatalogManager();
     $listCatalog = $catalogObject->listCatalog();
 }
+function showAllSensors(){
+    require('./View/showAllSensors.php');
+}
 
 function signInUser($login,$pass){
     require_once('./Model/ConnectionManager.php');
@@ -374,30 +406,6 @@ function updateARoom(){
 function passwordLost(){
     require('./View/passwordLost.php');
 }
-
-function getMyPassword($myLogin,$myMail){
-    require_once('./Model/UserManager.php');
-    $userObject = new \SweetIt\SweetOm\Model\UserManager();
-    $mail = $userObject->getMail($myLogin);
-    if($mail==$myMail){
-        $passwordTemp = bin2hex(random_bytes(5));
-        require_once('./Model/PasswordLostManager.php');
-        $passwordLostObject = new \SweetIt\SweetOm\Model\PasswordLostManager();
-        $passwordLostObject->insertPasswordTemp($myLogin,$passwordTemp);
-        $subject = "Récupération mot de passe";
-        $text = " <div>Vous avez tentez de récupérer votre mot de passe. Nous vous envoyons un mot de passe provisoire afin de pouvoir le rénitialiser.</div>  <div>Ce message vous a été envoyé automatiquement de Domisep. Si vous n'êtes pas à l'origine de ce message, veuillez l'ignorer et/ou nous le signaler.</div>
-            <div>Mot de passe: ".$passwordTemp." </div>
-            <a href=\"sweetom\">www.sweetom.fr</a>";
-
-        sendMail($myLogin,$mail,$subject,$text);
-        $_SESSION['send'] = 'Votre message a bien été envoyé';
-        require('./View/passwordLost.php');
-    }else{
-        $_SESSION['error'] = "l'identifiant et l'adresse mail ne correspondent pas.";
-        require('./View/passwordLost.php');
-    }
-}
-
 
 
 

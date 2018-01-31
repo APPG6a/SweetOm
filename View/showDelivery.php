@@ -8,9 +8,7 @@ ob_start();
         <div id="delivery">
             <?php if ($listDeliveryByUser != null){
             $i = 1; ?>
-            <form method="post">
-                <input id="searchBar" type="text" name="search" placeholder="Tapez l'identifiant">
-            </form>
+
 
             <table>
                 <div>Information du client</div>
@@ -28,30 +26,12 @@ ob_start();
 
 
                 <tr class="userDeliveryInfo" <?php echo "onclick=\"showSlides(" . $i . ")\""; ?>>
-                    <?php
-
-                    if (isset($_POST['search']) && !empty($_POST["search"])) {
-                        $searchManager = new \SweetIt\SweetOm\Model\DeliveryManager();
-                        $data = $searchManager->collectData($_POST["search"]);
-
-                        //var_dump($data);
-
-                        if ($data != null) {
-                            foreach ($data as $aUser) {
-
-                                //if (in_array($aUser, array('FirstName', 'LastName', 'PhoneNumber', 'CellNumber', 'Mail'))) {
-                                //if ($aUser != '0')*/
-
-                                echo "<td> " . $aUser . "</td>";
-                            }
-                        }
-                    }
-
-
-                    ?>
+                    <td><?php echo $aUser[0]['login']?></td>
+                    <td><?php echo $aUser[0]['name']?></td>
+                    <td><?php echo $aUser[0]['phone']?></td>
                 </tr>
                 <?php
-                $i++;
+                $i++; }
                 ?>
 
 
@@ -94,8 +74,7 @@ ob_start();
 
 
             </div>
-        <?php }
-        } ?>
+        <?php } ?>
         </div>
         <script type="text/javascript" src="/Public/Js/showDeliveryScript.js"></script>
         <?php } else { ?>

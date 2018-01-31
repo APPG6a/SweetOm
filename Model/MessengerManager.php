@@ -17,7 +17,7 @@ class MessengerManager extends Manager{
 	}
 	public function receivedMessage($id){
 		$db = $this->dbConnect();
-		$req1 = $db->prepare('SELECT * FROM messenger WHERE ID_Receiver = ? ORDER BY SendOn DESC');
+		$req1 = $db->prepare('SELECT * FROM messenger WHERE ID_Receiver = ? ORDER BY SendOn DESC LIMIT 20');
 		$req1->execute(array($id));
 		$listReceivedMessage = array();
 		$messageInfo = array();
@@ -42,7 +42,7 @@ class MessengerManager extends Manager{
 	}
 	public function sentMessage($id){
 		$db = $this->dbConnect();
-		$req1 = $db->prepare('SELECT * FROM messenger WHERE ID_Sender = ? ORDER BY SendOn DESC');
+		$req1 = $db->prepare('SELECT * FROM messenger WHERE ID_Sender = ? ORDER BY SendOn DESC LIMIT 20');
 		$req1->execute(array($id));
 		$listSentMessage = array();
 		$messageInfo = array();
