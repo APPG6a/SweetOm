@@ -79,7 +79,7 @@ function connectUser($login, $pass){
     $connectionObject->connect1($login, $pass);
     if($_SESSION['connected'] && !$_SESSION['waitingForSignIn']){
         if($_SESSION['userType']=='admin'){
-                getADelivery();
+                getAllDelivery();
         }else{
             require('./View/homeUser.php');
         }
