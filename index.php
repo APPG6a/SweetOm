@@ -466,7 +466,7 @@ try {
         else if (isset($_GET['action']) && $_GET['action'] == 'getUserInfo'){
             showAllSensors();
         }
-        else if (isset($_GET['action']) && $_GET['action'] == 'getAlSensors'){
+        else if (isset($_GET['action']) && $_GET['action'] == 'getAllSensors'){
             if(isset($_POST['search']) && in_array($_POST['search'], listElement('Login','user')))  {
                 getAllSensors($_POST['search']);
             }else{
