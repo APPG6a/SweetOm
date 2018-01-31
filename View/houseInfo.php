@@ -39,7 +39,7 @@ ob_start()
         	</label>
         
            <div class="send">
-              <input class= "sendData" type="submit" min=1 max=10 value=">>valider"/> 
+              <input class= "sendData" type="submit"  value=">>valider"/> 
            </div>
 
        </div>

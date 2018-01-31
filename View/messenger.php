@@ -54,7 +54,7 @@ ob_start()?>
 									</div>
 									<div class=\"aContentReceived\">
 										<p>".$aMessage["content"]."</p>
-										<a href=\"#\" class=\"goBack\" onclick=\"goBackR()\">Retour</a>
+										<a href=\"#\" class=\"go\" onclick=\"goBackR()\">Retour</a>
 									</div>";
 									$i++;}
 						}else{
@@ -76,7 +76,7 @@ ob_start()?>
 									</div>
 									<div class=\"aContentSent\">
 										<p>".$aMessage["content"]."</p>
-										<a href=\"#\" class=\"goBack\" onclick=\"goBackS()\">Retour</a>
+										<a href=\"#\" class=\"go\" onclick=\"goBackS()\">Retour</a>
 									</div>";
 									$j++;}
 

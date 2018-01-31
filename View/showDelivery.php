@@ -10,7 +10,7 @@ ob_start();
 			$i = 1; ?>
 
 			<table>
-				<div>Informmation du client</div>
+				<div>Information du client</div>
 				<tr id="userDeliveryInfoHead">
 					<th>Login</th>
 					<th>Nom</th>
@@ -62,7 +62,7 @@ ob_start();
 					<input type="hidden" name="userDelivery" <?php echo "value='".$aUser[0]['login']."'";?>>
 					<div class="send">
 						<input type="submit" name="submit" value="valider la commande" class="sendData">
-						<a href="#" class="goBack" onclick="goBack()">retour</a>
+						<a href="#" class="go" onclick="goBack()">retour</a>
 					</div>
 				</form>
 			</div>
@@ -73,10 +73,9 @@ ob_start();
 		</div>
 	<script type="text/javascript" src="/Public/Js/showDeliveryScript.js"></script>
 	<?php }else{ ?>
-		<div class="noMessage">Vous n'avez aucunne commande. Vous serrez informé à la demande des clients.</div>
+		<div class="noMessage">Vous n'avez aucune commande. Vous serez informé à la demande des clients.</div>
 	<?php } ?>
 </div>
 <?php 
-//
 $content = ob_get_clean();
 require('template.php');

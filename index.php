@@ -1,9 +1,34 @@
 <?php
-session_cache_limiter('private_no_expire, must-revalidate');
 session_start();
+
+// for stopping the refresh
+if(!empty($_POST) OR !empty($_FILES))
+{
+    $_SESSION['save'] = $_POST ;
+    $_SESSION['saveFILES'] = $_FILES ;
+    
+    $fichierActuel = $_SERVER['PHP_SELF'] ;
+    if(!empty($_SERVER['QUERY_STRING']))
+    {
+        $currentFile .= '?' . $_SERVER['QUERY_STRING'] ;
+    }
+    
+    header('Location: ' . $currentFile);
+    exit;
+}
+
+if(isset($_SESSION['save']))
+{
+    $_POST = $_SESSION['save'] ;
+    $_FILES = $_SESSION['saveFILES'] ;
+    
+    unset($_SESSION['save'], $_SESSION['saveFILES']);
+}
+//--//
 
 require_once("./Controller/frontend.php");
 
+// test if files arrived correctly
 function issetList($aArray,$arrayKey){
         foreach ($arrayKey as $value) {
             if(!isset($aArray[$value])){
@@ -11,6 +36,15 @@ function issetList($aArray,$arrayKey){
             }
         }
         return true;
+}
+
+function is_numericList($aArray){
+    foreach ($aArray as $value) {
+        if(!is_numeric($value)){
+            return false;
+        }
+    }
+    return true;
 }
 
 function notEmptyList($aArray){
@@ -21,7 +55,7 @@ function notEmptyList($aArray){
     }
     return true;
 }
-
+//
 try
 {   
     if (array_key_exists('connected', $_SESSION) && $_SESSION['connected'] == true)
@@ -105,6 +139,8 @@ try
 
                         sendMail(htmlspecialchars($_POST['name']),htmlspecialchars($_POST['mail']) , $subject, $text);
                         addNewUserToDb(htmlspecialchars($_POST['firstLogin']),$_POST['firstPassword'],htmlspecialchars($_POST['mail']));
+                        $_SESSION['send'] = "Identifiant envoyé";
+                        require('./View/createNewUserPage.php');
                     }else{
                         $_SESSION['error'] = 'Cet identifiant existe déja veuillez choisir un autre identifiant';
                         require('./View/createNewUserPage.php');
@@ -141,7 +177,7 @@ try
 
 
         else if(isset($_GET['action']) && $_GET['action'] == 'houseInfo'){
-            if(issetList($_POST,['nbrHabitant', 'nbrBedroom', 'nbrToilet', 'nbrLivingRoom']) && notEmptyList($_POST)){
+            if(issetList($_POST,['nbrHabitant', 'nbrBedroom', 'nbrToilet', 'nbrLivingRoom']) && is_numericList($_POST)){
                 loadHouseInfo($_POST['nbrHabitant'],$_POST['nbrBedroom'],$_POST['nbrToilet'],$_POST['nbrLivingRoom']);
             }else{
                 throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
@@ -152,13 +188,13 @@ try
 
         else if(isset($_GET['action']) && $_GET['action'] == 'bedroomRenaming'){
             $test = 0;
-            $nbrRoom = $_SESSION['nbrBedroom'];
             $listRoom = array();
-            for ($c=0; $c<$nbrRoom; $c++) { 
+            for ($c=0; $c<$_SESSION['nbrBedroom']; $c++) { 
                 $i = $c+1;
                 $room = 'room'.$i;
                 $surface = 'surface'.$i;
-                if(!isset($_POST[$room]) OR !isset($_POST[$surface]) OR !is_numeric($_POST[$surface]) ){
+                if(!isset($_POST[$room]) OR !isset($_POST[$surface]) OR !is_numeric($_POST[$surface]) OR in_array($_POST[$room], $listRoom) OR 
+                    !isNotInDbRoom($_POST[$room])){
                     $test++;
                 }
                 $listRoom[]=$_POST[$room];
@@ -169,10 +205,24 @@ try
                 $_SESSION['listBedroom'] = $listRoom;
                 insertThisRoomTypeToDb($type, $_SESSION['nbrBedroom'], $_POST);
                 setCemacByRoom($_SESSION['nbrBedroom'],$_POST);
+                showCatalogOption();
                 connectedBedroom();
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
+                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurer vous égualement de la validité des champs';
+                require('./View/bedroomRenaming.php');
                 
+            }
+        }
+        else if(isset($_GET['action']) && $_GET['action'] == 'newRoomRenaming'){
+            if(issetList($_POST,['room1','surface1']) && notEmptyList($_POST) && isNotInDbRoom($_POST['room1'])) {
+                testDelivery();
+                insertThisRoomTypeToDb('no-specifie', 1, $_POST);
+                setCemacByRoom(1,$_POST);
+                addNewSensorRoomView($_POST['room1']);
+
+            }else{
+                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurer vous égualement de la validité des champs';
+                require('./View/roomRenaming.php');
             }
         }
 
@@ -184,7 +234,8 @@ try
                 $i = $c+1;
                 $room = 'room'.$i;
                 $surface = 'surface'.$i;
-                if(!isset($_POST[$room]) OR !isset($_POST[$surface]) OR !is_numeric($_POST[$surface])){
+                if(!isset($_POST[$room]) OR !isset($_POST[$surface]) OR !is_numeric($_POST[$surface]) OR in_array($_POST[$room], $listToilet) OR 
+                    !isNotInDbRoom($_POST[$room])){
                     $test++;
                 }
 
@@ -196,9 +247,11 @@ try
                 $_SESSION['listToilet'] = $listToilet;
                 insertThisRoomTypeToDb($type, $_SESSION['nbrToilet'], $_POST);
                 setCemacByRoom($_SESSION['nbrToilet'],$_POST);
+                showCatalogOption();
                 connectedToilet();
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
+                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurer vous égualement de la validité des champs';
+                require('./View/bedroomRenaming.php');
                 
             }
         }
@@ -212,7 +265,8 @@ try
                 $i = $c+1;
                 $room = 'room'.$i;
                 $surface = 'surface'.$i;
-                if(!isset($_POST[$room]) OR !isset($_POST[$surface]) OR !is_numeric($_POST[$surface])){
+                if(!isset($_POST[$room]) OR !isset($_POST[$surface]) OR !is_numeric($_POST[$surface]) OR in_array($_POST[$room], $listLivingRoom) OR 
+                    !isNotInDbRoom($_POST[$room])){
                     $test++;
                 }
                 $listLivingRoom[] = $_POST[$room]; 
@@ -222,9 +276,11 @@ try
                 $_SESSION['listLivingRoom'] = $listLivingRoom;
                 insertThisRoomTypeToDb($type, $_SESSION['nbrLivingRoom'], $_POST);
                 setCemacByRoom($_SESSION['nbrLivingRoom'],$_POST);
+                showCatalogOption();
                 connectedLivingRoom();
             }else{
-                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente. Veillez égualement à la concordance des champs");
+                $_SESSION['error'] = 'Le nom de chaque pièce doit être unique. Assurer vous égualement de la validité des champs';
+                require('./View/bedroomRenaming.php');
                 
             }
         }
@@ -330,7 +386,23 @@ try
             if($test==0 && notEmptyList($_POST)){
                addSensorByRoom($_SESSION['listBedroom'],$_POST);
                addDelivery($_SESSION['listBedroom'],$_POST);
-               toiletRenaming();
+               if($_SESSION['nbrToilet']>0){
+                    toiletRenaming();
+               }else{
+                    if($_SESSION['nbrLivingRoom']>0){
+                        livingRoomRenaming();
+                    }else{
+                        connectUser($_SESSION['loginTemp'], $_SESSION['passwordTemp']);
+                        unset($_SESSION['passwordTemp']);
+                        unset($_SESSION['nbrLivingRoom']);
+                        unset($_SESSION['nbrBedroom']);
+                        unset($_SESSION['nbrToilet']);
+                        unset($_SESSION['listToilet']);
+                        unset($_SESSION['listBedroom']);
+                        unset($_SESSION['listLivingRoom']);
+                    }
+               }
+               
                
             }else{
                 throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
@@ -354,7 +426,37 @@ try
             if($test==0 && notEmptyList($_POST)){
                addSensorByRoom($_SESSION['listToilet'],$_POST);
                addDelivery($_SESSION['listToilet'],$_POST);
-               livingRoomRenaming();
+               if($_SESSION['nbrLivingRoom']>0){
+                    livingRoomRenaming();
+               }else{
+                    connectUser($_SESSION['loginTemp'], $_SESSION['passwordTemp']);
+                    unset($_SESSION['passwordTemp']);
+                    unset($_SESSION['nbrLivingRoom']);
+                    unset($_SESSION['nbrBedroom']);
+                    unset($_SESSION['nbrToilet']);
+                    unset($_SESSION['listToilet']);
+                    unset($_SESSION['listBedroom']);
+                    unset($_SESSION['listLivingRoom']);
+               }
+               
+            }else{
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                
+            }
+        }
+
+        else if(isset($_GET['action']) && $_GET['action']=='connectedRoom'){
+            $type = ['Température','Luminosité','Humidité','Fumée','Présence','CO2','Caméra','Pression'];
+            $test = 0;
+            foreach ($type as $aType) {
+                if(!isset($_POST[$aType])){
+                    $test++;
+                }
+            }
+            if($test==0 && notEmptyList($_POST)){
+               addSensorByRoomName($_SESSION['roomName'],$_POST);
+               addDeliveryByRoomName($_SESSION['roomName'],$_POST);
+               getADelivery($_SESSION['ID']);
             }else{
                 throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
                 
@@ -398,9 +500,22 @@ try
             }
         }else if(isset($_GET['action']) && $_GET['action']=='myDelivery'){
             getADelivery($_SESSION['ID']);
-        
-               
-        } 
+                    
+        }else if(isset($_GET['action']) && $_GET['action'] == 'updateUserRoom'){
+            updateUserRoom();
+        }
+        else if(isset($_GET['action']) && $_GET['action']=='updateARoom'){
+            updateARoom();
+        }
+        else if(isset($_GET['action']) && $_GET['action']=='addSensorHere'){
+            if(isset($_POST['roomName'])){
+                addNewSensorRoomView($_POST['roomName']);  
+            }
+            
+        }else if(isset($_GET['action']) && $_GET['action'] == 'addNewRoom'){
+            addNewRoom();
+        }
+
             
 
         else{
@@ -424,12 +539,59 @@ try
         }else if (isset($_GET['action']) && $_GET['action'] == 'connectUser'){
             if (issetList($_POST, ['login', 'password']) && notEmptyList($_POST)){
                 connectUser($_POST['login'], $_POST['password']);
+            }else{
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                
             }
         }else if (isset($_GET['action']) && $_GET['action'] == 'signInUser') {
             if (issetList($_POST, ['IdDomisep', 'passwordDomisep']) && notEmptyList($_POST)){
                 signInUser($_POST['IdDomisep'],$_POST['passwordDomisep']);
+            }else{
+                throw new Exception("Une erreur est survenu lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
             }
-        }else if (isset($_GET['action']) && $_GET['action'] == 'create'){
+        }
+
+        else if(isset($_GET['action']) && $_GET['action']=='passwordLost'){
+            passwordLost();
+        }
+        else if(isset($_GET['action']) && $_GET['action']=='getMyPassword'){
+            if(issetList($_POST,['myLogin','myMail']) && notEmptyList($_POST)){
+                if(in_array($_POST['myLogin'],listElement('Login','user'))){
+                    getMyPassword(htmlspecialchars($_POST['myLogin']),htmlspecialchars($_POST['myMail']));
+                }else{
+                    throw new Exception("Une erreur est survenue. Impossible d'accéder à cette page");
+                }
+            }
+            else{
+                throw new Exception("Une erreur est survenue boom. Impossible d'accéder à cette page");
+                
+            }
+        }
+        else if(isset($_GET['action']) && $_GET['action']=='updatePassword'){
+            if(issetList($_POST,['myLogin','passwordDomisep','newPassword','newPasswordValidate']) && notEmptyList($_POST)){
+                if($_POST['newPassword']==$_POST['newPasswordValidate']){
+                    if(strlen($_POST['newPassword'])>=6){
+                        updatePassword($_POST['myLogin'],$_POST['passwordDomisep'],$_POST['newPassword']);
+
+                    }else{
+                        $_SESSION['erreur1'] = "Le mot de passe doit comporter au moins 6 caractères";
+                        require('./View/passwordLost.php');
+                    }
+                    
+                }
+                else{
+                    $_SESSION['erreur1'] = "les deux mots de passe ne correspondent pas";
+                    require('./View/passwordLost.php');
+                }
+            }
+            else{
+                throw new Exception("Un problème est survenu lors du cette page. Impossible d'afficher cette page.");
+                
+            }
+        }
+
+
+        else if (isset($_GET['action']) && $_GET['action'] == 'create'){
 
         }else if (isset($_GET['action']) && $_GET['action'] == 'read'){
 

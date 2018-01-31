@@ -43,6 +43,44 @@ class DeliveryManager extends Manager {
 	        $i++;
 		}
 	}
+		public function addDeliveryByRoomName($roomName, $arrayPost){
+		// found in database price and id equipement
+	    $dateLoading = date('Y-m-d H:i:s');
+        $db = $this->dbConnect();
+        $type = ['Température','Luminosité','Humidité','Fumée','Présence','CO2','Caméra','Pression'];
+        $req2 = $db->prepare('SELECT ID FROM room WHERE ID_Domicile = ? AND RoomName = ?');
+        $req2->execute(array($_SESSION['idHouse'], $roomName));
+        $idRoom = $req2->fetch()[0];
+        $req2->closeCursor();
+        $req3 = $db->prepare('SELECT ID FROM cemac WHERE ID_Room = ?');
+        $req3->execute(array($idRoom));
+        $idCemac = $req3->fetch()[0];
+        $j=$_SESSION['nbrEquipment']-1; 
+        foreach ($type as $aType) {
+            if($arrayPost[$aType]!='Aucun'){
+                $req1 = $db->prepare('SELECT  Price FROM catalog WHERE model = ?');
+                $req1->execute(array($arrayPost[$aType]));
+                $value = $req1->fetch();
+                $price = floatval($value['Price']);
+                $req1->closeCursor();
+                $req3->closeCursor();
+                $req4 = $db->prepare('SELECT ID FROM equipment  WHERE ID_CeMac = ?');
+                $req4->execute(array($idCemac));
+                while ($value4 = $req4->fetch()){
+                	$idDelivery = $value4['ID'];
+
+                }
+                $idDelivery = $idDelivery-$j;
+                $req4->closeCursor();
+                $req5 = $db->prepare('INSERT INTO delivery_history(DateLoading,Price,ID_Delivery,ID_User) VALUES (?,?,?,?)');
+                $req5->execute(array($dateLoading,$price,$idDelivery,$_SESSION['ID']));
+                $req5->closeCursor();
+                $j--;
+            }
+		}
+		unset($_SESSION['nbrEquipment']);
+	}
+
 
 	public function getAllDelivery(){
 		$db = $this->dbConnect();
@@ -52,7 +90,6 @@ class DeliveryManager extends Manager {
 		$req1->execute(array());
 		while ($value1=$req1->fetch()) {
 			$listID[] = $value1['ID_User'];
-			echo $value1['ID_User'];
 		}
 		$req1->closeCursor();
 		foreach ($listID as $anID) {
@@ -65,12 +102,12 @@ class DeliveryManager extends Manager {
 			$infoUser['name'] = $valueUser['FirstName']." ".$valueUser["LastName"];
 			$infoUser['phone'] = $valueUser['PhoneNumber']." ou ".$valueUser['CellNumber'];
 			$reqUser->closeCursor();
-			$req2 = $db->prepare('SELECT ID_Delivery FROM delivery_history WHERE ID_User = ?');
+			$req2 = $db->prepare('SELECT ID_Delivery FROM delivery_history WHERE ID_User = ? AND delivered = 0');
 			$req2->execute(array($anID));
 			$aUser[] = $infoUser;
 			while($value2 = $req2->fetch()){
 				$listEquipement = array();
-				$req3 = $db->prepare('SELECT ID_Catalog, ID_CeMac FROM equipment WHERE ID = ?');
+				$req3 = $db->prepare('SELECT ID_Catalog, ID_CeMac FROM equipment WHERE ID = ? ');
 				$req3->execute(array($value2['ID_Delivery']));
 				$value3 = $req3->fetch();
 				$idCatalog = $value3['ID_Catalog'];
