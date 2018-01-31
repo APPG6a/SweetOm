@@ -6,6 +6,8 @@ ob_start();
 
 <div id="accueil">
     <a id="tabDeBord" href="/index.php?action=showDashbord">Tableau de bord </a>
+    
+
     <a href="/index.php?action=updateUserRoom" id="editProfil">Editer profil</a>
 
 </div>
