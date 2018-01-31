@@ -13,7 +13,7 @@ ob_start();
 			foreach ($_SESSION['listToilet'] as $aRoom) {
 				$c= $i+1; ?>
 				<div class = "mySlide">
-					<strong>Connecté la Salle de bain : <?php echo $aRoom; ?></strong>
+					<strong>Connecter la salle de bain : <?php echo $aRoom; ?></strong>
 					<div class="sensor">
 			<?php foreach ($listCatalog as $capteurType){
 						$d = 1;
