@@ -66,7 +66,7 @@ try
         require('./View/cgu.php');
         }
         else if (isset($_GET['action']) && $_GET['action'] == 'contact'){
-        contact();
+        contact(2);
         }
         else if (isset($_GET['action']) && $_GET['action'] == 'addNewSensorView'){
             addNewSensorView();
@@ -602,7 +602,7 @@ try
         }else if (isset($_GET['action']) && $_GET['action'] == 'cgu'){
             require('./View/cgu.php');
         }else if (isset($_GET['action']) && $_GET['action'] == 'contact'){
-            contact();
+            contact(2);
         }
         else{
             logout();

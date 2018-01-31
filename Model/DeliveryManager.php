@@ -92,74 +92,98 @@ class DeliveryManager extends Manager {
 			$listID[] = $value1['ID_User'];
 		}
 		$req1->closeCursor();
+
 		foreach ($listID as $anID) {
 			$aUser = array();
-			$reqUser = $db->query('SELECT Login,FirstName,LastName,CellNumber,PhoneNumber FROM user WHERE ID = '.$anID.'');
-			$valueUser = $reqUser->fetch();
-			$infoUser = array();
 
+			$reqUser = $db->query('SELECT Login,FirstName,LastName,CellNumber,PhoneNumber FROM user WHERE ID = '.$anID);
+			$valueUser = $reqUser->fetch();
+
+			$infoUser = array();
 			$infoUser['login'] = $valueUser['Login'];
 			$infoUser['name'] = $valueUser['FirstName']." ".$valueUser["LastName"];
 			$infoUser['phone'] = $valueUser['PhoneNumber']." ou ".$valueUser['CellNumber'];
-			$reqUser->closeCursor();
-			$req2 = $db->prepare('SELECT ID_Delivery FROM delivery_history WHERE ID_User = ? AND delivered = 0');
-			$req2->execute(array($anID));
-			$aUser[] = $infoUser;
+            $aUser[] = $infoUser;
+            $reqUser->closeCursor();
+
+            $req2 = $db->prepare('SELECT ID_Delivery FROM delivery_history WHERE ID_User = ? AND delivered = 0');
+            $req2->execute(array($anID));
+
 			while($value2 = $req2->fetch()){
-				$listEquipement = array();
+				$listEquipment = array();
+
 				$req3 = $db->prepare('SELECT ID_Catalog, ID_CeMac FROM equipment WHERE ID = ? ');
 				$req3->execute(array($value2['ID_Delivery']));
 				$value3 = $req3->fetch();
-				$idCatalog = $value3['ID_Catalog'];
-				$idCemac = $value3['ID_CeMac'];
 				$req3->closeCursor();
+
 				$req4 = $db->prepare('SELECT room.RoomName FROM room JOIN cemac ON(room.ID = cemac.ID_Room) WHERE cemac.ID = ?');
-				$req4->execute(array($idCemac));
+				$req4->execute(array($value3['ID_CeMac']));
 				$value4 = $req4->fetch();
-				$roomName = $value4['RoomName'];
 				$req4->closeCursor();
+
 				$req5 = $db->prepare('SELECT Name, Model, Price FROM catalog WHERE ID = ?');
-				$req5->execute(array($idCatalog));
+				$req5->execute(array($value3['ID_Catalog']));
 				$value5 = $req5->fetch();
-				$listEquipement['place'] = $roomName;
-				$listEquipement['name'] = $value5['Name'];
-				$listEquipement['model'] = $value5['Model'];
-				$listEquipement['price'] = $value5['Price'];
-				$aUser[] = $listEquipement;
+                $req5->closeCursor();
+
+                $listEquipment['place'] = $value4['RoomName'];
+                $listEquipment['name'] = $value5['Name'];
+                $listEquipment['model'] = $value5['Model'];
+                $listEquipment['price'] = $value5['Price'];
+
+                $aUser[] = $listEquipment;
 			}
 			$listDeliveryByUser[] = $aUser;
 		}
 		return $listDeliveryByUser;
-		
 	}
+
 	public function getADelivery($id){
-			$listDelivery = array();
-			$db = $this->dbConnect();
-			$req2 = $db->prepare('SELECT ID_Delivery FROM delivery_history WHERE ID_User = ? AND delivered = 0');
-			$req2->execute(array($id));
-			while($value2 = $req2->fetch()){
-				$listEquipement = array();
-				$req3 = $db->prepare('SELECT ID_Catalog, ID_CeMac FROM equipment WHERE ID = ?');
-				$req3->execute(array($value2['ID_Delivery']));
-				$value3 = $req3->fetch();
-				$idCatalog = $value3['ID_Catalog'];
-				$idCemac = $value3['ID_CeMac'];
-				$req3->closeCursor();
-				$req4 = $db->prepare('SELECT room.RoomName FROM room JOIN cemac ON(room.ID = cemac.ID_Room) WHERE cemac.ID = ?');
-				$req4->execute(array($idCemac));
-				$value4 = $req4->fetch();
-				$roomName = $value4['RoomName'];
-				$req4->closeCursor();
-				$req5 = $db->prepare('SELECT Name, Model, Price FROM catalog WHERE ID = ?');
-				$req5->execute(array($idCatalog));
-				$value5 = $req5->fetch();
-				$listEquipement['place'] = $roomName;
-				$listEquipement['name'] = $value5['Name'];
-				$listEquipement['model'] = $value5['Model'];
-				$listEquipement['price'] = $value5['Price'];
-				$listDelivery[] = $listEquipement;
-			}
-			return $listDelivery;
+        $db = $this->dbConnect();
+        $aUser = array();
+
+        $reqUser = $db->query('SELECT Login,FirstName,LastName,CellNumber,PhoneNumber FROM user WHERE ID = '.$id);
+        $valueUser = $reqUser->fetch();
+        $reqUser->closeCursor();
+
+        $infoUser = array();
+        $infoUser['login'] = $valueUser['Login'];
+        $infoUser['name'] = $valueUser['FirstName']." ".$valueUser["LastName"];
+        $infoUser['phone'] = $valueUser['PhoneNumber']." ou ".$valueUser['CellNumber'];
+        $aUser[] = $infoUser;
+
+        $reqDelivery = $db->query('SELECT ID_Delivery FROM delivery_history WHERE ID_User = '.$id.' AND delivered = 0');
+
+        while($value2 = $reqDelivery->fetch()){
+            $listEquipment = array();
+
+            $req3 = $db->prepare('SELECT ID_Catalog, ID_CeMac FROM equipment WHERE ID = ? ');
+            $req3->execute(array($value2['ID_Delivery']));
+            $value3 = $req3->fetch();
+            $req3->closeCursor();
+
+            $req4 = $db->prepare('SELECT room.RoomName FROM room JOIN cemac ON(room.ID = cemac.ID_Room) WHERE cemac.ID = ?');
+            $req4->execute(array($value3['ID_CeMac']));
+            $value4 = $req4->fetch();
+            $req4->closeCursor();
+
+            $req5 = $db->prepare('SELECT Name, Model, Price FROM catalog WHERE ID = ?');
+            $req5->execute(array($value3['ID_Catalog']));
+            $value5 = $req5->fetch();
+            $req5->closeCursor();
+
+            $listEquipment['place'] = $value4['RoomName'];
+            $listEquipment['name'] = $value5['Name'];
+            $listEquipment['model'] = $value5['Model'];
+            $listEquipment['price'] = $value5['Price'];
+
+            $aUser[] = $listEquipment;
+        }
+
+        $reqDelivery->closeCursor();
+
+        return $aUser;
 	}
 
 	public function delivered($login){
@@ -172,4 +196,21 @@ class DeliveryManager extends Manager {
 		$req->execute(array($dateDelivered,1,$id));
 
 	}
+
+    public function collectData($infoUser)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT LastName,FirstName,PhoneNumber,CellNumber,Mail FROM user WHERE Login=?');
+        $req->execute(array($infoUser));
+
+        $user = $req->fetch();
+
+        if (!$user) {
+            die(404);
+        } else {
+            return array($infoUser,
+                $user['FirstName'].' '.$user['LastName'],
+                $user['PhoneNumber']. ' ou '.$user['CellNumber']);
+        }
+    }
 }
