@@ -94,7 +94,7 @@ button:hover, button:focus {
 }
 .capteurInfoByType2{
 	background-color: rgba(255, 228, 196, 0.8);
-	display: flex-inline;
+	display: flex;
 	flex-wrap: wrap;
 	margin-bottom: 3%;
 	width: 70%;
@@ -131,7 +131,7 @@ button:hover, button:focus {
 	width: 98%;
 	margin: auto;
 	display: flex;
-	flex-wrap: wrap
+	flex-wrap: wrap;
 	justify-content:space-between;
 	margin-top: 7%;
 }
@@ -240,13 +240,13 @@ button:hover, button:focus {
 	width: 60%;
 	margin: auto;
 	box-shadow: 0 8px 6px -6px black;
-	padding: 4%
+	padding: 4%;
 }
 #domisepInfo div{
 	margin-bottom: 3%;
 }
 .eachRoom{
-	width: 60%
+	width: 60%;
 	margin: auto;
 	padding: 2%;
 	display: flex;
@@ -727,6 +727,21 @@ button:hover, button:focus {
 	text-align: center;
 
 }
+#searchBar{
+	width: 130px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	background: white url('../Assets/Images/loupe2.png') no-repeat 10px 10px;
+	padding: 12px 20px 12px 40px;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+}
+
+#searchBar:focus {
+	width: 100%;
+}
 
 #teteForm
 {
@@ -773,7 +788,7 @@ button:hover, button:focus {
 table{
 	width: 90%;
 	margin: auto;
-	overflow-wrap: wrap;
+	flex-wrap: wrap;
 }
 #updateARoom{
 	width: 60%;
@@ -804,12 +819,10 @@ table{
 
 }
 .updateUserRoom a:hover{
-	filter: brightness(70%);
-  -webkit-filter: brightness(70%);
-  -moz-filter: brightness(70%);
-  -o-filter: brightness(70%);
-  -ms-filter: brightness(70%);
-}
+    -webkit-filter: brightness(70);
+    filter: brightness(70);
+    }
+
 .userDeliveryInfo{
 	cursor: pointer;
 	width:100%;
@@ -897,7 +910,7 @@ table{
 
 	}
 	table{
-		font-size: 0.5;
+		font-size: 0.5em;
 	}
 	.wrapper-left{
 		width: 100%;

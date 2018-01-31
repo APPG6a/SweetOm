@@ -79,7 +79,7 @@ function connectUser($login, $pass){
     $connectionObject->connect1($login, $pass);
     if($_SESSION['connected'] && !$_SESSION['waitingForSignIn']){
         if($_SESSION['userType']=='admin'){
-                getAllDelivery();
+                getADelivery();
         }else{
             require('./View/homeUser.php');
         }
@@ -90,7 +90,7 @@ function connectUser($login, $pass){
 }
 
 
-function contact(){
+function contact($id){
     require_once("./Model/UserManager.php");
     $userObject = new \SweetIt\SweetOm\Model\UserManager();
     $domisepInfo = $userObject->getDomisepInfo($id);
@@ -145,7 +145,7 @@ function getADelivery($id){
     require_once('./Model/DeliveryManager.php');
     $deliveryObject = new SweetIt\SweetOm\Model\DeliveryManager();
     $listDelivery = $deliveryObject->getADelivery($id);
-    require('./View/myDelivery.php');
+    require('./View/showDelivery.php');
 }
 function insertNewSensorIntoDb($array,$urlImg){
     require_once('./Model/CatalogManager.php');
