@@ -8,7 +8,7 @@
 	<div id="closeDashboard"><a href="javascript:void(0)"  onclick="closeNav()">&times;</a></div>
 	<a href="/index.php?action=createNewUserPage" class="myDashboardFunction">Créer un compte client</a>
 	<a href="/index.php?action=getAllDelivery" class="myDashboardFunction">Gérer les utilisateurs</a>
-	<a href="" class="myDashboardFunction">Afficher les données</a>
+	<a href="/index.php?action=getUserInfo" class="myDashboardFunction" >Afficher les données</a>
 	<a href="/index.php?action=messenger" class="myDashboardFunction">Messagerie</a>
 	<a href="/index.php?action=showCatalog" class="myDashboardFunction">Catalogue</a>
 	<a href="/index.php?action=addNewSensorView" class="myDashboardFunction">Ajouter un nouveau capteur</a>

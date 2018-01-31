@@ -24,3 +24,6 @@ function goBack(){
       links[i].style.display = "table-row";
   }
 }
+document.getElementById('searchBar').addEventListener('blur',function(e){
+  e.target.type = "sumit";
+})

@@ -143,15 +143,19 @@ class DeliveryManager extends Manager {
         $db = $this->dbConnect();
         $aUser = array();
 
-        $reqUser = $db->query('SELECT Login,FirstName,LastName,CellNumber,PhoneNumber FROM user WHERE ID = '.$id);
-        $valueUser = $reqUser->fetch();
+        $reqUser = $db->prepare('SELECT user.Login,user.FirstName,user.LastName,user.CellNumber,user.PhoneNumber FROM user JOIN delivery_history 
+        	ON(delivery_history.ID_User= user.ID) WHERE user.Login = ? AND delivered.delivery_history = 0');
+        $reqUser->execute(array($id));
+        if($valueUser = $reqUser->fetch()){
+        	$infoUser = array();
+	        $infoUser['login'] = $valueUser['Login'];
+	        $infoUser['name'] = $valueUser['FirstName']." ".$valueUser["LastName"];
+	        $infoUser['phone'] = $valueUser['PhoneNumber']." ou ".$valueUser['CellNumber'];
+	        $aUser[] = $infoUser;
+        }
         $reqUser->closeCursor();
-
-        $infoUser = array();
-        $infoUser['login'] = $valueUser['Login'];
-        $infoUser['name'] = $valueUser['FirstName']." ".$valueUser["LastName"];
-        $infoUser['phone'] = $valueUser['PhoneNumber']." ou ".$valueUser['CellNumber'];
-        $aUser[] = $infoUser;
+        
+        
 
         $reqDelivery = $db->query('SELECT ID_Delivery FROM delivery_history WHERE ID_User = '.$id.' AND delivered = 0');
 
@@ -182,7 +186,64 @@ class DeliveryManager extends Manager {
         }
 
         $reqDelivery->closeCursor();
+        return $aUser;
+	}
 
+
+
+		public function getAllSensors($login){
+        $db = $this->dbConnect();
+        $aUser = array();
+
+        $reqUser = $db->prepare('SELECT user.ID,user.Login,user.FirstName,user.LastName,user.CellNumber,user.PhoneNumber FROM user JOIN delivery_history 
+        	ON(delivery_history.ID_User= user.ID) WHERE user.Login = ?');
+        $reqUser->execute(array($login));
+        if($valueUser = $reqUser->fetch()){
+        	$infoUser = array();
+	        $infoUser['login'] = $valueUser['Login'];
+	        $infoUser['name'] = $valueUser['FirstName']." ".$valueUser["LastName"];
+	        $infoUser['phone'] = $valueUser['PhoneNumber']." ou ".$valueUser['CellNumber'];
+	        $reqHouse = $db->prepare('SELECT Address FROM house WHERE ID_Owner = ?');
+	        $reqHouse->execute(array( $valueUser['ID']));
+	        $valueHouse = $reqHouse->fetch();
+	        $infoUser['address'] = $valueHouse['Address'];
+	        $aUser[] = $infoUser;
+	        $id = $valueUser['ID'];
+        }
+        $reqUser->closeCursor();
+        
+        
+
+        $reqDelivery = $db->prepare('SELECT ID_Delivery FROM delivery_history WHERE ID_User = ?');
+        $reqDelivery->execute(array($id));
+
+        while($value2 = $reqDelivery->fetch()){
+            $listEquipment = array();
+
+            $req3 = $db->prepare('SELECT ID_Catalog, ID_CeMac FROM equipment WHERE ID = ? ');
+            $req3->execute(array($value2['ID_Delivery']));
+            $value3 = $req3->fetch();
+            $req3->closeCursor();
+
+            $req4 = $db->prepare('SELECT room.RoomName FROM room JOIN cemac ON(room.ID = cemac.ID_Room) WHERE cemac.ID = ?');
+            $req4->execute(array($value3['ID_CeMac']));
+            $value4 = $req4->fetch();
+            $req4->closeCursor();
+
+            $req5 = $db->prepare('SELECT Name, Model, Price FROM catalog WHERE ID = ?');
+            $req5->execute(array($value3['ID_Catalog']));
+            $value5 = $req5->fetch();
+            $req5->closeCursor();
+
+            $listEquipment['place'] = $value4['RoomName'];
+            $listEquipment['name'] = $value5['Name'];
+            $listEquipment['model'] = $value5['Model'];
+            $listEquipment['price'] = $value5['Price'];
+
+            $aUser[] = $listEquipment;
+        }
+
+        $reqDelivery->closeCursor();
         return $aUser;
 	}
 
@@ -202,15 +263,16 @@ class DeliveryManager extends Manager {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT LastName,FirstName,PhoneNumber,CellNumber,Mail FROM user WHERE Login=?');
         $req->execute(array($infoUser));
-
+        //$reqHouse = $db->
         $user = $req->fetch();
 
         if (!$user) {
             die(404);
         } else {
-            return array($infoUser,
-                $user['FirstName'].' '.$user['LastName'],
-                $user['PhoneNumber']. ' ou '.$user['CellNumber']);
+            $collecData = array($infoUser,
+            $user['FirstName'].' '.$user['LastName'],
+            $user['PhoneNumber']. ' ou '.$user['CellNumber']);
         }
+        return $collecData;
     }
 }

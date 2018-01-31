@@ -514,6 +514,19 @@ try
             
         }else if(isset($_GET['action']) && $_GET['action'] == 'addNewRoom'){
             addNewRoom();
+        }else if(isset($_GET['action']) && $_GET['action'] == 'getUserInfo'){
+            showAllSensors();
+        }else if(isset($_GET['action']) && $_GET['action'] == 'getAllSensors'){
+            if(isset($_POST['search'])){
+                if(in_array($_POST['search'], listElement('Login','user'))){
+                    getAllSensors($_POST['search']);  
+                }else{
+                    require('./View/showAllSensors.php');
+                }
+            }else{
+                throw new Exception("Une erreur est survenue lors du chargement de cette page. Veuillez vous rediriger vers la page précédente");
+                
+            }
         }
 
             
