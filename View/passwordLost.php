@@ -25,7 +25,7 @@ ob_start();
 				<div>
 					<input type="submit" name="submit">
 				</div>
-				<p><i>Un mot de passe provisoire vous sera envoyez par mail.</i></p>
+				<p><i>Un mot de passe provisoire vous sera envoyé par mail.</i></p>
 				<?php if (array_key_exists('error', $_SESSION)) { ?>
 					<div class="error"><?php echo $_SESSION['error'] ;?></div>
 				  
