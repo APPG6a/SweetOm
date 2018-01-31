@@ -16,9 +16,11 @@ class CeMacManager extends Manager
 
     /**
      * CeMacManager constructor.
+     * @param null $ID
      */
-    public function __construct()
+    public function __construct($ID = null)
     {
+        $this->setID($ID);
     }
 
     /**
@@ -53,6 +55,11 @@ class CeMacManager extends Manager
         $this->ID_Room = $ID_Room;
     }
 
+    public function getEquipments()
+    {
+        return $this->read(array('ID_CeMac' => $this->ID), 'equipment', 0);
+    }
+
     public function insertIntoDataBase()
     {
         $db = $this->dbConnect();
@@ -61,6 +68,7 @@ class CeMacManager extends Manager
         $req->execute(array($this->getIDRoom()));
         $req->closeCursor();
     }
+
     public function setCeMacByRoom($nbr,$array){
         $listId = array();
         $nbrRoom = count($array)/2;
