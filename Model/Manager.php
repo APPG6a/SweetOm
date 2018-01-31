@@ -25,7 +25,7 @@ class Manager
 			$db = new \PDO($engine.":host=".$host.";dbname=".$dbname.";charset=".$charset, $login, $password);
 
 			return $db;
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			die("Message ".$e->getMessage());
 		}
 		

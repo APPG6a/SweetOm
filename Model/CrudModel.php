@@ -27,9 +27,9 @@ class crudModel extends Manager
         $TelephoneFixe = $array['phone'];
         $Adresse = $array['address'] . " " . $array['postCode'] . " " . $array['city'] . " " . $array['country'];
 
-        create(array($Prenom, $Nom, $TelephonePortable, $TelephoneFixe, $Mail, $login), 'utilisateurs');
-        $user = read(['Login' => $login], 'utilisateurs');
-        create(array($Adresse, $user['ID']), "domicile");
+        $this->create(array($Prenom, $Nom, $TelephonePortable, $TelephoneFixe, $Mail, $login), 'user');
+        $user = $this->read(['Login' => $login], 'user',0);
+        $this->create(array($Adresse, $user['ID']), "domicile");
     }
 
     /**
@@ -79,7 +79,10 @@ class crudModel extends Manager
         $bdd = $manager->dbConnect();
 
         if (empty($post)) {
-            return $bdd->query('SELECT * FROM' . $table)->fetchAll();
+            $req = $bdd->prepare('SELECT * FROM ' . $table);
+            if ($debug) $req->debugDumpParams();
+            $req->execute();
+            return $req->fetchAll();
         }
 
         $where = "";

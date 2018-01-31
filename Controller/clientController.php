@@ -349,3 +349,10 @@ function getPressureByRoom(int $idRoom): float
 
     return round($averageTemperature/$counter, 1);
 }
+
+function saveAddress(array $post): void
+{
+    $crud = new crudModel();
+
+    $crud->create($post, 'house');
+}

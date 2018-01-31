@@ -104,6 +104,7 @@ class EquipmentManager extends Manager
     {
         $this->ID_CeMac = $ID_CeMac;
     }
+
     public function listTypesSensors(){
     $db = $this->dbConnect();
     $rep = $db->query('SELECT * FROM equipment_type');
@@ -116,6 +117,7 @@ class EquipmentManager extends Manager
     return $listTypesSensors;
 
     }
+
     public function addSensorByRoom($arrayRoom, $arrayPost){
         // found in database idcemac and id catalog
         $i = 1;

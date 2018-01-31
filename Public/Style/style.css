@@ -289,13 +289,13 @@ button:hover, button:focus {
 
 
 #editProfil{
+	background: url("/Public/Assets/Images/edit_profil4.png") no-repeat;
 	border-radius: 0 9px 9px 0;
 }
 
 #editProfil:hover
 {
 	width: 500px;
-	background: url("/Public/Assets/Images/edit_profil4.png") no-repeat;
 	text-decoration: underline;
 }
 .element_catalog:nth-child(2)
@@ -465,6 +465,135 @@ button:hover, button:focus {
     -o-transform: translateY(-74px);
     transform: translateY(-74px);
     
+}
+
+.dashboardBody {
+	background: #0067A688;
+	border: 2px solid #0067A6;
+	border-radius: 5px;
+	margin: 2px;
+	text-align: center;
+}
+
+.dashboardHeader {
+	background: #0067A688;
+	border: 2px solid #0067A6;
+	border-radius: 5px;
+	margin: 2px;
+	text-align: center;
+	-webkit-box-shadow: 0 0 65px #00be9f inset, 0 0 20px #00ae8c inset, 0 0 5px #006f47;
+	-moz-box-shadow: 0 0 65px #00be9f inset, 0 0 20px #00ae8c inset, 0 0 5px #006f47;
+	box-shadow: 0 0 65px #00be9f inset, 0 0 20px #00ae8c inset, 0 0 5px #006f47;
+}
+
+.icon {
+	border: black 1px solid;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 0 65px #cdbe9f inset, 0 0 20px #beae8c inset, 0 0 5px #816f47;
+	-moz-box-shadow: 0 0 65px #cdbe9f inset, 0 0 20px #beae8c inset, 0 0 5px #816f47;
+	box-shadow: 0 0 65px #cdbe9f inset, 0 0 20px #beae8c inset, 0 0 5px #816f47;
+	display: block;
+	margin: 5px;
+	min-height: 100px;
+	width: 40%;
+}
+
+.icon p {
+	height: 100%;
+	margin: 0;
+}
+
+.icon p img {
+	margin: auto;
+}
+
+.item {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.item div {
+	flex: 1;
+	justify-content: space-around;
+	min-width: 30%;
+}
+
+.item div.dashboardHeader {
+	flex: 1;
+	justify-content: space-around;
+	min-width: 20%;
+	flex-wrap: wrap;
+}
+
+.temperatureMeasure {
+	font-size: 30px;
+}
+
+.securityHeader ul{
+	display: flex;
+	flex: 1;
+}
+
+.securityHeader ul li{
+	flex: 1;
+	list-style-type: none;
+	text-align: center;
+}
+
+.securityHeader ul li:first-child{
+	display: inline;
+	flex: 4;
+	text-align: left;
+}
+
+.wrapperItem {
+	display: flex;
+	flex-direction: column;
+}
+
+.wrapperItem ul {
+	display: flex;
+	flex: 1;
+}
+
+.wrapperItem ul li {
+	flex: 1;
+	list-style-type: none;
+	text-align: center;
+}
+
+.wrapperItem ul li:first-child {
+	display: inline;
+	flex: 4;
+	text-align: left;
+}
+
+.wrapperLeft {
+	border: black 2px solid;
+	border-radius: 5px;
+	display: flex;
+	flex: 2;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin: 5px;
+	min-width: 400px;
+}
+
+.wrapperRight {
+	border: black 2px solid;
+	border-radius: 5px;
+	display: flex;
+	flex: 3;
+	flex-direction: column;
+	flex-wrap: wrap;
+	margin: 5px;
+	min-width: 400px;
+}
+
+.wrapperRight iframe {
+	flex: 2;
 }
 
 #logo
@@ -752,13 +881,13 @@ button:hover, button:focus {
 
 #tabDeBord{
 
+	background: url("/Public/Assets/Images/tab_de_bord2.jpg") no-repeat;
 	border-radius: 9px 0 0 9px;
 }
 
 
 #tabDeBord:hover{
 	width: 500px;
-	background: url("/Public/Assets/Images/tab_de_bord2.jpg") no-repeat;
 	text-decoration: underline;
 }
 .typeLinks {
@@ -853,6 +982,7 @@ table{
 	justify-content: space-between;
 	text-align: center;
 	width: 100%;
+    min-width: 400px;
 	height: 100vh;
 }
 
