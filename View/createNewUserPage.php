@@ -4,6 +4,12 @@ $style = "style.css";
 ob_start(); ?>
 
  <div class= "myBody">
+ 	<?php
+	if (array_key_exists('send',$_SESSION)) {
+		echo "<div id=\"ok\">".$_SESSION['send']."</div>";
+		unset($_SESSION['send']);
+	}
+	?>
 
  	<form method="POST" id="creationNewUser" action="/index.php?action=addNewUserToDb">
  		<?php if(array_key_exists('error', $_SESSION)){
@@ -33,6 +39,7 @@ ob_start(); ?>
  	</form>
 
  </div>
+ <script type="text/javascript" src="/Public/Js/dataSendScript.js"></script>
  <?php 
  $content = ob_get_clean();
  require("template.php");

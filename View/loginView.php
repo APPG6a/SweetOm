@@ -23,6 +23,8 @@ ob_start();
             }  ?>
             <button>VALIDER</button>
         </form>
+        <br>
+        <a href="/index?action=passwordLost">Mot de passe oublié ?</a>
     </div>
     <div class="wrapper-right">
 
